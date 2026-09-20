@@ -1,0 +1,1100 @@
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDeprecation[0m [1m[35m[plugin angular-sass][0m
+
+    src/app/pages/perfil/perfil.component.scss:241:19:
+[37m      241 │             color: [32m[37mdarken($color-texto-muted, 10%);
+          ╵                    [32m^[0m
+
+
+  Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+  Use color.adjust instead.
+  
+  More info and automated migrator: [4mhttps://sass-lang.com/d/import[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDeprecation[0m [1m[35m[plugin angular-sass][0m
+
+    src/app/pages/perfil/perfil.component.scss:241:19:
+[37m      241 │             color: [32m[37mdarken($color-texto-muted, 10%);
+          ╵                    [32m^[0m
+
+
+  darken() is deprecated. Suggestions:
+  
+  color.scale($color, $lightness: -27.7173913043%)
+  color.adjust($color, $lightness: -10%)
+  
+  More info: [4mhttps://sass-lang.com/d/color-functions[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '../../components/footer/footer.component' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/layouts/main-layout/main-layout.component.ts:4:32:
+[37m      4 │ ... FooterComponent } from [32m'../../components/footer/footer.component'[37m;
+        ╵                            [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: 'imports' must be an array of components, directives, pipes, or NgModules.
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/layouts/main-layout/main-layout.component.ts:9:43:
+[37m      9 │   imports: [RouterOutlet, NavbarComponent, [32mFooterComponent[37m],
+        ╵                                            [32m~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/layouts/main-layout/main-layout.component.ts:9:43:
+[37m      9 │   imports: [RouterOutlet, NavbarComponent, [32mFooterComponent[37m],
+        ╵                                            [32m~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../components/footer/footer.component"[0m
+
+    src/app/layouts/main-layout/main-layout.component.ts:5:32:
+[37m      5 │ ... FooterComponent } from [32m'../../components/footer/footer.component'[37m;
+        ╵                            [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module '../../components/footer/footer.component' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/layouts/main-layout/main-layout.component.ts:4:32:
+[37m      4 │ ... FooterComponent } from [32m'../../components/footer/footer.component'[37m;
+        ╵                            [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG1010: 'imports' must be an array of components, directives, pipes, or NgModules.
+  Value could not be determined statically.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/layouts/main-layout/main-layout.component.ts:9:43:
+[37m      9 │   imports: [RouterOutlet, NavbarComponent, [32mFooterComponent[37m],
+        ╵                                            [32m~~~~~~~~~~~~~~~[0m
+
+  Unknown reference.
+
+    src/app/layouts/main-layout/main-layout.component.ts:9:43:
+[37m      9 │   imports: [RouterOutlet, NavbarComponent, [32mFooterComponent[37m],
+        ╵                                            [32m~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "../../components/footer/footer.component"[0m
+
+    src/app/layouts/main-layout/main-layout.component.ts:5:32:
+[37m      5 │ ... FooterComponent } from [32m'../../components/footer/footer.component'[37m;
+        ╵                            [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './pages/dashboard/dashboard.component' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:72:36:
+[37m      72 │ ...) => import([32m'./pages/dashboard/dashboard.component'[37m).then(m => ...
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./pages/dashboard/dashboard.component"[0m
+
+    src/app/app.routes.ts:70:44:
+[37m      70 │ ...) => import([32m'./pages/dashboard/dashboard.component'[37m).then(m => ...
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './pages/dashboard/dashboard.component' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:72:36:
+[37m      72 │ ...) => import([32m'./pages/dashboard/dashboard.component'[37m).then(m => ...
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./pages/dashboard/dashboard.component"[0m
+
+    src/app/app.routes.ts:70:44:
+[37m      70 │ ...) => import([32m'./pages/dashboard/dashboard.component'[37m).then(m => ...
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './pages/dashboard/dashboard.component' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:72:36:
+[37m      72 │ ...) => import([32m'./pages/dashboard/dashboard.component'[37m).then(m => ...
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./pages/dashboard/dashboard.component"[0m
+
+    src/app/app.routes.ts:70:44:
+[37m      70 │ ...) => import([32m'./pages/dashboard/dashboard.component'[37m).then(m => ...
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './pages/dashboard/dashboard.component' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:72:36:
+[37m      72 │ ...) => import([32m'./pages/dashboard/dashboard.component'[37m).then(m => ...
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./pages/dashboard/dashboard.component"[0m
+
+    src/app/app.routes.ts:70:44:
+[37m      70 │ ...) => import([32m'./pages/dashboard/dashboard.component'[37m).then(m => ...
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './dashboard.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/dashboard/dashboard.component.ts:11:12:
+[37m      11 │   styleUrl: [32m'./dashboard.component.scss'[37m
+         ╵             [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './dashboard.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/dashboard/dashboard.component.ts:11:12:
+[37m      11 │   styleUrl: [32m'./dashboard.component.scss'[37m
+         ╵             [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2729: Property 'authService' is used before its initialization.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/home/home.ts:14:26:
+[37m      14 │   isAuthenticated$ = this.[32mauthService[37m.isAuthenticated$;
+         ╵                           [32m~~~~~~~~~~~[0m
+
+  'authService' is declared here.
+
+    src/app/pages/home/home.ts:16:14:
+[37m      16 │   constructor([32mprivate authService: AuthService[37m) {}
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './pages/home/home' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:22:36:
+[37m      22 │ ...mponent: () => import([32m'./pages/home/home'[37m).then(m => m.HomeComp...
+         ╵                          [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./pages/home/home"[0m
+
+    src/app/app.routes.ts:20:44:
+[37m      20 │ ...mponent: () => import([32m'./pages/home/home'[37m).then(m => m.HomeComp...
+         ╵                          [32m~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2307: Cannot find module './pages/home/home' or its corresponding type declarations.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/app.routes.ts:22:36:
+[37m      22 │ ...mponent: () => import([32m'./pages/home/home'[37m).then(m => m.HomeComp...
+         ╵                          [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mCould not resolve "./pages/home/home"[0m
+
+    src/app/app.routes.ts:20:44:
+[37m      20 │ ...mponent: () => import([32m'./pages/home/home'[37m).then(m => m.HomeComp...
+         ╵                          [32m~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'isLoggedIn' does not exist on type 'CatalogComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/catalog/catalog.component.html:8:71:
+[37m      8 │ ...n-publish-catalog" routerLink="/publicar-libro" *ngIf="[32misLoggedIn[37m">
+        ╵                                                           [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component CatalogComponent.
+
+    src/app/pages/catalog/catalog.component.ts:27:15:
+[37m      27 │   templateUrl: [32m'./catalog.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'isLoggedIn' does not exist on type 'CatalogComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/catalog/catalog.component.html:115:43:
+[37m      115 │ ...ass="btn-exchange" *ngIf="[32misLoggedIn[37m" [routerLink]="['/interca...
+          ╵                              [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component CatalogComponent.
+
+    src/app/pages/catalog/catalog.component.ts:27:15:
+[37m      27 │   templateUrl: [32m'./catalog.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'isLoggedIn' does not exist on type 'CatalogComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/catalog/catalog.component.html:119:54:
+[37m      119 │ ...exchange btn-login" *ngIf="![32misLoggedIn[37m" routerLink="/auth/login">
+          ╵                                [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component CatalogComponent.
+
+    src/app/pages/catalog/catalog.component.ts:27:15:
+[37m      27 │   templateUrl: [32m'./catalog.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'isLoggedIn' does not exist on type 'CatalogComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/catalog/catalog.component.html:138:71:
+[37m      138 │ ...n-empty-publish" routerLink="/publicar-libro" *ngIf="[32misLoggedIn[37m">
+          ╵                                                         [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component CatalogComponent.
+
+    src/app/pages/catalog/catalog.component.ts:27:15:
+[37m      27 │   templateUrl: [32m'./catalog.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'isLoggedIn' does not exist on type 'CatalogComponent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/catalog/catalog.component.html:141:71:
+[37m      141 │ ...n-empty-publish" routerLink="/auth/registro" *ngIf="![32misLoggedIn[37m">
+          ╵                                                         [32m~~~~~~~~~~[0m
+
+  Error occurs in the template of component CatalogComponent.
+
+    src/app/pages/catalog/catalog.component.ts:27:15:
+[37m      27 │   templateUrl: [32m'./catalog.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDeprecation[0m [1m[35m[plugin angular-sass][0m
+
+    src/app/pages/perfil/perfil.component.scss:241:19:
+[37m      241 │             color: [32m[37mdarken($color-texto-muted, 10%);
+          ╵                    [32m^[0m
+
+
+  Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+  Use color.adjust instead.
+  
+  More info and automated migrator: [4mhttps://sass-lang.com/d/import[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDeprecation[0m [1m[35m[plugin angular-sass][0m
+
+    src/app/pages/perfil/perfil.component.scss:241:19:
+[37m      241 │             color: [32m[37mdarken($color-texto-muted, 10%);
+          ╵                    [32m^[0m
+
+
+  darken() is deprecated. Suggestions:
+  
+  color.scale($color, $lightness: -27.7173913043%)
+  color.adjust($color, $lightness: -10%)
+  
+  More info: [4mhttps://sass-lang.com/d/color-functions[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDeprecation[0m [1m[35m[plugin angular-sass][0m
+
+    src/app/pages/perfil/perfil.component.scss:241:19:
+[37m      241 │             color: [32m[37mdarken($color-texto-muted, 10%);
+          ╵                    [32m^[0m
+
+
+  Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+  Use color.adjust instead.
+  
+  More info and automated migrator: [4mhttps://sass-lang.com/d/import[0m
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mDeprecation[0m [1m[35m[plugin angular-sass][0m
+
+    src/app/pages/perfil/perfil.component.scss:241:19:
+[37m      241 │             color: [32m[37mdarken($color-texto-muted, 10%);
+          ╵                    [32m^[0m
+
+
+  darken() is deprecated. Suggestions:
+  
+  color.scale($color, $lightness: -27.7173913043%)
+  color.adjust($color, $lightness: -10%)
+  
+  More info: [4mhttps://sass-lang.com/d/color-functions[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'tone' does not exist on type '{ label: string; description: string; icon: string; link: string; }'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/dashboard/dashboard.component.html:77:52:
+[37m      77 │             [class]="'action-card action-' + action.[32mtone[37m">
+         ╵                                                     [32m~~~~[0m
+
+  Error occurs in the template of component DashboardComponent.
+
+    src/app/pages/dashboard/dashboard.component.ts:10:15:
+[37m      10 │   templateUrl: [32m'./dashboard.component.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './book-form.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/books/book-form/book-form.ts:32:14:
+[37m      32 │   styleUrls: [[32m'./book-form.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG2008: Could not find stylesheet file './my-proposals.component.scss'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/pages/my-proposals/my-proposals.component.ts:27:14:
+[37m      27 │   styleUrls: [[32m'./my-proposals.component.scss'[37m]
+         ╵               [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[39m[22m

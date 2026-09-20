@@ -1,0 +1,102 @@
+<div class="auth-page auth-page--login">
+  <section class="auth-card">
+    <aside class="auth-visual" aria-label="Páramo Libre">
+      <img src="assets/images/logo_paramo.png" alt="Páramo Libre" class="visual-logo" />
+      <div>
+        <p class="eyebrow">Biblioteca comunitaria</p>
+        <h1>Vuelve a tus intercambios de libros</h1>
+        <p class="visual-copy">Accede a tus propuestas, publica nuevos títulos y conecta con otros lectores.</p>
+      </div>
+      <div class="visual-points">
+        <span><mat-icon>auto_stories</mat-icon> Cataloga tus libros</span>
+        <span><mat-icon>swap_horiz</mat-icon> Propón trueques</span>
+        <span><mat-icon>groups</mat-icon> Encuentra nuevas lecturas</span>
+      </div>
+    </aside>
+
+    <div class="auth-form-panel">
+      <div class="login-brand">
+        <img src="assets/images/logo_paramo.png" alt="Páramo Libre" class="login-logo" />
+        <p class="eyebrow">Iniciar sesion</p>
+        <h2>Bienvenido de vuelta</h2>
+      </div>
+
+      <div class="auth-notice" *ngIf="authMessage">
+        <mat-icon>info</mat-icon>
+        <span>{{ authMessage }}</span>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo electronico</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder="tu@email.com"
+            autocomplete="email">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="email?.hasError('required')">
+            El correo electronico es obligatorio
+          </mat-error>
+          <mat-error *ngIf="email?.hasError('email')">
+            Ingresa un correo electronico valido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contrasena</mat-label>
+          <input
+            matInput
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+            autocomplete="current-password">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="'Mostrar contrasena'"
+            [attr.aria-pressed]="!hidePassword">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password?.hasError('required')">
+            La contrasena es obligatoria
+          </mat-error>
+          <mat-error *ngIf="password?.hasError('minlength')">
+            La contrasena debe tener al menos 8 caracteres
+          </mat-error>
+        </mat-form-field>
+
+        <div class="security-note">
+          <mat-icon>verified_user</mat-icon>
+          <span>Tu sesion se guarda solo hasta cerrar el navegador, a menos que actives "Mantener sesion".</span>
+        </div>
+
+        <div class="login-options">
+          <mat-checkbox formControlName="rememberMe" color="primary">
+            Mantener sesion
+          </mat-checkbox>
+          <span class="access-note">Acceso para usuarios registrados</span>
+        </div>
+
+        <button
+          mat-raised-button
+          class="btn-login-submit"
+          type="submit"
+          [disabled]="loading">
+          <span *ngIf="!loading">Iniciar sesion</span>
+          <span *ngIf="loading" class="spinner"></span>
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <p>
+          No tienes una cuenta?
+          <a routerLink="/auth/registro">Crear cuenta</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

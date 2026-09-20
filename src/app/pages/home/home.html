@@ -1,0 +1,63 @@
+<div class="landing">
+  <main class="hero">
+    <section class="hero-content">
+      <h1 class="hero-title">
+        Intercambia libros de forma
+        <span class="gradient-text">sencilla y gratuita.</span>
+      </h1>
+
+      <p class="hero-description">
+        Páramo Libre conecta lectores que quieren dar nueva vida a sus libros. Explora el catálogo, encuentra una lectura que te interese y propón un trueque con otro usuario.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn-primary" routerLink="/auth/login">Iniciar sesi&oacute;n</a>
+        <a class="btn-primary btn-secondary" routerLink="/auth/registro">Registrarse</a>
+        <a class="btn-primary" routerLink="/catalogo">Explorar catálogo</a>
+        <button type="button" class="btn-share" (click)="openShareModal()">
+          <span class="material-icons">share</span>
+          Compartir Páramo Libre
+        </button>
+      </div>
+    </section>
+
+    <aside class="hero-visual" aria-hidden="true">
+      <img src="assets/images/hero-books.svg" alt="" class="hero-illustration" />
+    </aside>
+  </main>
+
+  <section class="how-section" aria-label="Cómo funciona">
+    <div class="section-heading">
+      <span>Cómo funciona</span>
+      <h2>Tu próximo libro en cuatro pasos</h2>
+    </div>
+
+    <div class="steps-grid">
+      <article class="step-card">
+        <span class="step-number">1</span>
+        <span class="material-icons">travel_explore</span>
+        <h3>Explora el catálogo</h3>
+      </article>
+
+      <article class="step-card">
+        <span class="step-number">2</span>
+        <span class="material-icons">auto_stories</span>
+        <h3>Encuentra un libro que te interese</h3>
+      </article>
+
+      <article class="step-card">
+        <span class="step-number">3</span>
+        <span class="material-icons">swap_horiz</span>
+        <h3>Propón un trueque</h3>
+      </article>
+
+      <article class="step-card">
+        <span class="step-number">4</span>
+        <span class="material-icons">handshake</span>
+        <h3>Intercambia libros</h3>
+      </article>
+    </div>
+  </section>
+</div>
+
+<app-share-modal *ngIf="shareOpen" (close)="closeShareModal()"></app-share-modal>

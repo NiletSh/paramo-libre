@@ -1,0 +1,369 @@
+.auth-page {
+  width: 100%;
+  min-height: calc(100vh - 48px);
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  color: #2f4f2f;
+  animation: fadeInUp 0.55s ease-out;
+}
+
+.auth-card {
+  width: min(1080px, 100%);
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(420px, 1.18fr);
+  overflow: hidden;
+  border: 1px solid rgba(123, 189, 47, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 24px 60px rgba(47, 79, 47, 0.16);
+}
+
+.auth-visual {
+  display: flex;
+  min-height: 680px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 34px;
+  color: #ffffff;
+  background:
+    linear-gradient(150deg, rgba(47, 79, 47, 0.96), rgba(93, 139, 31, 0.88)),
+    url('/assets/images/logo_paramo.png') center 58% / 74% no-repeat;
+}
+
+.visual-logo {
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 30px rgba(35, 59, 45, 0.22);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #5d8b1f;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auth-visual .eyebrow {
+  color: #d9efb1;
+}
+
+.auth-visual h1 {
+  max-width: 360px;
+  margin: 0;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.visual-copy {
+  max-width: 360px;
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.visual-points {
+  display: grid;
+  gap: 12px;
+}
+
+.visual-points span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.visual-points mat-icon {
+  color: #d9efb1;
+}
+
+.auth-form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 34px 38px;
+}
+
+.register-brand {
+  margin-bottom: 22px;
+}
+
+.register-logo {
+  display: none;
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(123, 189, 47, 0.18);
+}
+
+.register-brand h2 {
+  margin: 0;
+  color: #2f4f2f;
+  font-size: 30px;
+  font-weight: 850;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 14px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+::ng-deep .register-form .mat-mdc-form-field {
+  --mdc-outlined-text-field-container-shape: 8px;
+  --mdc-outlined-text-field-outline-width: 1px;
+  --mdc-outlined-text-field-focus-outline-width: 1.5px;
+  --mdc-outlined-text-field-outline-color: rgba(123, 189, 47, 0.24);
+  --mdc-outlined-text-field-hover-outline-color: rgba(123, 189, 47, 0.38);
+  --mdc-outlined-text-field-focus-outline-color: #5d8b1f;
+  --mdc-outlined-text-field-input-text-color: #2f4f2f;
+  --mdc-outlined-text-field-label-text-color: #6a7d3b;
+  --mdc-outlined-text-field-focus-label-text-color: #5d8b1f;
+  --mdc-outlined-text-field-hover-label-text-color: #5d8b1f;
+  --mdc-outlined-text-field-error-outline-color: #c64b3d;
+  --mdc-outlined-text-field-error-label-text-color: #c64b3d;
+}
+
+::ng-deep .register-form .mat-mdc-text-field-wrapper {
+  background: #f8fdea !important;
+  border-radius: 8px !important;
+}
+
+::ng-deep .register-form .mat-mdc-form-field-infix {
+  min-height: 44px;
+  padding: 12px 0 10px;
+}
+
+::ng-deep .register-form .mat-mdc-form-field-subscript-wrapper {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+::ng-deep .register-form .mat-mdc-form-field-error {
+  color: #c64b3d;
+}
+
+::ng-deep .register-form .mat-mdc-form-field-icon-prefix,
+::ng-deep .register-form .mat-mdc-form-field-icon-suffix,
+::ng-deep .register-form .mat-mdc-form-field-icon-suffix button {
+  color: #5d8b1f !important;
+}
+
+.strength-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -4px 0 4px;
+  padding: 0 2px;
+}
+
+.strength-track {
+  flex: 1;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8f2cf;
+}
+
+.strength-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: all 0.25s ease;
+}
+
+.strength-label {
+  min-width: 54px;
+  color: #5d8b1f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.terms-row {
+  margin: 0 0 4px;
+  padding: 10px 12px;
+  border: 1px solid rgba(123, 189, 47, 0.18);
+  border-radius: 8px;
+  background: rgba(248, 253, 234, 0.92);
+}
+
+::ng-deep .terms-row .mat-mdc-checkbox {
+  --mdc-checkbox-selected-checkmark-color: #ffffff;
+  --mdc-checkbox-selected-focus-icon-color: #5d8b1f;
+  --mdc-checkbox-selected-hover-icon-color: #5d8b1f;
+  --mdc-checkbox-selected-icon-color: #5d8b1f;
+  --mdc-checkbox-selected-pressed-icon-color: #5d8b1f;
+  --mdc-checkbox-unselected-focus-icon-color: rgba(47, 79, 47, 0.5);
+  --mdc-checkbox-unselected-hover-icon-color: rgba(47, 79, 47, 0.7);
+  --mdc-checkbox-unselected-icon-color: rgba(47, 79, 47, 0.25);
+  --mdc-checkbox-unselected-pressed-icon-color: rgba(47, 79, 47, 0.5);
+}
+
+::ng-deep .terms-row .mat-mdc-checkbox .mdc-label {
+  color: #4f5d2e;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.terms-text a {
+  color: #5d8b1f;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.terms-text a:hover {
+  text-decoration: underline;
+}
+
+.terms-error {
+  display: block;
+  margin-top: 4px;
+  margin-left: 32px;
+  color: #c64b3d;
+  font-size: 12px;
+}
+
+.btn-register-submit {
+  width: 100%;
+  height: 48px !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%) !important;
+  color: #ffffff !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+  box-shadow: 0 12px 24px rgba(123, 189, 47, 0.26) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.btn-register-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(123, 189, 47, 0.34) !important;
+}
+
+.btn-register-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.register-footer {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(123, 189, 47, 0.16);
+  text-align: center;
+}
+
+.register-footer p {
+  margin: 0;
+  color: #6a7d3b;
+  font-size: 14px;
+}
+
+.register-footer a {
+  color: #5d8b1f;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.register-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 920px) {
+  .auth-card {
+    grid-template-columns: 1fr;
+    max-width: 580px;
+  }
+
+  .auth-visual {
+    display: none;
+  }
+
+  .auth-form-panel {
+    padding: 32px 24px;
+  }
+
+  .register-logo {
+    display: block;
+  }
+}
+
+@media (max-width: 560px) {
+  .auth-page {
+    min-height: auto;
+    padding: 0;
+  }
+
+  .auth-card {
+    min-height: calc(100vh - 48px);
+    border-radius: 0;
+  }
+
+  .auth-form-panel {
+    padding: 26px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .register-brand h2 {
+    font-size: 26px;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

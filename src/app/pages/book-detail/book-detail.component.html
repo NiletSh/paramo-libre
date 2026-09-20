@@ -1,0 +1,145 @@
+<div class="book-detail">
+  
+  <!-- Estado: Libro no encontrado -->
+  <div class="not-found" *ngIf="notFound">
+    <span class="material-icons">sentiment_dissatisfied</span>
+    <h2>Libro no encontrado</h2>
+    <p>El libro que buscas no existe o ha sido eliminado.</p>
+    <button class="btn-back" (click)="goBack()">
+      <span class="material-icons">arrow_back</span>
+      Volver al catálogo
+    </button>
+  </div>
+
+  <!-- Detalle del libro -->
+  <div class="detail-content" *ngIf="book && !notFound">
+    
+    <!-- Panel izquierdo: Portada -->
+    <div class="detail-left">
+      <div class="book-cover-large" [style.background]="book.imageUrl ? 'transparent' : 'linear-gradient(135deg, ' + book.imageColor + ' 0%, ' + book.imageColor + 'dd 100%)'">
+        <img *ngIf="book.imageUrl" [src]="book.imageUrl" [alt]="book.title">
+        <span class="material-icons" *ngIf="!book.imageUrl">auto_stories</span>
+      </div>
+      
+      <div class="owner-card">
+        <div class="owner-avatar">
+          <span class="material-icons">person</span>
+        </div>
+        <div class="owner-info">
+          <span class="owner-label">Publicado por</span>
+          <span class="owner-name">{{ book.owner }}</span>
+          <span class="owner-date">{{ book.publishedDate }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel derecho: Información -->
+    <div class="detail-right">
+      
+      <!-- Header -->
+      <div class="detail-header">
+        <div class="badges-row">
+          <span class="badge-category">{{ book.category }}</span>
+          <span class="badge-status" [style.background]="statusColors[book.status] + '20'" [style.color]="statusColors[book.status]">
+            {{ statusLabels[book.status] }}
+          </span>
+        </div>
+        
+        <h1 class="book-title">{{ book.title }}</h1>
+        <p class="book-author">por {{ book.author }}</p>
+      </div>
+
+      <!-- Descripción -->
+      <div class="detail-section">
+        <h3>Descripción</h3>
+        <p class="book-description">{{ book.description }}</p>
+      </div>
+
+      <!-- Detalles técnicos -->
+      <div class="detail-section">
+        <h3>Detalles del libro</h3>
+        <div class="details-grid">
+          <div class="detail-item">
+            <span class="detail-icon">
+              <span class="material-icons">star</span>
+            </span>
+            <div>
+              <span class="detail-label">Condición</span>
+              <span class="detail-value" [style.color]="conditionColors[book.condition]">
+                {{ conditionLabels[book.condition] }}
+              </span>
+            </div>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-icon">
+              <span class="material-icons">place</span>
+            </span>
+            <div>
+              <span class="detail-label">Zona de entrega</span>
+              <span class="detail-value">{{ book.location }}</span>
+            </div>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-icon">
+              <span class="material-icons">schedule</span>
+            </span>
+            <div>
+              <span class="detail-label">Publicado</span>
+              <span class="detail-value">{{ book.publishedDate }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trade-guide">
+        <div class="guide-item">
+          <span class="material-icons">swap_horiz</span>
+          <div>
+            <strong>Trueque por otro libro</strong>
+            <p>Para proponer, selecciona un libro de tu biblioteca y envía un mensaje al dueño.</p>
+          </div>
+        </div>
+        <div class="guide-item">
+          <span class="material-icons">location_on</span>
+          <div>
+            <strong>Entrega acordada</strong>
+            <p>Acuerden un punto de encuentro conveniente y revisen el estado del libro antes de cerrar el trato.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="detail-actions">
+        <button class="btn-exchange-main" *ngIf="canEditBook" [routerLink]="['/libro', book.id, 'editar']">
+          <span class="material-icons">edit</span>
+          Editar libro
+        </button>
+
+        <button class="btn-exchange-main" *ngIf="book.status === 'available' && isLoggedIn && !canEditBook" [routerLink]="['/intercambio', book.id]">
+          <span class="material-icons">swap_horiz</span>
+          Proponer trueque
+        </button>
+
+        <button class="btn-exchange-main btn-login-required" *ngIf="book.status === 'available' && !isLoggedIn" (click)="goToLogin()">
+          <span class="material-icons">login</span>
+          Inicia sesión para proponer trueque
+        </button>
+        
+        <button class="btn-exchange-main disabled" *ngIf="book.status !== 'available'" disabled>
+          <span class="material-icons">block</span>
+          No disponible
+        </button>
+        
+        <button class="btn-back-secondary" (click)="goBack()">
+          <span class="material-icons">arrow_back</span>
+          Volver al catálogo
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

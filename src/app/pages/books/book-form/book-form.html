@@ -1,0 +1,131 @@
+<div class="book-form-page">
+  <div class="form-card">
+    
+    <!-- Header compacto -->
+    <div class="form-header">
+      <button type="button" class="btn-back" routerLink="/catalogo">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-title">
+        <h1>{{ isEditMode ? 'Editar libro' : 'Publicar libro' }}</h1>
+        <span>{{ isEditMode ? 'Actualiza la informacion guardada en tu publicacion' : 'Comparte un libro disponible para trueque' }}</span>
+      </div>
+      <div class="header-spacer"></div>
+    </div>
+
+    <!-- Cuerpo en dos columnas -->
+    <div class="form-body">
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-grid">
+          
+          <!-- COLUMNA IZQUIERDA: Imagen -->
+          <div class="col-image">
+            <label class="field-label">Portada</label>
+            <div
+              class="image-zone"
+              [class.drag-active]="isDragOver"
+              (drop)="onDrop($event)"
+              (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)"
+            >
+              <input
+                #fileInput
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                class="d-none"
+                (change)="onFileSelected($event)"
+              >
+
+              <ng-container *ngIf="!imagePreview; else previewTpl">
+                <div class="upload-content" (click)="fileInput.click()">
+                  <div class="upload-circle">
+                    <mat-icon>add_photo_alternate</mat-icon>
+                  </div>
+                  <p class="upload-text">Arrastra o haz clic</p>
+                  <span class="upload-meta">JPG, PNG · Máx. 5MB</span>
+                </div>
+              </ng-container>
+
+              <ng-template #previewTpl>
+                <div class="preview-box">
+                  <img [src]="imagePreview" alt="Portada">
+                  <button type="button" class="btn-remove" (click)="removeImage($event)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA: Campos -->
+          <div class="col-fields">
+            <div class="fields-row">
+              <mat-form-field appearance="outline" class="field-grow">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="title" placeholder="Ej. Cien años de soledad">
+                <mat-error *ngIf="bookForm.get('title')?.invalid">Título inválido</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="field-grow">
+                <mat-label>Autor</mat-label>
+                <input matInput formControlName="author" placeholder="Ej. Gabriel García Márquez">
+                <mat-error *ngIf="bookForm.get('author')?.invalid">Autor inválido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="fields-row">
+              <mat-form-field appearance="outline" class="field-grow">
+                <mat-label>Categoría</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="bookForm.get('category')?.invalid">Requerido</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="field-grow">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="condition">
+                  <mat-option *ngFor="let cond of conditions" [value]="cond.value">{{ cond.label }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="bookForm.get('condition')?.invalid">Requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Zona de entrega</mat-label>
+              <mat-select formControlName="location">
+                <mat-option *ngFor="let location of locations" [value]="location">{{ location }}</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>location_on</mat-icon>
+              <mat-error *ngIf="bookForm.get('location')?.invalid">Selecciona una zona</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100 textarea-field">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput formControlName="description" rows="3" placeholder="Describe el libro, su estado, edición y qué tipo de trueque buscas..."></textarea>
+              <mat-hint align="end" class="hint-count">{{ (bookForm.get('description')?.value || '').length }}/1000</mat-hint>
+              <mat-error *ngIf="bookForm.get('description')?.invalid">Mínimo 20 caracteres</mat-error>
+            </mat-form-field>
+
+            <div class="trade-note">
+              <mat-icon>info</mat-icon>
+              <div>
+                <strong>Trueque seguro</strong>
+                <span>Publica solo libros disponibles para intercambio. No agregues precios ni datos sensibles.</span>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button type="submit" mat-flat-button class="btn-publish" [disabled]="bookForm.invalid">
+                <mat-icon>{{ isEditMode ? 'save' : 'publish' }}</mat-icon>
+                {{ isEditMode ? 'Guardar cambios' : 'Publicar libro' }}
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

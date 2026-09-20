@@ -1,0 +1,6 @@
+
+> paramo-libre-api@1.0.0 start
+> node server.js
+
+Servidor corriendo en http://localhost:3001
+✅ Conexión a MySQL establecida correctamente en el puerto 3307.

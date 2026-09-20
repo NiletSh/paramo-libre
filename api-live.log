@@ -1,0 +1,4 @@
+
+> paramo-libre@1.0.0 start:api
+> node server/server.js
+

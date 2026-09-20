@@ -1,0 +1,126 @@
+<div class="proposals-page">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Mis propuestas</h1>
+      <p class="page-subtitle">Seguimiento de tus propuestas de trueque enviadas y recibidas</p>
+    </div>
+
+    <div class="tabs-row">
+      <button
+        class="tab-btn"
+        *ngFor="let tab of tabs"
+        [class.active]="activeTab === tab.value"
+        (click)="setTab(tab.value)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <div class="filters-row">
+      <button
+        class="filter-chip"
+        *ngFor="let f of filters"
+        [class.active]="activeFilter === f.value"
+        (click)="setFilter(f.value)"
+      >
+        {{ f.label }}
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Cargando propuestas...</p>
+    </div>
+
+    <div *ngIf="!loading && filteredProposals.length === 0" class="empty-state">
+      <mat-icon>swap_horiz</mat-icon>
+      <h3>No hay propuestas</h3>
+      <p *ngIf="activeFilter === 'all' && activeTab === 'sent'">
+        Aún no has enviado ninguna propuesta de trueque.
+      </p>
+      <p *ngIf="activeFilter === 'all' && activeTab === 'received'">
+        Aún no has recibido propuestas de trueque.
+      </p>
+      <p *ngIf="activeFilter !== 'all'">
+        No tienes propuestas con el estado seleccionado.
+      </p>
+      <button mat-raised-button class="btn-primary" routerLink="/catalogo">
+        Explorar catálogo
+      </button>
+    </div>
+
+    <div *ngIf="!loading && filteredProposals.length > 0" class="proposals-list">
+      <div class="proposal-card" *ngFor="let p of filteredProposals">
+        <div class="proposal-header">
+          <span class="proposal-date">{{ formatDate(p.createdAt) }}</span>
+          <span class="status-badge" [class]="getStatusClass(p.status)">
+            {{ getStatusLabel(p.status) }}
+          </span>
+        </div>
+
+        <div class="proposal-body">
+          <div class="book-side">
+            <span class="side-label">{{ getRequestLabel() }}</span>
+            <div class="book-mini">
+              <img *ngIf="p.requestedBookImage; else requestedPlaceholder" [src]="p.requestedBookImage" [alt]="p.requestedBookTitle" />
+              <ng-template #requestedPlaceholder>
+                <div class="book-mini-placeholder">
+                  <mat-icon>auto_stories</mat-icon>
+                </div>
+              </ng-template>
+              <div class="book-mini-info">
+                <span class="mini-title">{{ p.requestedBookTitle }}</span>
+                <span class="mini-owner" *ngIf="activeTab === 'received'">Tu libro</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="exchange-icon">
+            <mat-icon>swap_horiz</mat-icon>
+          </div>
+
+          <div class="book-side">
+            <span class="side-label">{{ getOfferLabel() }}</span>
+            <div class="book-mini">
+              <img *ngIf="p.offeredBookImage; else offeredPlaceholder" [src]="p.offeredBookImage" [alt]="p.offeredBookTitle" />
+              <ng-template #offeredPlaceholder>
+                <div class="book-mini-placeholder">
+                  <mat-icon>auto_stories</mat-icon>
+                </div>
+              </ng-template>
+              <div class="book-mini-info">
+                <span class="mini-title">{{ p.offeredBookTitle }}</span>
+                <span class="mini-owner">
+                  {{ activeTab === 'sent' ? 'Tu libro' : 'De ' + p.proposerUserName }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="p.message" class="proposal-message">
+          <mat-icon>chat_bubble_outline</mat-icon>
+          <p>{{ p.message }}</p>
+        </div>
+
+        <div class="proposal-actions" *ngIf="p.status === 'pending' && activeTab === 'sent'">
+          <button mat-button class="btn-cancel" (click)="cancelProposal(p.id)">
+            <mat-icon>close</mat-icon>
+            Cancelar propuesta
+          </button>
+        </div>
+
+        <div class="proposal-actions" *ngIf="p.status === 'pending' && activeTab === 'received'">
+          <button class="btn-accept" (click)="acceptProposal(p.id)">
+            <mat-icon>check</mat-icon>
+            Aceptar
+          </button>
+          <button class="btn-reject" (click)="rejectProposal(p.id)">
+            <mat-icon>close</mat-icon>
+            Rechazar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

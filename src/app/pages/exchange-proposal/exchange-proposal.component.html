@@ -1,0 +1,129 @@
+<div class="proposal-page">
+  <div class="container">
+    <button mat-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Volver al libro
+    </button>
+
+    <h1 class="page-title">Propuesta de trueque</h1>
+    <p class="page-subtitle">Selecciona uno de tus libros y acuerda el trueque con el dueño</p>
+
+    <!-- Libro solicitado -->
+    <section class="requested-section" *ngIf="requestedBook">
+      <span class="section-label">LIBRO QUE DESEAS</span>
+      <div class="requested-card">
+        <div class="requested-image">
+          <img [src]="requestedBook.imageUrl" [alt]="requestedBook.title" />
+        </div>
+        <div class="requested-info">
+          <div class="badges-row">
+            <span class="badge category-badge">{{ requestedBook.category }}</span>
+            <span class="badge status-badge">Disponible para trueque</span>
+          </div>
+          <h2 class="book-title">{{ requestedBook.title }}</h2>
+          <p class="book-author">por {{ requestedBook.author }}</p>
+
+          <div class="details-grid">
+            <div class="detail-box">
+              <div class="detail-icon">
+                <mat-icon>star</mat-icon>
+              </div>
+              <div class="detail-text">
+                <span class="detail-label">Condición</span>
+                <span class="detail-value">{{ requestedBook.condition }}</span>
+              </div>
+            </div>
+            <div class="detail-box">
+              <div class="detail-icon">
+                <mat-icon>person</mat-icon>
+              </div>
+              <div class="detail-text">
+                <span class="detail-label">Publicado por</span>
+                <span class="detail-value">{{ requestedBook.ownerName }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Selección de mi libro -->
+    <section class="mybooks-section">
+      <span class="section-label">TU LIBRO PARA OFRECER</span>
+
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4" *ngFor="let book of myBooks">
+          <div
+            class="book-card"
+            [class.selected]="isSelected(book.id)"
+            (click)="selectMyBook(book.id)"
+            (keydown.enter)="selectMyBook(book.id)"
+            tabindex="0"
+            role="button"
+          >
+            <div class="card-image">
+              <img [src]="book.imageUrl" [alt]="book.title" />
+              <div class="check-overlay" *ngIf="isSelected(book.id)">
+                <mat-icon>check_circle</mat-icon>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="badges-row">
+                <span class="badge category-badge">{{ book.category }}</span>
+                <span class="badge condition-badge">{{ book.condition }}</span>
+              </div>
+              <h4 class="book-title">{{ book.title }}</h4>
+              <p class="book-author">{{ book.author }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="myBooks.length === 0" class="empty-state">
+        <mat-icon>menu_book</mat-icon>
+        <p>No tienes libros registrados para ofrecer en trueque</p>
+        <button mat-raised-button class="btn-primary" routerLink="/publicar-libro">
+          Publicar un libro
+        </button>
+      </div>
+    </section>
+
+    <!-- Formulario de mensaje -->
+    <section class="message-section" *ngIf="selectedBookId && !submitted">
+      <span class="section-label">MENSAJE OPCIONAL</span>
+      <form [formGroup]="proposalForm" (ngSubmit)="onSubmit()">
+        <div class="form-box">
+          <mat-form-field appearance="outline" class="message-field">
+            <mat-label>Escribe un mensaje al dueño del libro</mat-label>
+            <textarea
+              matInput
+              formControlName="message"
+              rows="4"
+              placeholder="Hola, me interesa tu libro. Puedo ofrecer este libro a cambio y acordar la entrega."
+            ></textarea>
+            <mat-hint align="end"
+              >{{ proposalForm.value.message?.length || 0 }}/500</mat-hint
+            >
+          </mat-form-field>
+        </div>
+
+        <div class="actions">
+          <button mat-raised-button class="btn-primary" type="submit">
+            <mat-icon>send</mat-icon>
+            Enviar propuesta
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Estado de éxito -->
+    <div *ngIf="submitted" class="success-state">
+      <mat-icon class="success-icon">check_circle</mat-icon>
+      <h3>¡Propuesta enviada!</h3>
+      <p>El dueño del libro será notificado. Puedes seguir el estado en "Mis propuestas".</p>
+      <button mat-raised-button class="btn-primary" routerLink="/mis-propuestas">
+        Ver mis propuestas
+      </button>
+    </div>
+  </div>
+</div>

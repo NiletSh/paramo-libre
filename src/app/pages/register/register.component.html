@@ -1,0 +1,103 @@
+<div class="auth-page auth-page--register">
+  <section class="auth-card">
+    <aside class="auth-visual" aria-label="Crear cuenta en Páramo Libre">
+      <img src="assets/images/logo_paramo.png" alt="Páramo Libre" class="visual-logo" />
+      <div>
+        <p class="eyebrow">Unete a la comunidad</p>
+        <h1>Crea tu biblioteca de intercambio</h1>
+        <p class="visual-copy">Publica los libros que quieres mover, recibe propuestas y encuentra nuevas lecturas cerca de ti.</p>
+      </div>
+      <div class="visual-points">
+        <span><mat-icon>menu_book</mat-icon> Comparte titulos disponibles</span>
+        <span><mat-icon>handshake</mat-icon> Acuerda trueques seguros</span>
+        <span><mat-icon>place</mat-icon> Conecta con lectores</span>
+      </div>
+    </aside>
+
+    <div class="auth-form-panel">
+      <div class="register-brand">
+        <img src="assets/images/logo_paramo.png" alt="Páramo Libre" class="register-logo" />
+        <p class="eyebrow">Crear cuenta</p>
+        <h2>Empieza en Páramo Libre</h2>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+        <div class="form-grid">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre completo</mat-label>
+            <input matInput type="text" formControlName="name" placeholder="Juan Perez" autocomplete="name">
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="name?.hasError('required')">El nombre es obligatorio</mat-error>
+            <mat-error *ngIf="name?.hasError('minlength')">Minimo 3 caracteres</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Correo electronico</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="tu@email.com" autocomplete="email">
+            <mat-icon matPrefix>email</mat-icon>
+            <mat-error *ngIf="email?.hasError('required')">El correo es obligatorio</mat-error>
+            <mat-error *ngIf="email?.hasError('email')">Ingresa un correo valido</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contrasena</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" autocomplete="new-password">
+            <mat-icon matPrefix>lock</mat-icon>
+            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" aria-label="Mostrar contrasena">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="password?.hasError('required')">La contrasena es obligatoria</mat-error>
+            <mat-error *ngIf="password?.hasError('minlength')">Minimo 8 caracteres</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Confirmar contrasena</mat-label>
+            <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" autocomplete="new-password">
+            <mat-icon matPrefix>lock_outline</mat-icon>
+            <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword" aria-label="Mostrar confirmacion">
+              <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="confirmPassword?.hasError('required')">Confirma tu contrasena</mat-error>
+            <mat-error *ngIf="confirmPassword?.hasError('passwordMismatch')">Las contrasenas no coinciden</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="strength-bar" *ngIf="passwordStrength > 0">
+          <div class="strength-track">
+            <div class="strength-fill" [style.width.%]="passwordStrength * 33.33" [style.background]="strengthColor"></div>
+          </div>
+          <span class="strength-label" [style.color]="strengthColor">{{ strengthLabel }}</span>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Zona (opcional)</mat-label>
+          <mat-select formControlName="location">
+            <mat-option value="">Prefiero elegir despues</mat-option>
+            <mat-option *ngFor="let location of locations" [value]="location">{{ location }}</mat-option>
+          </mat-select>
+          <mat-icon matPrefix>location_on</mat-icon>
+        </mat-form-field>
+
+        <div class="terms-row">
+          <mat-checkbox formControlName="terms" color="primary">
+            <span class="terms-text">
+              Acepto los <a href="#" (click)="$event.preventDefault()">terminos de servicio</a> y la <a href="#" (click)="$event.preventDefault()">politica de privacidad</a>
+            </span>
+          </mat-checkbox>
+          <mat-error class="terms-error" *ngIf="registerForm.get('terms')?.touched && registerForm.get('terms')?.hasError('required')">
+            Debes aceptar los terminos
+          </mat-error>
+        </div>
+
+        <button mat-raised-button class="btn-register-submit" type="submit" [disabled]="loading">
+          <span *ngIf="!loading">Crear cuenta</span>
+          <span *ngIf="loading" class="spinner"></span>
+        </button>
+      </form>
+
+      <div class="register-footer">
+        <p>Ya tienes una cuenta? <a routerLink="/auth/login">Iniciar sesion</a></p>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,14 @@
+<svg width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Páramo Libre">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7BBD2F"/>
+      <stop offset="100%" stop-color="#5D8B1F"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="272" height="272" rx="72" fill="url(#bg)"/>
+  <path d="M105 95c0-16 13-29 29-29h48c35 0 63 29 63 65 0 18-7 35-19 47l-20 21c-8 8-12 19-12 30v16h-40v-16c0-11-4-22-12-30l-20-21c-12-12-19-29-19-47z" fill="#FFFFFF" opacity="0.96"/>
+  <path d="M140 115c0-10 8-18 18-18h26c17 0 31 13 31 29 0 8-3 15-8 21l-10 12c-5 6-8 13-8 20v10h-22v-10c0-7-3-14-8-20l-10-12c-5-6-8-13-8-21z" fill="#F8FDEA"/>
+  <circle cx="178" cy="142" r="10" fill="#7BBD2F"/>
+  <rect x="112" y="192" width="96" height="16" rx="8" fill="#F8FDEA" opacity="0.95"/>
+  <rect x="122" y="218" width="76" height="12" rx="6" fill="#F8FDEA" opacity="0.85"/>
+</svg>

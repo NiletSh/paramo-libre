@@ -1,0 +1,585 @@
+$color-primario: #7bbd2f;
+$color-secundario: #5d8b1f;
+$color-exito: #4f7d2a;
+$color-advertencia: #d58a14;
+$color-error: #c64b3d;
+$color-fondo: #f8fdea;
+$color-texto: #2f4f2f;
+$color-texto-muted: #6a7d3b;
+$color-borde: #dfeac7;
+$color-card: #ffffff;
+
+.perfil-container {
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #f8fdea 0%, #e9f7c8 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 1.4rem;
+}
+
+.perfil-inner {
+  width: 100%;
+  max-width: 900px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  box-sizing: border-box;
+}
+
+// HEADER
+.perfil-header {
+  flex: 0 0 auto;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .avatar-wrapper {
+    width: 104px;
+    height: 104px;
+    margin: 0 auto 0.55rem;
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, $color-primario 0%, $color-secundario 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .avatar-initials {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+      }
+
+      .avatar-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        .upload-label {
+          color: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+
+          mat-icon {
+            font-size: 2rem;
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+
+      &.has-image .avatar-overlay {
+        opacity: 0;
+        &:hover { opacity: 1; }
+      }
+    }
+  }
+
+  .perfil-nombre {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: $color-texto;
+    margin-bottom: 0.25rem;
+  }
+
+  .perfil-ubicacion {
+    font-size: 0.9rem;
+    color: $color-texto-muted;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+
+    .location-icon {
+      font-size: 1rem;
+      width: 1rem;
+      height: 1rem;
+      color: $color-primario;
+    }
+  }
+
+  .perfil-stats {
+    gap: 1.5rem;
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 70px;
+
+      .stat-value {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: $color-primario;
+        line-height: 1.2;
+      }
+
+      .stat-label {
+        font-size: 0.65rem;
+        color: $color-texto-muted;
+        margin-top: 0.15rem;
+        font-weight: 600;
+      }
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: $color-borde;
+      height: 28px;
+      align-self: center;
+    }
+  }
+}
+
+// TARJETAS
+.perfil-card {
+  width: 100%;
+  background: $color-card;
+  border-radius: 8px;
+  border: 1px solid $color-borde;
+  overflow: hidden;
+  text-align: left;
+
+  .card-header {
+    padding: 0.8rem 1.1rem;
+    background: #ffffff;
+    border-bottom: 1px solid $color-borde;
+    justify-content: space-between !important;
+    text-align: left;
+    gap: 1rem;
+
+    .card-heading {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .card-icon {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 8px;
+      color: $color-secundario;
+      background: rgba($color-primario, 0.13);
+
+      mat-icon {
+        font-size: 1.35rem;
+        width: 1.35rem;
+        height: 1.35rem;
+      }
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: $color-texto;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .card-subtitle {
+      margin: 0.2rem 0 0;
+      color: $color-texto-muted;
+      font-size: 0.82rem;
+      line-height: 1.35;
+    }
+
+    .btn-editar {
+      border-radius: 10px;
+      padding: 0 1rem;
+      height: 36px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #ffffff;
+      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+    }
+
+    button[mat-flat-button],
+    button[mat-stroked-button] {
+      color: #ffffff;
+      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+      border-color: transparent;
+    }
+  }
+
+  .card-body {
+    padding: 0.85rem 1.1rem;
+
+    .view-mode {
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .info-item {
+        min-width: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.65rem;
+        padding: 0.72rem;
+        border: 1px solid rgba($color-borde, 0.78);
+        border-radius: 8px;
+        background: linear-gradient(180deg, #ffffff 0%, #fbfef3 100%);
+
+        &.info-item-wide {
+          grid-column: 1 / -1;
+        }
+
+        .info-icon {
+          width: 34px;
+          height: 34px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          border-radius: 8px;
+          color: $color-secundario;
+          background: rgba($color-primario, 0.12);
+
+          mat-icon {
+            font-size: 1.2rem;
+            width: 1.2rem;
+            height: 1.2rem;
+          }
+        }
+
+        .info-content {
+          min-width: 0;
+          text-align: left;
+        }
+
+        .info-label {
+          font-size: 0.7rem;
+          color: $color-texto-muted;
+          margin-bottom: 0.12rem;
+          font-weight: 700;
+          display: block;
+        }
+
+        .info-value {
+          font-size: 0.94rem;
+          color: $color-texto;
+          margin: 0;
+          font-weight: 600;
+          line-height: 1.4;
+          overflow-wrap: anywhere;
+
+          &.bio-text {
+            font-weight: 400;
+            color: #4f6138;
+            line-height: 1.5;
+            font-size: 0.95rem;
+          }
+        }
+      }
+    }
+
+    .edit-mode {
+      .edit-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .edit-field {
+        min-width: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.65rem;
+        padding: 0.68rem;
+        border: 1px solid rgba($color-borde, 0.78);
+        border-radius: 8px;
+        background: linear-gradient(180deg, #ffffff 0%, #fbfef3 100%);
+
+        &.edit-field-wide {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .edit-icon {
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        border-radius: 8px;
+        color: $color-secundario;
+        background: rgba($color-primario, 0.12);
+
+        mat-icon {
+          font-size: 1.15rem;
+          width: 1.15rem;
+          height: 1.15rem;
+        }
+      }
+
+      .compact {
+        margin-bottom: -0.35rem;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+    }
+  }
+
+}
+
+.profile-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.1rem 0 0.25rem;
+}
+
+.btn-logout-profile {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0 1.1rem;
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(93, 139, 31, 0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+
+  mat-icon {
+    font-size: 1.1rem;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  &:hover {
+    filter: brightness(1.03);
+    box-shadow: 0 12px 26px rgba(93, 139, 31, 0.24);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Tarjeta de información: ocupa el espacio disponible
+.info-card {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: $color-card;
+
+  .card-body {
+    flex: 0 0 auto;
+  }
+}
+
+// Tarjeta de seguridad: compacta, abajo
+.security-card {
+  flex: 0 0 auto;
+
+  .security-body {
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .security-left {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      text-align: left;
+
+      .security-icon {
+        color: $color-advertencia;
+        font-size: 1.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      .security-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.3;
+
+        .security-title {
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: $color-texto;
+        }
+
+        .security-desc {
+          font-size: 0.8rem;
+          color: $color-texto-muted;
+        }
+      }
+    }
+
+    .btn-security {
+      border-radius: 10px;
+      height: 36px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0 1rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      color: #ffffff;
+      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+    }
+  }
+
+  .security-form-wrap {
+    .security-form-inner {
+      padding: 0.75rem 1.25rem 1rem;
+      max-width: 780px;
+      margin: 0 auto;
+
+      .btn-update {
+        height: 40px;
+        margin-top: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #ffffff;
+        background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+      }
+    }
+  }
+}
+
+// Angular Material compacto
+mat-form-field.compact {
+  ::ng-deep {
+    .mat-mdc-form-field-subscript-wrapper {
+      height: auto;
+    }
+    .mat-mdc-form-field-error-wrapper {
+      padding: 2px 0 0;
+    }
+    .mat-mdc-text-field-wrapper {
+      padding: 0 10px !important;
+    }
+    .mat-mdc-form-field-infix {
+      padding: 6px 0 !important;
+      min-height: 32px;
+      font-size: 0.9rem;
+    }
+    .mat-mdc-floating-label {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .perfil-container {
+    height: auto;
+    overflow: auto;
+  }
+
+  .perfil-inner {
+    padding: 1rem;
+  }
+
+  .perfil-header {
+    .avatar-wrapper {
+      width: 80px;
+      height: 80px;
+
+      .avatar-initials {
+        font-size: 1.75rem;
+      }
+    }
+
+    .perfil-nombre {
+      font-size: 1.25rem;
+    }
+
+    .perfil-stats {
+      gap: 1rem !important;
+
+      .stat-divider {
+        display: none;
+      }
+    }
+  }
+
+  .security-card .security-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .profile-actions {
+    justify-content: stretch;
+  }
+
+  .btn-logout-profile {
+    width: 100%;
+  }
+
+  .perfil-card .card-header {
+    align-items: flex-start !important;
+    gap: 0.75rem;
+    flex-direction: column;
+  }
+
+  .perfil-card .card-header .d-flex {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .perfil-card .card-body .view-mode .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,232 @@
+<div class="perfil-container">
+  <div class="perfil-inner">
+
+    <!-- Header -->
+    <div class="perfil-header text-center">
+      <div class="avatar-wrapper mx-auto">
+        <div class="avatar" [class.has-image]="perfil?.fotoUrl || fotoPreview">
+          <img *ngIf="perfil?.fotoUrl || fotoPreview" [src]="fotoPreview || perfil?.fotoUrl" alt="Foto de perfil" class="avatar-img">
+          <span *ngIf="!(perfil?.fotoUrl || fotoPreview)" class="avatar-initials">{{ getInitials() }}</span>
+
+          <div class="avatar-overlay" *ngIf="isEditing">
+            <label for="fotoInput" class="upload-label">
+              <mat-icon>camera_alt</mat-icon>
+            </label>
+            <input id="fotoInput" type="file" accept="image/*" (change)="onFileSelected($event)" hidden>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="perfil-nombre" *ngIf="!isEditing && perfil">{{ perfil.nombre }} {{ perfil.apellido }}</h1>
+      <p class="perfil-ubicacion text-muted" *ngIf="!isEditing && perfil && perfil.ubicacion">
+        <mat-icon class="location-icon">location_on</mat-icon>
+        {{ perfil.ubicacion }}
+      </p>
+
+      <div class="perfil-stats d-flex justify-content-center" *ngIf="!isEditing">
+        <div class="stat-item">
+          <span class="stat-value">{{ perfil?.librosPublicados || 0 }}</span>
+          <span class="stat-label">Libros</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">{{ perfil?.intercambiosCompletados || 0 }}</span>
+          <span class="stat-label">Trueques</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">{{ perfil?.fechaRegistro | date:'yyyy' }}</span>
+          <span class="stat-label">Miembro desde</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tarjeta Información Personal -->
+    <div class="perfil-card info-card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-heading">
+          <span class="card-icon">
+            <mat-icon>person</mat-icon>
+          </span>
+          <div>
+            <h2 class="card-title">Informaci&oacute;n Personal</h2>
+            <p class="card-subtitle">Datos visibles para gestionar tus intercambios.</p>
+          </div>
+        </div>
+        <button mat-stroked-button color="primary" (click)="toggleEdit()" *ngIf="!isEditing" class="btn-editar">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <div class="d-flex gap-2" *ngIf="isEditing">
+          <button mat-stroked-button (click)="toggleEdit()" [disabled]="isLoading">Cancelar</button>
+          <button mat-flat-button color="primary" (click)="guardarPerfil()" [disabled]="isLoading || perfilForm.invalid">
+            <mat-icon *ngIf="!isLoading">save</mat-icon>
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+            {{ isLoading ? 'Guardando...' : 'Guardar' }}
+          </button>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="card-body">
+        <!-- Modo Vista -->
+        <div class="view-mode" *ngIf="!isEditing">
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-icon"><mat-icon>badge</mat-icon></span>
+              <div class="info-content">
+                <label class="info-label">Nombre completo</label>
+                <p class="info-value">{{ perfil?.nombre }} {{ perfil?.apellido }}</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon"><mat-icon>mail</mat-icon></span>
+              <div class="info-content">
+                <label class="info-label">Correo electr&oacute;nico</label>
+                <p class="info-value">{{ perfil?.email }}</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon"><mat-icon>call</mat-icon></span>
+              <div class="info-content">
+                <label class="info-label">Tel&eacute;fono</label>
+                <p class="info-value">{{ perfil?.telefono || 'No especificado' }}</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon"><mat-icon>location_on</mat-icon></span>
+              <div class="info-content">
+                <label class="info-label">Zona</label>
+                <p class="info-value">{{ perfil?.ubicacion || 'No especificada' }}</p>
+              </div>
+            </div>
+            <div class="info-item info-item-wide" *ngIf="perfil && perfil.biografia">
+              <span class="info-icon"><mat-icon>auto_stories</mat-icon></span>
+              <div class="info-content">
+                <label class="info-label">Biograf&iacute;a</label>
+                <p class="info-value bio-text">{{ perfil.biografia }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modo Edición -->
+        <form [formGroup]="perfilForm" class="edit-mode" *ngIf="isEditing">
+          <div class="edit-grid">
+            <div class="edit-field">
+              <span class="edit-icon"><mat-icon>badge</mat-icon></span>
+              <mat-form-field appearance="outline" class="w-100 compact">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre" placeholder="Tu nombre">
+                <mat-error *ngIf="perfilForm.get('nombre')?.hasError('required')">El nombre es obligatorio</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="edit-field">
+              <span class="edit-icon"><mat-icon>person</mat-icon></span>
+              <mat-form-field appearance="outline" class="w-100 compact">
+                <mat-label>Apellido</mat-label>
+                <input matInput formControlName="apellido" placeholder="Tu apellido">
+              </mat-form-field>
+            </div>
+            <div class="edit-field">
+              <span class="edit-icon"><mat-icon>mail</mat-icon></span>
+              <mat-form-field appearance="outline" class="w-100 compact">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput formControlName="email" placeholder="correo@ejemplo.com" type="email">
+                <mat-error *ngIf="perfilForm.get('email')?.hasError('required')">El correo es obligatorio</mat-error>
+                <mat-error *ngIf="perfilForm.get('email')?.hasError('email')">Ingresa un correo válido</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="edit-field">
+              <span class="edit-icon"><mat-icon>call</mat-icon></span>
+              <mat-form-field appearance="outline" class="w-100 compact">
+                <mat-label>Teléfono</mat-label>
+                <input matInput formControlName="telefono" placeholder="+52 442 000 0000">
+              </mat-form-field>
+            </div>
+            <div class="edit-field edit-field-wide">
+              <span class="edit-icon"><mat-icon>location_on</mat-icon></span>
+              <mat-form-field appearance="outline" class="w-100 compact">
+                <mat-label>Zona</mat-label>
+                <mat-select formControlName="ubicacion">
+                  <mat-option value="">Prefiero elegir después</mat-option>
+                  <mat-option *ngFor="let location of locations" [value]="location">{{ location }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="edit-field edit-field-wide">
+              <span class="edit-icon"><mat-icon>auto_stories</mat-icon></span>
+              <mat-form-field appearance="outline" class="w-100 compact">
+                <mat-label>Biografía</mat-label>
+                <textarea matInput formControlName="biografia" rows="2" placeholder="Cuéntanos sobre ti..."></textarea>
+                <mat-hint align="end">{{perfilForm.get('biografia')?.value?.length || 0}}/500</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tarjeta Seguridad (Compacta) -->
+    <div class="perfil-card security-card">
+      <div class="security-body">
+        <div class="security-left">
+          <mat-icon class="security-icon">lock</mat-icon>
+          <div class="security-text">
+            <span class="security-title">Seguridad de la cuenta</span>
+            <span class="security-desc">Mantén tu cuenta segura actualizando tu contraseña periódicamente.</span>
+          </div>
+        </div>
+        <button mat-stroked-button color="accent" (click)="togglePasswordForm()" *ngIf="!showPasswordForm" class="btn-security">
+          <mat-icon>vpn_key</mat-icon>
+          Cambiar contraseña
+        </button>
+        <button mat-stroked-button (click)="togglePasswordForm()" *ngIf="showPasswordForm" class="btn-security">
+          Cancelar
+        </button>
+      </div>
+
+      <div class="security-form-wrap" *ngIf="showPasswordForm">
+        <mat-divider></mat-divider>
+        <div class="security-form-inner">
+          <form [formGroup]="passwordForm" (ngSubmit)="cambiarPassword()">
+            <div class="row g-2">
+              <div class="col-md-4">
+                <mat-form-field appearance="outline" class="w-100 compact">
+                  <mat-label>Contraseña actual</mat-label>
+                  <input matInput formControlName="currentPassword" type="password" placeholder="••••••••">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 compact">
+                  <mat-label>Nueva contraseña</mat-label>
+                  <input matInput formControlName="newPassword" type="password" placeholder="Mínimo 8">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field appearance="outline" class="w-100 compact">
+                  <mat-label>Confirmar</mat-label>
+                  <input matInput formControlName="confirmPassword" type="password" placeholder="Repetir">
+                </mat-form-field>
+              </div>
+              <div class="col-md-2 d-flex align-items-start justify-content-end">
+                <button mat-flat-button color="accent" type="submit" [disabled]="isChangingPassword || passwordForm.invalid" class="btn-update">
+                  {{ isChangingPassword ? '...' : 'Actualizar' }}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-actions" *ngIf="!isEditing">
+      <button type="button" class="btn-logout-profile" (click)="cerrarSesion()">
+        <mat-icon>logout</mat-icon>
+        Cerrar sesi&oacute;n
+      </button>
+    </div>
+
+  </div>
+</div>

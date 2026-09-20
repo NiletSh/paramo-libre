@@ -1,0 +1,479 @@
+// Paleta verde premium
+$bg-dark: #f8fdea;
+$bg-card: #ffffff;
+$bg-card-hover: #f4fbe8;
+$bg-input: #f7fbeb;
+$border-color: #dfeac7;
+$text-primary: #2f4f2f;
+$text-secondary: #6a7d3b;
+$accent-cyan: #7bbd2f;
+$accent-cyan-hover: #5d8b1f;
+$accent-purple: #4f7d2a;
+$success: #4f7d2a;
+$warning: #d58a14;
+
+.proposal-page {
+  background-color: $bg-dark;
+  min-height: 100vh;
+  padding: 2.5rem 1rem;
+  color: $text-primary;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+
+.back-btn {
+  margin-bottom: 2rem;
+  color: $text-secondary;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $text-primary;
+  }
+
+  mat-icon {
+    margin-right: 0.25rem;
+    font-size: 1.1rem;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
+.page-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: $text-primary;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.page-subtitle {
+  color: $text-secondary;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.section-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: $text-secondary;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+// Libro solicitado
+.requested-section {
+  margin-bottom: 3rem;
+
+  .requested-card {
+    display: flex;
+    gap: 2rem;
+    background: $bg-card;
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    border: 1px solid $border-color;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .requested-image {
+    width: 220px;
+    height: 320px;
+    border-radius: 1rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #0f4c5c 0%, #1a5f7a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .requested-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .badges-row {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .book-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: $text-primary;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .book-author {
+    color: $text-secondary;
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    font-weight: 400;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.category-badge {
+  background-color: rgba($accent-cyan, 0.12);
+  color: $accent-cyan;
+}
+
+.status-badge {
+  background-color: rgba($success, 0.1);
+  color: $success;
+}
+
+.condition-badge {
+  background-color: rgba($warning, 0.12);
+  color: $warning;
+}
+
+// Detalles grid
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  max-width: 500px;
+}
+
+.detail-box {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border-color;
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.detail-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-secondary;
+
+  mat-icon {
+    font-size: 1.1rem;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
+.detail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  color: $text-secondary;
+  font-weight: 500;
+}
+
+.detail-value {
+  font-size: 1rem;
+  color: $text-primary;
+  font-weight: 700;
+}
+
+// Mis libros
+.mybooks-section {
+  margin-bottom: 3rem;
+}
+
+.book-card {
+  cursor: pointer;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: $bg-card;
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-5px);
+    background: $bg-card-hover;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  &.selected {
+    border-color: $accent-cyan;
+    box-shadow: 0 0 0 3px rgba($accent-cyan, 0.2), 0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .card-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.08);
+    }
+  }
+
+  .check-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba($accent-cyan, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+
+    mat-icon {
+      color: $bg-dark;
+      font-size: 3.5rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      font-weight: 700;
+    }
+  }
+
+  .card-body {
+    padding: 1.25rem;
+
+    .badges-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .book-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: $text-primary;
+      margin-bottom: 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .book-author {
+      color: $text-secondary;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+}
+
+// Mensaje
+.message-section {
+  margin-bottom: 3rem;
+
+  .form-box {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .message-field {
+    width: 100%;
+
+    ::ng-deep {
+      .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
+
+      .mat-mdc-text-field-wrapper {
+        background: $bg-input;
+        border-radius: 0.75rem;
+        border: 1px solid $border-color;
+      }
+
+      .mat-mdc-form-field-focus-overlay {
+        background: transparent;
+      }
+
+      .mdc-text-field--outlined {
+        --mdc-outlined-text-field-container-shape: 0.75rem;
+      }
+
+      .mdc-text-field--outlined .mdc-notched-outline__leading,
+      .mdc-text-field--outlined .mdc-notched-outline__notch,
+      .mdc-text-field--outlined .mdc-notched-outline__trailing {
+        border-color: $border-color !important;
+      }
+
+      .mdc-text-field--focused .mdc-notched-outline__leading,
+      .mdc-text-field--focused .mdc-notched-outline__notch,
+      .mdc-text-field--focused .mdc-notched-outline__trailing {
+        border-color: $accent-cyan !important;
+      }
+
+      .mat-mdc-form-field-label {
+        color: $text-secondary !important;
+      }
+
+      .mat-mdc-input-element {
+        color: $text-primary !important;
+      }
+
+      textarea::placeholder {
+        color: rgba($text-secondary, 0.5) !important;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+  }
+}
+
+// Botón principal
+.btn-primary {
+  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%) !important;
+  color: #ffffff !important;
+  padding: 0.6rem 2rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.01em !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 4px 14px rgba($accent-cyan, 0.25) !important;
+
+  &:hover {
+    background-color: $accent-cyan-hover !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba($accent-cyan, 0.35) !important;
+  }
+
+  mat-icon {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
+// Estados vacíos y éxito
+.empty-state,
+.success-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: 1.25rem;
+  margin-top: 1rem;
+
+  mat-icon {
+    font-size: 3.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: $accent-cyan;
+    margin-bottom: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $text-primary;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: $text-secondary;
+    margin-bottom: 1.75rem;
+    font-size: 1.05rem;
+  }
+}
+
+.success-state {
+  .success-icon {
+    color: $success;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .proposal-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .requested-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem !important;
+
+    .requested-image {
+      width: 180px;
+      height: 260px;
+    }
+
+    .details-grid {
+      max-width: 100%;
+    }
+  }
+
+  .actions {
+    justify-content: center !important;
+
+    .btn-primary {
+      width: 100%;
+    }
+  }
+
+  .book-card .card-image {
+    height: 180px;
+  }
+}

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 420" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="cover1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2f4f2f"/>
+      <stop offset="100%" stop-color="#5d8b1f"/>
+    </linearGradient>
+    <linearGradient id="cover2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5d8b1f"/>
+      <stop offset="100%" stop-color="#7bbd2f"/>
+    </linearGradient>
+    <linearGradient id="cover3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3d6b4f"/>
+      <stop offset="100%" stop-color="#6c8c4e"/>
+    </linearGradient>
+    <linearGradient id="bgGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7bbd2f" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#5d8b1f" stop-opacity="0.06"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="240" cy="360" rx="180" ry="28" fill="#5d8b1f" opacity="0.12"/>
+
+  <circle cx="380" cy="80" r="60" fill="url(#bgGlow)"/>
+  <circle cx="80" cy="120" r="40" fill="url(#bgGlow)"/>
+
+  <!-- Floating pages -->
+  <path d="M60 180 Q90 160 120 180 L120 220 Q90 240 60 220 Z" fill="#ffffff" opacity="0.7" stroke="#7bbd2f" stroke-width="1.5"/>
+  <path d="M370 200 Q400 180 430 200 L430 240 Q400 260 370 240 Z" fill="#ffffff" opacity="0.6" stroke="#7bbd2f" stroke-width="1.5"/>
+
+  <!-- Book 3 (back) -->
+  <g transform="rotate(-8 280 260)">
+    <rect x="200" y="130" width="130" height="180" rx="6" fill="#ffffff" stroke="#dfeac7" stroke-width="2"/>
+    <rect x="208" y="138" width="114" height="164" rx="4" fill="url(#cover3)"/>
+    <rect x="200" y="130" width="10" height="180" rx="3" fill="#3d6b4f"/>
+    <line x1="230" y1="170" x2="300" y2="170" stroke="#ffffff" stroke-width="3" opacity="0.5" stroke-linecap="round"/>
+    <line x1="230" y1="190" x2="285" y2="190" stroke="#ffffff" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+  </g>
+
+  <!-- Book 2 (middle) -->
+  <g transform="rotate(6 180 240)">
+    <rect x="110" y="110" width="140" height="195" rx="6" fill="#ffffff" stroke="#dfeac7" stroke-width="2"/>
+    <rect x="118" y="118" width="124" height="179" rx="4" fill="url(#cover2)"/>
+    <rect x="110" y="110" width="10" height="195" rx="3" fill="#5d8b1f"/>
+    <circle cx="180" cy="200" r="28" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+    <path d="M168 200 L176 208 L192 192" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  </g>
+
+  <!-- Book 1 (front) -->
+  <g transform="rotate(-4 260 220)">
+    <rect x="170" y="90" width="150" height="210" rx="6" fill="#ffffff" stroke="#dfeac7" stroke-width="2"/>
+    <rect x="178" y="98" width="134" height="194" rx="4" fill="url(#cover1)"/>
+    <rect x="170" y="90" width="12" height="210" rx="3" fill="#2f4f2f"/>
+    <text x="245" y="175" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="14" font-weight="bold" opacity="0.85">P�ramo</text>
+    <text x="245" y="195" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="14" font-weight="bold" opacity="0.85">Libre</text>
+    <line x1="200" y1="220" x2="290" y2="220" stroke="#ffffff" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+    <line x1="200" y1="235" x2="270" y2="235" stroke="#ffffff" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Swap arrows -->
+  <g transform="translate(240, 60)">
+    <circle cx="0" cy="0" r="32" fill="#ffffff" stroke="#7bbd2f" stroke-width="2"/>
+    <path d="M-12 -4 L4 -4 L4 -12 L16 0 L4 12 L4 4 L-12 4 Z" fill="#5d8b1f"/>
+    <path d="M12 4 L-4 4 L-4 12 L-16 0 L-4 -12 L-4 -4 L12 -4 Z" fill="#7bbd2f"/>
+  </g>
+
+  <!-- Reading glasses -->
+  <g transform="translate(50, 280)">
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#5d8b1f" stroke-width="2.5"/>
+    <circle cx="30" cy="0" r="14" fill="none" stroke="#5d8b1f" stroke-width="2.5"/>
+    <path d="M14 0 L16 0" stroke="#5d8b1f" stroke-width="2.5"/>
+    <path d="M-14 0 L-22 6" stroke="#5d8b1f" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M44 0 L52 6" stroke="#5d8b1f" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+</svg>

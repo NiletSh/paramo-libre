@@ -1,0 +1,173 @@
+<div class="catalog">
+  
+  <header class="catalog-header">
+    <div class="header-content">
+      <h1>Catálogo de libros</h1>
+      <p>{{ totalResults }} libros disponibles para trueque</p>
+    </div>
+    <a class="btn-publish-catalog" routerLink="/publicar-libro" *ngIf="isLoggedIn">
+      <span class="material-icons">add</span>
+      Publicar libro
+    </a>
+    <a class="btn-publish-catalog btn-publish-guest" routerLink="/auth/login" [queryParams]="{ returnUrl: 'publicar-libro', reason: 'Debes iniciar sesión para publicar un libro.' }" *ngIf="!isLoggedIn">
+      <span class="material-icons">login</span>
+      Inicia sesión para publicar
+    </a>
+  </header>
+
+  <div class="search-bar">
+    <span class="material-icons search-icon">search</span>
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      placeholder="Buscar por título, autor o zona..."
+      class="search-input">
+    <button class="search-btn" (click)="onSearch()">
+      <span class="material-icons">arrow_forward</span>
+    </button>
+  </div>
+
+  <div class="catalog-tools">
+    <label class="tool-field">
+      <span>Categoría</span>
+      <select [(ngModel)]="selectedCategory" (change)="applyFilters()">
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </label>
+
+    <label class="tool-field">
+      <span>Estado</span>
+      <select [(ngModel)]="selectedCondition" (change)="applyFilters()">
+        <option *ngFor="let condition of conditions" [value]="condition.value">{{ condition.label }}</option>
+      </select>
+    </label>
+
+    <label class="tool-field">
+      <span>Zona</span>
+      <select [(ngModel)]="selectedLocation" (change)="applyFilters()">
+        <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+      </select>
+    </label>
+
+    <label class="tool-field">
+      <span>Ordenar</span>
+      <select [(ngModel)]="sortBy" (change)="applyFilters()">
+        <option value="recent">Más recientes</option>
+        <option value="title">Título A-Z</option>
+        <option value="location">Zona A-Z</option>
+      </select>
+    </label>
+
+    <button type="button" class="btn-reset" (click)="clearFilters()">
+      <span class="material-icons">restart_alt</span>
+      Limpiar
+    </button>
+  </div>
+
+  <div class="category-filters">
+    <button
+      *ngFor="let cat of categories"
+      class="category-chip"
+      [class.active]="selectedCategory === cat"
+      (click)="selectCategory(cat)">
+      {{ cat }}
+    </button>
+  </div>
+
+  <div class="loading-state" *ngIf="loading">
+    <span class="material-icons">hourglass_empty</span>
+    <p>Cargando libros...</p>
+  </div>
+
+  <div class="books-grid" *ngIf="!loading && paginatedBooks.length > 0; else emptyState">
+    <div class="book-card" *ngFor="let book of paginatedBooks; let i = index" [style.animation-delay]="i * 0.05 + 's'">
+      
+      <div class="book-cover" [style.background]="book.imageUrl ? 'transparent' : 'linear-gradient(135deg, ' + book.imageColor + ' 0%, ' + book.imageColor + 'dd 100%)'">
+        <img *ngIf="book.imageUrl" [src]="book.imageUrl" [alt]="book.title">
+        <span class="material-icons" *ngIf="!book.imageUrl">auto_stories</span>
+        <div class="book-status-badge" [style.background]="book.status === 'available' ? '#2d6a4f' : (book.status === 'reserved' ? '#e76f51' : '#868e96')">
+          {{ statusLabels[book.status] }}
+        </div>
+      </div>
+
+      <div class="book-info">
+        <div class="book-category">{{ book.category }}</div>
+        <h3 class="book-title">{{ book.title }}</h3>
+        <p class="book-author">{{ book.author }}</p>
+        
+        <div class="book-meta">
+          <span class="meta-item">
+            <span class="material-icons">place</span>
+            {{ book.location }}
+          </span>
+          <span class="meta-item">
+            <span class="material-icons">person</span>
+            {{ book.owner }}
+          </span>
+        </div>
+
+        <div class="book-footer">
+          <span class="condition-badge" [style.background]="conditionColors[book.condition] + '20'" [style.color]="conditionColors[book.condition]">
+            {{ conditionLabels[book.condition] }}
+          </span>
+          <div class="book-actions">
+            <a class="btn-view" [routerLink]="['/libro', book.id]">
+              <span class="material-icons">visibility</span>
+              Ver
+            </a>
+            <a class="btn-exchange" *ngIf="isLoggedIn" [routerLink]="['/intercambio', book.id]">
+              <span class="material-icons">swap_horiz</span>
+              Trueque
+            </a>
+            <a class="btn-exchange btn-login" *ngIf="!isLoggedIn" routerLink="/auth/login" [queryParams]="{ returnUrl: 'intercambio/' + book.id, reason: 'Debes iniciar sesión para proponer un trueque.' }">
+              <span class="material-icons">login</span>
+              Iniciar sesión
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="empty-state" *ngIf="!loading">
+      <span class="material-icons">search_off</span>
+      <h3>No encontramos libros</h3>
+      <p>Intenta con otro título, autor, categoría o zona.</p>
+      <button class="btn-clear" (click)="clearFilters()">
+        Limpiar filtros
+      </button>
+      <a class="btn-empty-publish" routerLink="/publicar-libro" *ngIf="isLoggedIn">
+        Publicar un libro
+      </a>
+      <a class="btn-empty-publish" routerLink="/auth/login" [queryParams]="{ returnUrl: 'publicar-libro', reason: 'Debes iniciar sesión para publicar un libro.' }" *ngIf="!isLoggedIn">
+        Inicia sesión para publicar
+      </a>
+    </div>
+  </ng-template>
+
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button class="page-btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+      <span class="material-icons">chevron_left</span>
+      Anterior
+    </button>
+
+    <div class="page-numbers">
+      <button
+        *ngFor="let page of pages"
+        class="page-number"
+        [class.active]="page === currentPage"
+        (click)="goToPage(page)">
+        {{ page }}
+      </button>
+    </div>
+
+    <button class="page-btn" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+      Siguiente
+      <span class="material-icons">chevron_right</span>
+    </button>
+  </div>
+
+</div>

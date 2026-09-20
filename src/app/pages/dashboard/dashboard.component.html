@@ -1,0 +1,111 @@
+<div class="dashboard">
+  <header class="dash-hero">
+    <div class="hero-content">
+      <span class="eyebrow">Mi espacio</span>
+      <h1>Hola, {{ userName }}</h1>
+      <p>Administra tus libros, propuestas y trueques desde un solo lugar.</p>
+    </div>
+
+    <a class="btn-new-book" routerLink="/publicar-libro">
+      <span class="material-icons">add</span>
+      Publicar libro
+    </a>
+  </header>
+
+  <section class="stats-grid" aria-label="Resumen">
+    <a
+      class="stat-card"
+      *ngFor="let stat of stats; let i = index"
+      [class]="'stat-card stat-' + stat.tone"
+      [routerLink]="stat.link"
+      [style.animation-delay]="i * 0.08 + 's'">
+      <div class="stat-top">
+        <div class="stat-icon">
+          <span class="material-icons">{{ stat.icon }}</span>
+        </div>
+        <span class="stat-trend material-icons" aria-hidden="true">trending_up</span>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+    </a>
+  </section>
+
+  <div class="dash-content">
+    <section class="dash-section books-section">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Biblioteca</span>
+          <h2>Mis libros publicados</h2>
+        </div>
+        <a routerLink="/catalogo">Ver catálogo</a>
+      </div>
+
+      <div class="books-grid">
+        <article class="book-card" *ngFor="let book of recentBooks; let i = index" [style.animation-delay]="0.24 + i * 0.08 + 's'">
+          <div class="book-cover" [style.background]="book.cover">
+            <span class="material-icons">auto_stories</span>
+            <span class="book-status" [class]="book.status">{{ getStatusLabel(book.status) }}</span>
+          </div>
+          <div class="book-card-body">
+            <h3>{{ book.title }}</h3>
+            <p class="book-author">{{ book.author }}</p>
+            <a class="btn-details" [routerLink]="['/libro', book.id]">
+              <span class="material-icons">visibility</span>
+              Ver detalles
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="dash-side">
+      <section class="dash-section actions-section">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Atajos</span>
+            <h2>Acciones rápidas</h2>
+          </div>
+        </div>
+
+        <div class="actions-grid">
+          <a
+            class="action-card"
+            *ngFor="let action of quickActions"
+            [routerLink]="action.link"
+            [class]="'action-card action-' + action.tone">
+            <span class="action-icon material-icons">{{ action.icon }}</span>
+            <span class="action-copy">
+              <strong>{{ action.label }}</strong>
+              <small>{{ action.description }}</small>
+            </span>
+            <span class="action-arrow material-icons">arrow_forward</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="dash-section activity-section">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Movimiento</span>
+            <h2>Actividad reciente</h2>
+          </div>
+          <a routerLink="/mis-propuestas">Ver todo</a>
+        </div>
+
+        <div class="activity-list">
+          <div class="activity-item" *ngFor="let activity of activities; let i = index" [style.animation-delay]="0.42 + i * 0.08 + 's'">
+            <div class="activity-icon">
+              <span class="material-icons">{{ activity.icon }}</span>
+            </div>
+            <div class="activity-text">
+              <p>{{ activity.message }}</p>
+              <span>{{ activity.time }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
