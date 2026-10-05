@@ -5,7 +5,7 @@ const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '3307'),
   user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '23590203',
+  password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'paramo_libre',
   ssl: {
     rejectUnauthorized: false   // ← ESTO ES LO NUEVO (necesario para Aiven)
