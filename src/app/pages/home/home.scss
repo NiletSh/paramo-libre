@@ -105,32 +105,21 @@ h1 span {
   font-size: 18px;
 }
 
-.books {
-  height: min(100%, 280px);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 12px;
-}
-
-.spine {
-  width: 62px;
-  border-radius: 8px 8px 4px 4px;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+.hero-photo {
+  min-height: 0;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #f8fdea;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  box-shadow: 0 16px 30px rgba(47, 79, 47, 0.12);
 }
 
-.spine-a { height: 78%; background: #2f4f2f; }
-.spine-b { height: 92%; background: #5d8b1f; }
-.spine-c { height: 70%; background: #d58a14; }
-.spine-d { height: 84%; background: #0d7377; }
+.hero-photo img {
+  width: 100%;
+  max-height: min(42vh, 320px);
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 16px 36px rgba(47, 79, 47, 0.16);
+}
 
 .steps {
   display: grid;
@@ -167,9 +156,13 @@ h1 span {
     gap: 12px;
   }
 
-  .books {
-    height: 120px;
+  .hero-photo {
     order: -1;
+    height: auto;
+  }
+
+  .hero-photo img {
+    max-height: 150px;
   }
 
   h1 {
@@ -186,8 +179,8 @@ h1 span {
 }
 
 @media (max-height: 700px) {
-  .books {
-    display: none;
+  .hero-photo img {
+    max-height: 140px;
   }
 
   h1 {
