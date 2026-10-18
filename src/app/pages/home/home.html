@@ -1,38 +1,28 @@
-<div class="landing">
-  <svg class="leaf leaf-right" viewBox="0 0 180 260" aria-hidden="true">
-    <path d="M150 20c-40 30-70 80-60 140 20-30 50-50 90-60-20 40-30 80-20 120-50-20-90-70-90-130C70 40 110 10 150 20z" />
-  </svg>
-  <svg class="leaf leaf-left" viewBox="0 0 160 220" aria-hidden="true">
-    <path d="M30 30c50 10 80 50 70 110-30-20-60-20-90 0 10-40 20-80 20-110z" />
-  </svg>
-
-  <section class="stage">
-    <div class="copy">
-      <p class="kicker">Trueque de libros</p>
-      <h1>Intercambia un libro por otro libro.</h1>
-      <p class="lead">Encuentra una lectura, propone el cambio y recógela en el estante.</p>
-      <div class="actions">
-        <a class="btn-primary" routerLink="/catalogo">Ver catálogo</a>
-        <a class="btn-primary" routerLink="/auth/login">Iniciar sesión</a>
-        <a class="btn-primary" routerLink="/auth/registro">Registrarse</a>
-        <button type="button" class="btn-primary" (click)="openShareModal()">
-          <span class="material-icons">share</span>
-          Compartir
-        </button>
-      </div>
+<section class="landing" @arrive>
+  <div class="copy">
+    <p class="reveal kicker">Trueque de libros</p>
+    <h1 class="reveal">Intercambia un libro por otro libro.</h1>
+    <p class="reveal lead">Encuentra una lectura, propone el cambio y recógela en el estante.</p>
+    <div class="reveal actions">
+      <a class="btn-primary" routerLink="/catalogo">Ver catálogo</a>
+      <a class="btn-primary" routerLink="/auth/login">Iniciar sesión</a>
+      <a class="btn-primary" routerLink="/auth/registro">Registrarse</a>
+      <button type="button" class="btn-primary" (click)="openShareModal()">
+        <span class="material-icons">share</span>
+        Compartir
+      </button>
     </div>
+    <p class="reveal path">Explora <span></span> Elige <span></span> Propón <span></span> Estante</p>
+  </div>
 
+  <div class="scene" @sceneIn>
+    <span class="volume volume-a" aria-hidden="true"></span>
+    <span class="volume volume-b" aria-hidden="true"></span>
+    <span class="volume volume-c" aria-hidden="true"></span>
     <figure class="frame">
       <img src="assets/images/libroparamo.png" alt="Libro abierto con montañas y el nombre Páramo Libre" />
     </figure>
-  </section>
-
-  <ol class="steps">
-    <li><span>1</span> Explora <span class="material-icons">search</span></li>
-    <li><span>2</span> Elige <span class="material-icons">edit</span></li>
-    <li><span>3</span> Propón <span class="material-icons">swap_horiz</span></li>
-    <li><span>4</span> Estante <span class="material-icons">menu_book</span></li>
-  </ol>
-</div>
+  </div>
+</section>
 
 <app-share-modal *ngIf="shareOpen" (close)="closeShareModal()"></app-share-modal>
