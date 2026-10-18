@@ -14,8 +14,8 @@
     </div>
 
     <!-- Cuerpo en dos columnas -->
+    <form class="publish-form" [formGroup]="bookForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-body">
-      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-grid">
           
           <!-- COLUMNA IZQUIERDA: Imagen -->
@@ -121,18 +121,18 @@
                 <span>Publica solo libros disponibles para intercambio. Tras aceptar un trueque, llévalos al estante comunitario.</span>
               </div>
             </div>
-
-            <div class="actions">
-              <button type="submit" mat-flat-button class="btn-publish" [disabled]="bookForm.invalid">
-                <mat-icon>{{ isEditMode ? 'save' : 'post_add' }}</mat-icon>
-                {{ isEditMode ? 'Guardar cambios' : 'Publicar libro' }}
-              </button>
-            </div>
           </div>
 
         </div>
-      </form>
     </div>
+
+        <div class="actions">
+          <button type="submit" mat-flat-button class="btn-publish" [disabled]="bookForm.invalid">
+            <mat-icon>{{ isEditMode ? 'save' : 'post_add' }}</mat-icon>
+            {{ isEditMode ? 'Guardar cambios' : 'Publicar libro' }}
+          </button>
+        </div>
+    </form>
 
   </div>
 </div>
