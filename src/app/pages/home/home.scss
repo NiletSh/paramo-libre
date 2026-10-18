@@ -100,7 +100,7 @@ h1 em {
   right: 36px;
   bottom: 48px;
   z-index: 1;
-  width: min(48vw, 460px);
+  width: min(52vw, 680px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -120,9 +120,8 @@ figure img {
   display: block;
   width: auto;
   height: auto;
-  max-width: min(100%, 432px);
-  max-height: min(100%, 577px);
-  margin-bottom: -18px;
+  max-width: min(100%, 1167px);
+  max-height: min(100%, 1548px);
 }
 
 .ticker {
@@ -193,8 +192,8 @@ figure img {
   }
 
   figure img {
-    max-width: min(100%, 432px);
-    max-height: min(100%, 577px);
+    max-width: min(100%, 1167px);
+    max-height: min(100%, 1548px);
   }
 }
 
