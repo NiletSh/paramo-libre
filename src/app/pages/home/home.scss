@@ -67,13 +67,13 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 22px;
+  gap: 10px 12px;
   margin-top: 28px;
   margin-left: 12%;
 }
 
 .enter,
-.text-link {
+.soft {
   font: inherit;
   cursor: pointer;
   text-decoration: none;
@@ -95,17 +95,21 @@ h1 {
   background: #3d6340;
 }
 
-.text-link {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: rgba(42, 36, 28, 0.82);
+.soft {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 20px;
+  border: 1px solid rgba(42, 36, 28, 0.14);
+  border-radius: 999px;
+  color: #3a342c;
+  background: #e6e2d8;
   font-size: 15px;
-  font-weight: 650;
+  font-weight: 700;
 }
 
-.text-link:hover {
-  color: #6e4524;
+.soft:hover {
+  background: #ddd8cc;
 }
 
 .still {
