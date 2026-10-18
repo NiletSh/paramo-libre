@@ -60,6 +60,7 @@ export class FooterComponent {
       || path.startsWith('/publicar')
       || path.startsWith('/propuestas')
       || path.startsWith('/mis-propuestas')
-      || path.endsWith('/editar');
+      || path.endsWith('/editar')
+      || /^\/libro\/[^/]+$/.test(path);
   }
 }
