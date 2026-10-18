@@ -12,11 +12,13 @@
       <h1>Intercambia un libro por otro libro.</h1>
       <p class="lead">Encuentra una lectura, propone el cambio y recógela en el estante.</p>
       <div class="actions">
-        <a class="btn-catalog" routerLink="/catalogo">
-          Ver catálogo
-          <span class="material-icons">spa</span>
-        </a>
-        <button type="button" class="btn-outline" (click)="openShareModal()">Compartir</button>
+        <a class="btn-primary" routerLink="/catalogo">Ver catálogo</a>
+        <a class="btn-primary" routerLink="/auth/login">Iniciar sesión</a>
+        <a class="btn-primary" routerLink="/auth/registro">Registrarse</a>
+        <button type="button" class="btn-primary" (click)="openShareModal()">
+          <span class="material-icons">share</span>
+          Compartir
+        </button>
       </div>
     </div>
 

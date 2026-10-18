@@ -12,10 +12,11 @@ import { AuthService } from '../../core/services/auth.service';
     <nav class="navbar">
       <div class="navbar-inner">
         <a class="navbar-brand" routerLink="/" (click)="closeMenu()">
-          <img class="brand-logo" src="assets/images/logo_paramo.png" alt="Páramo Libre" />
+          <img class="brand-logo" src="assets/images/logo_paramo.png" alt="" />
+          <span class="brand-name">P&aacute;ramo Libre</span>
         </a>
 
-        <div class="nav-links">
+        <div class="nav-links" *ngIf="isLoggedIn || !isHomePage">
           <ng-container *ngIf="isLoggedIn; else publicLinks">
             <a class="nav-link" routerLink="/catalogo" routerLinkActive="active">Cat&aacute;logo</a>
             <a class="nav-link" routerLink="/publicar-libro" routerLinkActive="active">Publicar libro</a>
@@ -30,14 +31,14 @@ import { AuthService } from '../../core/services/auth.service';
           </ng-template>
         </div>
 
-        <button class="menu-toggle" type="button" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Men&uacute;">
+        <button class="menu-toggle" *ngIf="isLoggedIn || !isHomePage" type="button" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Men&uacute;">
           <span></span>
           <span></span>
           <span></span>
         </button>
       </div>
 
-      <div class="mobile-menu" [class.open]="menuOpen">
+      <div class="mobile-menu" [class.open]="menuOpen" *ngIf="isLoggedIn || !isHomePage">
         <ng-container *ngIf="isLoggedIn; else publicMobileLinks">
           <a class="mobile-link" routerLink="/catalogo" (click)="closeMenu()" routerLinkActive="active">Cat&aacute;logo</a>
           <a class="mobile-link" routerLink="/publicar-libro" (click)="closeMenu()" routerLinkActive="active">Publicar libro</a>
@@ -62,18 +63,15 @@ import { AuthService } from '../../core/services/auth.service';
       z-index: 1000;
       background: rgba(247, 246, 241, 0.94);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(110, 168, 56, 0.1);
     }
 
     .navbar-inner {
-      max-width: 1280px;
-      height: 64px;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px 0 12px;
     }
 
     .navbar-brand {
@@ -87,10 +85,17 @@ import { AuthService } from '../../core/services/auth.service';
     }
 
     .brand-logo {
-      height: 52px;
+      height: 56px;
       width: auto;
       display: block;
       object-fit: contain;
+    }
+
+    .brand-name {
+      color: #2c3328;
+      font-size: 18px;
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .nav-links {
