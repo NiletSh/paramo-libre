@@ -1,27 +1,38 @@
-<section class="landing" @arrive>
+<section class="night" @rise>
   <div class="copy">
-    <p class="reveal kicker">Trueque de libros</p>
-    <h1 class="reveal">Intercambia un libro por otro libro.</h1>
-    <p class="reveal lead">Encuentra una lectura, propone el cambio y recógela en el estante.</p>
-    <div class="reveal actions">
-      <a class="btn-primary" routerLink="/catalogo">Ver catálogo</a>
-      <a class="btn-primary" routerLink="/auth/login">Iniciar sesión</a>
-      <a class="btn-primary" routerLink="/auth/registro">Registrarse</a>
-      <button type="button" class="btn-primary" (click)="openShareModal()">
-        <span class="material-icons">share</span>
-        Compartir
-      </button>
+    <p class="line index">01 — El estante</p>
+    <h1 class="line">
+      Un libro
+      <em>encuentra</em>
+      otro libro.
+    </h1>
+    <p class="line note">Páramo Libre junta a quien suelta una historia con quien la está buscando.</p>
+    <div class="line actions">
+      <a class="enter" routerLink="/catalogo">Ver el catálogo</a>
+      <button type="button" class="text-link" (click)="openShareModal()">Compartir</button>
+      <a class="text-link" routerLink="/auth/registro">Crear cuenta</a>
+      <a class="text-link" routerLink="/auth/login">Entrar</a>
     </div>
-    <p class="reveal path">Explora <span></span> Elige <span></span> Propón <span></span> Estante</p>
   </div>
 
-  <div class="scene" @sceneIn>
-    <span class="volume volume-a" aria-hidden="true"></span>
-    <span class="volume volume-b" aria-hidden="true"></span>
-    <span class="volume volume-c" aria-hidden="true"></span>
-    <figure class="frame">
+  <div class="still" @plate>
+    <div class="spines" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <figure>
       <img src="assets/images/libroparamo.png" alt="Libro abierto con montañas y el nombre Páramo Libre" />
+      <figcaption>Trueque en el estante comunitario</figcaption>
     </figure>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Novela</span><span>Ciencia</span><span>Arte</span><span>Historia</span><span>Poesía</span><span>Filosofía</span>
+      <span>Novela</span><span>Ciencia</span><span>Arte</span><span>Historia</span><span>Poesía</span><span>Filosofía</span>
+    </div>
   </div>
 </section>
 

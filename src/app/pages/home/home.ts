@@ -11,20 +11,20 @@ import { ShareModalComponent } from '../../components/share-modal/share-modal.co
   templateUrl: './home.html',
   styleUrl: './home.scss',
   animations: [
-    trigger('arrive', [
+    trigger('rise', [
       transition(':enter', [
-        query('.reveal', [
-          style({ opacity: 0, transform: 'translateY(18px)' }),
-          stagger(80, [
-            animate('700ms cubic-bezier(.22, .7, .25, 1)', style({ opacity: 1, transform: 'none' }))
+        query('.line', [
+          style({ opacity: 0, transform: 'translateY(22px)' }),
+          stagger(90, [
+            animate('780ms cubic-bezier(.16, 1, .3, 1)', style({ opacity: 1, transform: 'none' }))
           ])
         ], { optional: true })
       ])
     ]),
-    trigger('sceneIn', [
+    trigger('plate', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(28px)' }),
-        animate('900ms 120ms cubic-bezier(.22, .7, .25, 1)', style({ opacity: 1, transform: 'none' }))
+        style({ opacity: 0, transform: 'translateY(40px) scale(.98)' }),
+        animate('1100ms 180ms cubic-bezier(.16, 1, .3, 1)', style({ opacity: 1, transform: 'none' }))
       ])
     ])
   ]

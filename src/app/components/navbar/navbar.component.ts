@@ -9,7 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   template: `
-    <nav class="navbar">
+    <nav class="navbar" [class.home-bar]="isHomePage">
       <div class="navbar-inner">
         <a class="navbar-brand" routerLink="/" (click)="closeMenu()">
           <img class="brand-logo" src="assets/images/logo_paramo.png" alt="" />
@@ -96,6 +96,21 @@ import { AuthService } from '../../core/services/auth.service';
       font-size: 18px;
       font-weight: 800;
       white-space: nowrap;
+    }
+
+    .home-bar {
+      background: transparent;
+    }
+
+    .home-bar .brand-name,
+    .home-bar .nav-link {
+      color: #f6f1e8;
+    }
+
+    .home-bar .nav-link:hover,
+    .home-bar .nav-link.active {
+      color: #e7c27a;
+      background: transparent;
     }
 
     .nav-links {
