@@ -18,43 +18,44 @@ $color-card: #ffffff;
 .perfil-container {
   min-height: calc(100vh - 72px);
   width: 100%;
-  overflow-x: hidden;
+  overflow: auto;
   background: transparent;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding-top: 1.4rem;
+  padding: 28px 20px 36px;
 }
 
 .perfil-inner {
-  width: 100%;
-  max-width: 900px;
-  padding: 0.75rem 1.5rem;
+  width: min(720px, 100%);
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.9rem;
+  align-items: stretch;
+  gap: 14px;
   box-sizing: border-box;
 }
 
 // HEADER
 .perfil-header {
-  flex: 0 0 auto;
   width: 100%;
-  text-align: center;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 16px;
+  padding: 18px 18px 14px;
+  text-align: left;
 
   .avatar-wrapper {
-    width: 104px;
-    height: 104px;
-    margin: 0 auto 0.55rem;
+    width: 88px;
+    height: 88px;
+    flex: 0 0 auto;
+    margin: 0;
 
     .avatar {
       width: 100%;
       height: 100%;
       border-radius: 50%;
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 5px rgba(93, 139, 31, 0.28);
       background: linear-gradient(135deg, $color-primario 0%, $color-secundario 100%);
       display: flex;
       align-items: center;
@@ -111,11 +112,46 @@ $color-card: #ffffff;
     }
   }
 
+  .perfil-identity {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   .perfil-nombre {
-    font-size: 1.35rem;
+    margin: 0 0 8px;
+    color: #24381f;
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .perfil-edit-note {
+    margin: 0;
+    color: $color-texto-muted;
+    font-size: 0.82rem;
+  }
+
+  .perfil-actions {
+    flex: 0 0 auto;
+    align-self: flex-start;
+  }
+
+  .edit-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-editar,
+  .perfil-actions button[mat-flat-button],
+  .perfil-actions button[mat-stroked-button] {
+    min-height: 36px;
+    border-radius: 18px;
+    padding: 0 14px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+    border-color: transparent;
+    font-size: 0.85rem;
     font-weight: 700;
-    color: $color-texto;
-    margin-bottom: 0.25rem;
   }
 
   .perfil-ubicacion {
@@ -135,34 +171,31 @@ $color-card: #ffffff;
   }
 
   .perfil-stats {
-    gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 
     .stat-item {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 70px;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f4fbe6;
 
       .stat-value {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: $color-primario;
-        line-height: 1.2;
+        color: #5d8b1f;
+        font-size: 0.95rem;
+        font-weight: 800;
+        line-height: 1;
       }
 
       .stat-label {
-        font-size: 0.65rem;
-        color: $color-texto-muted;
-        margin-top: 0.15rem;
-        font-weight: 600;
+        color: #4f6138;
+        font-size: 0.72rem;
+        font-weight: 700;
       }
-    }
-
-    .stat-divider {
-      width: 1px;
-      background: $color-borde;
-      height: 28px;
-      align-self: center;
     }
   }
 }
@@ -171,8 +204,9 @@ $color-card: #ffffff;
 .perfil-card {
   width: 100%;
   background: $color-card;
-  border-radius: 8px;
-  border: 1px solid $color-borde;
+  border-radius: 16px;
+  border: 1px solid rgba(123, 189, 47, 0.16);
+  box-shadow: 0 16px 34px rgba(47, 79, 47, 0.08);
   overflow: hidden;
   text-align: left;
 
@@ -245,7 +279,7 @@ $color-card: #ffffff;
   }
 
   .card-body {
-    padding: 0.85rem 1.1rem;
+    padding: 14px 16px 16px;
 
     .view-mode {
       .info-grid {
@@ -529,21 +563,22 @@ mat-form-field.compact {
 // Responsive
 @media (max-width: 768px) {
   .perfil-container {
+    align-items: flex-start;
     height: auto;
     overflow: auto;
-  }
-
-  .perfil-inner {
-    padding: 1rem;
+    padding: 18px 14px 28px;
   }
 
   .perfil-header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+
     .avatar-wrapper {
-      width: 80px;
-      height: 80px;
+      width: 72px;
+      height: 72px;
 
       .avatar-initials {
-        font-size: 1.75rem;
+        font-size: 1.6rem;
       }
     }
 
@@ -551,12 +586,13 @@ mat-form-field.compact {
       font-size: 1.25rem;
     }
 
-    .perfil-stats {
-      gap: 1rem !important;
+    .perfil-actions,
+    .edit-actions {
+      width: 100%;
+    }
 
-      .stat-divider {
-        display: none;
-      }
+    .edit-actions {
+      justify-content: flex-end;
     }
   }
 

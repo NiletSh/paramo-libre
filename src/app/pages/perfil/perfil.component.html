@@ -1,66 +1,55 @@
 <div class="perfil-container">
   <div class="perfil-inner">
 
-    <!-- Header -->
-    <div class="perfil-header text-center">
-      <div class="avatar-wrapper mx-auto">
-        <div class="avatar" [class.has-image]="perfil?.fotoUrl || fotoPreview">
-          <img *ngIf="perfil?.fotoUrl || fotoPreview" [src]="fotoPreview || perfil?.fotoUrl" alt="Foto de perfil" class="avatar-img">
-          <span *ngIf="!(perfil?.fotoUrl || fotoPreview)" class="avatar-initials">{{ getInitials() }}</span>
-
-          <div class="avatar-overlay" *ngIf="isEditing">
-            <label for="fotoInput" class="upload-label">
-              <mat-icon>camera_alt</mat-icon>
-            </label>
-            <input id="fotoInput" type="file" accept="image/*" (change)="onFileSelected($event)" hidden>
-          </div>
-        </div>
-      </div>
-
-      <h1 class="perfil-nombre" *ngIf="!isEditing && perfil">{{ perfil.nombre }} {{ perfil.apellido }}</h1>
-
-      <div class="perfil-stats d-flex justify-content-center" *ngIf="!isEditing">
-        <div class="stat-item">
-          <span class="stat-value">{{ perfil?.librosPublicados || 0 }}</span>
-          <span class="stat-label">Libros</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-value">{{ perfil?.intercambiosCompletados || 0 }}</span>
-          <span class="stat-label">Trueques</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-value">{{ perfil?.fechaRegistro | date:'yyyy' }}</span>
-          <span class="stat-label">Miembro desde</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Tarjeta Información Personal -->
     <div class="perfil-card info-card">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <div class="card-heading">
-          <span class="card-icon">
-            <mat-icon>person</mat-icon>
-          </span>
-          <div>
-            <h2 class="card-title">Informaci&oacute;n Personal</h2>
-            <p class="card-subtitle">Datos visibles para gestionar tus intercambios.</p>
+      <div class="perfil-header">
+        <div class="avatar-wrapper">
+          <div class="avatar" [class.has-image]="perfil?.fotoUrl || fotoPreview">
+            <img *ngIf="perfil?.fotoUrl || fotoPreview" [src]="fotoPreview || perfil?.fotoUrl" alt="Foto de perfil" class="avatar-img">
+            <span *ngIf="!(perfil?.fotoUrl || fotoPreview)" class="avatar-initials">{{ getInitials() }}</span>
+
+            <div class="avatar-overlay" *ngIf="isEditing">
+              <label for="fotoInput" class="upload-label">
+                <mat-icon>camera_alt</mat-icon>
+              </label>
+              <input id="fotoInput" type="file" accept="image/*" (change)="onFileSelected($event)" hidden>
+            </div>
           </div>
         </div>
-        <button mat-stroked-button color="primary" (click)="toggleEdit()" *ngIf="!isEditing" class="btn-editar">
-          <mat-icon>edit</mat-icon>
-          Editar
-        </button>
-        <div class="d-flex gap-2" *ngIf="isEditing">
-          <button mat-stroked-button (click)="toggleEdit()" [disabled]="isLoading">Cancelar</button>
-          <button mat-flat-button color="primary" (click)="guardarPerfil()" [disabled]="isLoading || perfilForm.invalid">
-            <mat-icon *ngIf="!isLoading">save</mat-icon>
-            <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
-            {{ isLoading ? 'Guardando...' : 'Guardar' }}
+
+        <div class="perfil-identity">
+          <h1 class="perfil-nombre" *ngIf="perfil">{{ perfil.nombre }} {{ perfil.apellido }}</h1>
+          <p class="perfil-edit-note" *ngIf="isEditing">Pasa el cursor sobre la foto para cambiarla.</p>
+
+          <div class="perfil-stats" *ngIf="!isEditing">
+            <div class="stat-item">
+              <span class="stat-value">{{ perfil?.librosPublicados || 0 }}</span>
+              <span class="stat-label">Libros</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ perfil?.intercambiosCompletados || 0 }}</span>
+              <span class="stat-label">Trueques</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ perfil?.fechaRegistro | date:'yyyy' }}</span>
+              <span class="stat-label">Miembro desde</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="perfil-actions">
+          <button mat-stroked-button color="primary" (click)="toggleEdit()" *ngIf="!isEditing" class="btn-editar">
+            <mat-icon>edit</mat-icon>
+            Editar
           </button>
+          <div class="edit-actions" *ngIf="isEditing">
+            <button mat-stroked-button (click)="toggleEdit()" [disabled]="isLoading">Cancelar</button>
+            <button mat-flat-button color="primary" (click)="guardarPerfil()" [disabled]="isLoading || perfilForm.invalid">
+              <mat-icon *ngIf="!isLoading">save</mat-icon>
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+              {{ isLoading ? 'Guardando...' : 'Guardar' }}
+            </button>
+          </div>
         </div>
       </div>
 
