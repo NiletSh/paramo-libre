@@ -100,9 +100,12 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  flex: 1;
-  min-height: 0;
-  padding: 24px;
+  flex: 0 0 auto;
+  align-self: center;
+  width: min(460px, 100%);
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 36px 28px;
   border: 1px solid rgba(123, 189, 47, 0.16);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.94);
