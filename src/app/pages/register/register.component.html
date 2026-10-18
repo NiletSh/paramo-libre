@@ -21,43 +21,55 @@
 
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
         <div class="form-grid">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Nombre completo</mat-label>
-            <input matInput type="text" formControlName="name" placeholder="Juan Perez" autocomplete="name">
-            <mat-icon matPrefix>person</mat-icon>
-            <mat-error *ngIf="name?.hasError('required')">El nombre es obligatorio</mat-error>
-            <mat-error *ngIf="name?.hasError('minlength')">Minimo 3 caracteres</mat-error>
-          </mat-form-field>
+          <div class="field">
+            <label class="field-label" for="register-name">Nombre completo</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nombre completo</mat-label>
+              <input id="register-name" matInput type="text" formControlName="name" placeholder="Juan Perez" autocomplete="name">
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-error *ngIf="name?.hasError('required')">El nombre es obligatorio</mat-error>
+              <mat-error *ngIf="name?.hasError('minlength')">Minimo 3 caracteres</mat-error>
+            </mat-form-field>
+          </div>
 
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Correo electronico</mat-label>
-            <input matInput type="email" formControlName="email" placeholder="tu@email.com" autocomplete="email">
-            <mat-icon matPrefix>email</mat-icon>
-            <mat-error *ngIf="email?.hasError('required')">El correo es obligatorio</mat-error>
-            <mat-error *ngIf="email?.hasError('email')">Ingresa un correo valido</mat-error>
-          </mat-form-field>
+          <div class="field">
+            <label class="field-label" for="register-email">Correo electronico</label>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Correo electronico</mat-label>
+              <input id="register-email" matInput type="email" formControlName="email" placeholder="tu@email.com" autocomplete="email">
+              <mat-icon matPrefix>email</mat-icon>
+              <mat-error *ngIf="email?.hasError('required')">El correo es obligatorio</mat-error>
+              <mat-error *ngIf="email?.hasError('email')">Ingresa un correo valido</mat-error>
+            </mat-form-field>
+          </div>
 
-          <mat-form-field appearance="outline" class="full-width">
+          <div class="field">
+            <label class="field-label" for="register-password">Contrasena</label>
+            <mat-form-field appearance="outline" class="full-width">
             <mat-label>Contrasena</mat-label>
-            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" autocomplete="new-password">
+            <input id="register-password" matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" autocomplete="new-password">
             <mat-icon matPrefix>lock</mat-icon>
             <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" aria-label="Mostrar contrasena">
               <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
             <mat-error *ngIf="password?.hasError('required')">La contrasena es obligatoria</mat-error>
             <mat-error *ngIf="password?.hasError('minlength')">Minimo 8 caracteres</mat-error>
-          </mat-form-field>
+            </mat-form-field>
+          </div>
 
-          <mat-form-field appearance="outline" class="full-width">
+          <div class="field">
+            <label class="field-label" for="register-confirm">Confirmar contrasena</label>
+            <mat-form-field appearance="outline" class="full-width">
             <mat-label>Confirmar contrasena</mat-label>
-            <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" autocomplete="new-password">
+            <input id="register-confirm" matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" autocomplete="new-password">
             <mat-icon matPrefix>lock_outline</mat-icon>
             <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword" aria-label="Mostrar confirmacion">
               <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
             <mat-error *ngIf="confirmPassword?.hasError('required')">Confirma tu contrasena</mat-error>
             <mat-error *ngIf="confirmPassword?.hasError('passwordMismatch')">Las contrasenas no coinciden</mat-error>
-          </mat-form-field>
+            </mat-form-field>
+          </div>
         </div>
 
         <div class="strength-bar" *ngIf="passwordStrength > 0">

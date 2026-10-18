@@ -1,9 +1,6 @@
 .auth-page {
   position: fixed;
-  top: 72px;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 1;
   width: auto;
   height: auto;
@@ -13,7 +10,7 @@
   place-items: center;
   padding: 16px;
   color: #2f4f2f;
-  background: #f4fbe6;
+  background: #d3ee96;
   animation: fadeInUp 0.55s ease-out;
 }
 
@@ -25,8 +22,8 @@
   overflow: hidden;
   border: 0;
   border-radius: 28px;
-  background: transparent;
-  box-shadow: none;
+  background: #f4fbe6;
+  box-shadow: 0 18px 40px rgba(47, 79, 47, 0.12);
 }
 
 .auth-visual {
@@ -103,7 +100,7 @@
 .login-form,
 .login-footer,
 .auth-notice {
-  width: min(100%, 280px);
+  width: min(100%, 300px);
 }
 
 .login-brand {
@@ -167,7 +164,20 @@
 ::ng-deep .login-form .mat-mdc-form-field-flex {
   background: #ffffff !important;
   border-radius: 24px !important;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.field-label {
+  display: block;
+  margin: 0 4px 4px;
+  color: #24381f;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+::ng-deep .login-form .mdc-floating-label {
+  display: none !important;
 }
 
 ::ng-deep .login-form .mdc-notched-outline__leading {

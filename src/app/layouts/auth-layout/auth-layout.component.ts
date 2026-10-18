@@ -23,9 +23,7 @@ import { RouterOutlet } from '@angular/router';
       justify-content: center;
       overflow-x: hidden;
       overflow-y: auto;
-      background:
-        radial-gradient(circle at top left, rgba(168, 217, 106, 0.42), transparent 34rem),
-        linear-gradient(135deg, #f8fdea 0%, #e9f7c8 100%);
+      background: #d3ee96;
       padding: clamp(1rem, 3vw, 2rem);
     }
 
