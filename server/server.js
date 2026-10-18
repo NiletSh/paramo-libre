@@ -40,6 +40,21 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+const pool = require('./config/db');
+
+pool.query(`
+  CREATE TABLE IF NOT EXISTS fotos_perfil (
+    usuario_id INT UNSIGNED PRIMARY KEY,
+    mime VARCHAR(40) NOT NULL,
+    datos MEDIUMBLOB NOT NULL,
+    actualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_foto_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+`).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  });
+}).catch((error) => {
+  console.error('No se pudo preparar el guardado de fotos de perfil:', error.message);
+  process.exit(1);
 });

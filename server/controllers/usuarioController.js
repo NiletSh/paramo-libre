@@ -365,6 +365,35 @@ const usuarioController = {
     }
   },
 
+  obtenerFotoPerfil: async (req, res) => {
+    try {
+      const usuarioId = Number(req.params.id);
+      if (!Number.isInteger(usuarioId) || usuarioId <= 0) {
+        return res.status(404).json({ exito: false, mensaje: 'Foto no encontrada.' });
+      }
+
+      const [fotos] = await pool.execute(
+        'SELECT mime, datos FROM fotos_perfil WHERE usuario_id = ?',
+        [usuarioId]
+      );
+
+      if (fotos.length === 0 || !fotos[0].datos) {
+        return res.status(404).json({ exito: false, mensaje: 'Foto no encontrada.' });
+      }
+
+      const imagen = Buffer.isBuffer(fotos[0].datos) ? fotos[0].datos : Buffer.from(fotos[0].datos);
+      res.set('Content-Type', fotos[0].mime || 'image/jpeg');
+      res.set('Cache-Control', 'public, max-age=31536000');
+      res.send(imagen);
+    } catch (error) {
+      console.error('Error en obtenerFotoPerfil:', error);
+      res.status(500).json({
+        exito: false,
+        mensaje: 'Error al obtener la foto de perfil.'
+      });
+    }
+  },
+
   // SUBIR FOTO DE PERFIL
   subirFotoPerfil: async (req, res) => {
     try {
@@ -375,11 +404,31 @@ const usuarioController = {
         });
       }
 
-      const fotoUrl = `/uploads/profiles/${req.file.filename}`;
+      const usuarioId = req.usuario.id;
+      const mime = req.file.mimetype;
+      const datos = req.file.buffer;
+      const [existente] = await pool.execute(
+        'SELECT usuario_id FROM fotos_perfil WHERE usuario_id = ?',
+        [usuarioId]
+      );
+
+      if (existente.length > 0) {
+        await pool.execute(
+          'UPDATE fotos_perfil SET mime = ?, datos = ? WHERE usuario_id = ?',
+          [mime, datos, usuarioId]
+        );
+      } else {
+        await pool.execute(
+          'INSERT INTO fotos_perfil (usuario_id, mime, datos) VALUES (?, ?, ?)',
+          [usuarioId, mime, datos]
+        );
+      }
+
+      const fotoUrl = `/api/users/${usuarioId}/photo?v=${Date.now()}`;
 
       await pool.execute(
         'UPDATE usuarios SET foto_perfil = ? WHERE id = ?',
-        [fotoUrl, req.usuario.id]
+        [fotoUrl, usuarioId]
       );
 
       res.json({

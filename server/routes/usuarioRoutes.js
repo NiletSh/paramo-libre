@@ -14,6 +14,9 @@ router.post('/register', usuarioController.registrar);
 // POST /api/users/login
 router.post('/login', usuarioController.login);
 
+// GET /api/users/:id/photo
+router.get('/:id/photo', usuarioController.obtenerFotoPerfil);
+
 // ==========================================
 // RUTAS PROTEGIDAS - PERFIL PROPIO
 // ==========================================
