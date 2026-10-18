@@ -1,6 +1,12 @@
 .auth-page {
-  width: 100%;
-  height: calc(100vh - 72px);
+  position: fixed;
+  top: 72px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: auto;
+  height: auto;
   min-height: 0;
   overflow: hidden;
   display: grid;
@@ -12,15 +18,15 @@
 }
 
 .auth-card {
-  width: min(860px, 100%);
+  width: min(760px, 100%);
   max-height: 100%;
   display: grid;
-  grid-template-columns: minmax(220px, 0.72fr) minmax(340px, 1.2fr);
+  grid-template-columns: minmax(200px, 0.8fr) minmax(280px, 1fr);
   overflow: hidden;
   border: 0;
   border-radius: 28px;
-  background: #f4fbe6;
-  box-shadow: 0 18px 40px rgba(47, 79, 47, 0.12);
+  background: transparent;
+  box-shadow: none;
 }
 
 .auth-visual {
@@ -87,9 +93,16 @@
 .auth-form-panel {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: 20px 26px;
-  background: #f4fbe6;
+  padding: 18px 16px;
+  background: transparent;
+}
+
+.register-brand,
+.register-form,
+.register-footer {
+  width: min(100%, 420px);
 }
 
 .register-brand {
@@ -113,8 +126,9 @@
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 190px));
+  justify-content: center;
+  column-gap: 12px;
 }
 
 .full-width {
@@ -136,17 +150,20 @@
   --mdc-outlined-text-field-error-label-text-color: #c64b3d;
 }
 
-::ng-deep .register-form .mat-mdc-text-field-wrapper {
+::ng-deep .register-form .mat-mdc-text-field-wrapper,
+::ng-deep .register-form .mat-mdc-form-field-flex {
   background: #ffffff !important;
-  border-radius: 22px !important;
+  border-radius: 24px !important;
+  overflow: hidden;
 }
 
 ::ng-deep .register-form .mdc-notched-outline__leading {
-  border-radius: 22px 0 0 22px !important;
+  width: 28px !important;
+  border-radius: 24px 0 0 24px !important;
 }
 
 ::ng-deep .register-form .mdc-notched-outline__trailing {
-  border-radius: 0 22px 22px 0 !important;
+  border-radius: 0 24px 24px 0 !important;
 }
 
 ::ng-deep .register-form .mat-mdc-form-field-infix {
@@ -305,6 +322,11 @@
 
 @media (max-width: 920px) {
   .auth-page {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
     height: auto;
     min-height: calc(100vh - 72px);
     overflow: auto;
