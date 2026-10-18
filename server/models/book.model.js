@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const { SHELF_LOCATION } = require('../constants/shelf');
 
 const conditionToDb = {
   new: 'nuevo',
@@ -226,7 +227,7 @@ class Book {
         author,
         description || '',
         dbCondition,
-        location || null,
+        location || SHELF_LOCATION,
         image_url || null
       ]
     );
@@ -263,7 +264,7 @@ class Book {
       description || '',
       resolvedCategoryId,
       dbCondition,
-      location || null,
+      location || SHELF_LOCATION,
       dbStatus
     ];
 

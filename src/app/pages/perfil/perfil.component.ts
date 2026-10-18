@@ -11,7 +11,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { PerfilService } from '../../services/perfil.service';
 import { Perfil } from '../../models/perfil.model';
-import { QUERETARO_LOCATIONS } from '../../models/book';
 import { switchMap } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -44,7 +43,6 @@ export class PerfilComponent implements OnInit {
   isLoading = false;
   isChangingPassword = false;
   showPasswordForm = false;
-  locations = QUERETARO_LOCATIONS;
 
   perfilForm!: FormGroup;
   passwordForm!: FormGroup;

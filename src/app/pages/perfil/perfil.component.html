@@ -98,7 +98,7 @@
             <div class="info-item">
               <span class="info-icon"><mat-icon>location_on</mat-icon></span>
               <div class="info-content">
-                <label class="info-label">Zona</label>
+                <label class="info-label">Ciudad o campus</label>
                 <p class="info-value">{{ perfil?.ubicacion || 'No especificada' }}</p>
               </div>
             </div>
@@ -148,11 +148,8 @@
             <div class="edit-field edit-field-wide">
               <span class="edit-icon"><mat-icon>location_on</mat-icon></span>
               <mat-form-field appearance="outline" class="w-100 compact">
-                <mat-label>Zona</mat-label>
-                <mat-select formControlName="ubicacion">
-                  <mat-option value="">Prefiero elegir después</mat-option>
-                  <mat-option *ngFor="let location of locations" [value]="location">{{ location }}</mat-option>
-                </mat-select>
+                <mat-label>Ciudad o campus</mat-label>
+                <input matInput formControlName="ubicacion" placeholder="Opcional">
               </mat-form-field>
             </div>
             <div class="edit-field edit-field-wide">

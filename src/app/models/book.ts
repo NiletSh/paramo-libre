@@ -5,7 +5,8 @@ export interface Book {
   category: string;
   condition: 'new' | 'like_new' | 'good' | 'fair';
   description: string;
-  location: string;
+  /** Siempre el estante comunitario; ya no se elige zona en la app. */
+  location?: string;
   imageUrl?: string | null;
   ownerId?: string;
   ownerName?: string;
@@ -13,40 +14,24 @@ export interface Book {
   createdAt?: string;
 }
 
+/** Punto único de entrega física (estante con sensores). */
+export const SHELF_LOCATION = 'Estante Páramo Libre';
+
+export const SHELF_INSTRUCTIONS =
+  'Cuando el trueque sea aceptado, deposita y recoge los libros en el estante. Los sensores avisarán cuando alguien retire un libro.';
+
 export const BOOK_CATEGORIES: string[] = [
   'Novela',
-  'Ciencia Ficción',
-  'Fantasía',
+  'Ciencia Ficcion',
+  'Fantasia',
   'Historia',
   'Ciencia',
-  'Tecnología',
-  'Filosofía',
+  'Tecnologia',
+  'Filosofia',
   'Arte',
-  'Poesía',
-  'Biografía',
+  'Poesia',
+  'Biografia',
   'Otros'
-];
-
-export const QUERETARO_LOCATIONS: string[] = [
-  'Santiago de Querétaro',
-  'Corregidora',
-  'El Marqués',
-  'San Juan del Río',
-  'Pedro Escobedo',
-  'Tequisquiapan',
-  'Cadereyta de Montes',
-  'Ezequiel Montes',
-  'Colón',
-  'Amealco de Bonfil',
-  'Huimilpan',
-  'Tolimán',
-  'Pinal de Amoles',
-  'Jalpan de Serra',
-  'Querétaro Centro',
-  'Juriquilla',
-  'Jurica',
-  'Candiles',
-  'Zibatá'
 ];
 
 export const BOOK_CONDITIONS = [

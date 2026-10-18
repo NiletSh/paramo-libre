@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const pool = require('../config/db');
 const { generarToken } = require('../utils/jwt');
+const Notification = require('../services/notification.service');
 
 const isDevelopment = (process.env.NODE_ENV || 'development') === 'development';
 const MAX_LOGIN_ATTEMPTS = isDevelopment ? 20 : 5;
@@ -508,7 +509,9 @@ const usuarioController = {
 
   obtenerNotificaciones: async (req, res) => {
     try {
-      const [rows] = await pool.execute(
+      const usuarioId = req.usuario.id;
+
+      const [exchangeRows] = await pool.execute(
         `SELECT i.id, i.estado, i.fecha_propuesta, i.fecha_respuesta, i.fecha_completado,
                 i.solicitante_id, i.receptor_id,
                 ls.titulo AS libro_solicitado,
@@ -518,18 +521,38 @@ const usuarioController = {
          JOIN usuarios us ON i.solicitante_id = us.id
          WHERE i.activo = TRUE AND (i.solicitante_id = ? OR i.receptor_id = ?)
          ORDER BY COALESCE(i.fecha_completado, i.fecha_respuesta, i.fecha_propuesta) DESC
-         LIMIT 20`,
-        [req.usuario.id, req.usuario.id]
+         LIMIT 15`,
+        [usuarioId, usuarioId]
       );
 
-      const notificaciones = rows.map((row) => ({
-        id: row.id,
+      const fromExchanges = exchangeRows.map((row) => ({
+        id: `ex-${row.id}`,
         tipo: statusFromDb[row.estado] || row.estado,
-        mensaje: row.receptor_id === req.usuario.id
-          ? `${row.solicitante_nombre} envio una propuesta por "${row.libro_solicitado}"`
-          : `Tu propuesta por "${row.libro_solicitado}" esta ${row.estado}`,
+        titulo: 'Propuesta de trueque',
+        mensaje: row.receptor_id === usuarioId
+          ? `${row.solicitante_nombre} envió una propuesta por "${row.libro_solicitado}"`
+          : `Tu propuesta por "${row.libro_solicitado}" está ${row.estado}`,
         fecha: row.fecha_completado || row.fecha_respuesta || row.fecha_propuesta
       }));
+
+      let fromShelf = [];
+      try {
+        const shelfRows = await Notification.listForUser(usuarioId, 15);
+        fromShelf = shelfRows.map((row) => ({
+          id: `nt-${row.id}`,
+          tipo: row.tipo,
+          titulo: row.titulo,
+          mensaje: row.mensaje,
+          fecha: row.fecha_creacion,
+          leida: !!row.leida
+        }));
+      } catch (innerError) {
+        console.warn('Notificaciones de estante no disponibles:', innerError.message);
+      }
+
+      const notificaciones = [...fromShelf, ...fromExchanges]
+        .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
+        .slice(0, 25);
 
       res.json({ exito: true, notificaciones });
     } catch (error) {

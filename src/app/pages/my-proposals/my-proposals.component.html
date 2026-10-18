@@ -103,6 +103,21 @@
           <p>{{ p.message }}</p>
         </div>
 
+        <div *ngIf="p.status === 'accepted'" class="shelf-banner">
+          <mat-icon>shelves</mat-icon>
+          <div>
+            <strong>Siguiente paso: {{ shelfLocation }}</strong>
+            <p>{{ shelfInstructions }}</p>
+          </div>
+        </div>
+
+        <div class="proposal-actions" *ngIf="p.status === 'accepted'">
+          <button class="btn-complete" (click)="completeProposal(p.id)">
+            <mat-icon>done_all</mat-icon>
+            Marcar trueque completado
+          </button>
+        </div>
+
         <div class="proposal-actions" *ngIf="p.status === 'pending' && activeTab === 'sent'">
           <button mat-button class="btn-cancel" (click)="cancelProposal(p.id)">
             <mat-icon>close</mat-icon>

@@ -8,6 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ExchangeService } from '../../services/exchange.service';
 import { ExchangeProposal, ExchangeStatus } from '../../models/exchange.model';
+import { SHELF_INSTRUCTIONS, SHELF_LOCATION } from '../../models/book';
 
 type StatusFilter = 'all' | ExchangeStatus;
 type ProposalTab = 'sent' | 'received';
@@ -28,6 +29,9 @@ type ProposalTab = 'sent' | 'received';
   styleUrls: ['./my-proposals.component.scss']
 })
 export class MyProposalsComponent implements OnInit {
+  readonly shelfLocation = SHELF_LOCATION;
+  readonly shelfInstructions = SHELF_INSTRUCTIONS;
+
   sentProposals: ExchangeProposal[] = [];
   receivedProposals: ExchangeProposal[] = [];
   filteredProposals: ExchangeProposal[] = [];
@@ -129,14 +133,33 @@ export class MyProposalsComponent implements OnInit {
   acceptProposal(id: number): void {
     this.exchangeService.updateStatus(id, 'accepted').subscribe({
       next: () => {
-        this.snackBar.open('Propuesta aceptada correctamente.', 'Cerrar', {
+        this.snackBar.open(
+          `Trueque aceptado. Deposita los libros en ${SHELF_LOCATION}. Te avisaremos cuando el sensor detecte un retiro.`,
+          'Entendido',
+          { duration: 8000, panelClass: ['snackbar-success'] }
+        );
+        this.loadProposals();
+      },
+      error: () => {
+        this.snackBar.open('Error al aceptar la propuesta.', 'Cerrar', {
+          duration: 5000,
+          panelClass: ['snackbar-error']
+        });
+      }
+    });
+  }
+
+  completeProposal(id: number): void {
+    this.exchangeService.updateStatus(id, 'completed').subscribe({
+      next: () => {
+        this.snackBar.open('Trueque marcado como completado.', 'Cerrar', {
           duration: 4000,
           panelClass: ['snackbar-success']
         });
         this.loadProposals();
       },
       error: () => {
-        this.snackBar.open('Error al aceptar la propuesta.', 'Cerrar', {
+        this.snackBar.open('No se pudo completar el trueque.', 'Cerrar', {
           duration: 5000,
           panelClass: ['snackbar-error']
         });

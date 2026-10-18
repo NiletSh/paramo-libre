@@ -33,10 +33,12 @@ export interface DashboardData {
 }
 
 export interface AppNotification {
-  id: number;
+  id: number | string;
   tipo: string;
+  titulo?: string;
   mensaje: string;
   fecha: string;
+  leida?: boolean;
 }
 
 @Injectable({

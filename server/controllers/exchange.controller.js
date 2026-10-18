@@ -1,5 +1,7 @@
 const Exchange = require('../models/exchange.model');
 const Book = require('../models/book.model');
+const Notification = require('../services/notification.service');
+const { SHELF_LOCATION, SHELF_ACCEPT_MESSAGE } = require('../constants/shelf');
 
 exports.createExchange = async (req, res) => {
   try {
@@ -124,8 +126,31 @@ exports.acceptExchange = async (req, res) => {
     await Exchange.updateStatus(id, 'accepted');
     await Book.updateStatus(exchange.book_id, 'reserved');
     await Book.updateStatus(exchange.offered_book_id, 'reserved');
+
+    const shelfDetail = `${SHELF_ACCEPT_MESSAGE} Ubicación: ${SHELF_LOCATION}.`;
+    await Promise.all([
+      Notification.createNotification({
+        userId: exchange.requester_id,
+        tipo: 'trueque_aceptado',
+        titulo: 'Trueque aceptado — ve al estante',
+        mensaje: shelfDetail,
+        exchangeId: Number(id)
+      }),
+      Notification.createNotification({
+        userId: exchange.owner_id,
+        tipo: 'trueque_aceptado',
+        titulo: 'Aceptaste un trueque — estante',
+        mensaje: shelfDetail,
+        exchangeId: Number(id)
+      })
+    ]);
+
     const updated = await Exchange.findById(id);
-    res.json({ message: 'Intercambio aceptado', exchange: updated });
+    res.json({
+      message: 'Intercambio aceptado',
+      shelf: { location: SHELF_LOCATION, instructions: SHELF_ACCEPT_MESSAGE },
+      exchange: updated
+    });
   } catch (error) {
     console.error('Error al aceptar intercambio:', error);
     res.status(500).json({ message: 'Error al aceptar el intercambio' });

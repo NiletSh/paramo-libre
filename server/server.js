@@ -16,6 +16,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/users', require('./routes/usuarioRoutes'));
 app.use('/api/books', require('./routes/book.routes'));
 app.use('/api/exchanges', require('./routes/exchange.routes'));
+app.use('/api/shelf', require('./routes/shelf.routes'));
 app.use('/api', require('./routes'));
 
 // Ruta de prueba

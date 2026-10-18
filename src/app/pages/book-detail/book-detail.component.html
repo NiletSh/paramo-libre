@@ -76,8 +76,8 @@
               <span class="material-icons">place</span>
             </span>
             <div>
-              <span class="detail-label">Zona de entrega</span>
-              <span class="detail-value">{{ book.location }}</span>
+              <span class="detail-label">Estante</span>
+              <span class="detail-value">{{ shelfLocation }}</span>
             </div>
           </div>
           
@@ -102,10 +102,10 @@
           </div>
         </div>
         <div class="guide-item">
-          <span class="material-icons">location_on</span>
+          <span class="material-icons">shelves</span>
           <div>
-            <strong>Entrega acordada</strong>
-            <p>Acuerden un punto de encuentro conveniente y revisen el estado del libro antes de cerrar el trato.</p>
+            <strong>Estante comunitario</strong>
+            <p>{{ shelfInstructions }}</p>
           </div>
         </div>
       </div>

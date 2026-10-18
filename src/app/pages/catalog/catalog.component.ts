@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { BookService } from '../../services/book';
 import { AuthService } from '../../core/services/auth.service';
-import { Book, BOOK_CATEGORIES, BOOK_CONDITIONS, QUERETARO_LOCATIONS } from '../../models/book';
+import { Book, BOOK_CATEGORIES, BOOK_CONDITIONS, SHELF_LOCATION } from '../../models/book';
 
 interface CatalogBook {
   id: string | number;
@@ -32,7 +32,6 @@ export class CatalogComponent implements OnInit {
   searchTerm = '';
   selectedCategory = 'Todos';
   selectedCondition = 'Todos';
-  selectedLocation = 'Todas';
   sortBy = 'recent';
   currentPage = 1;
   itemsPerPage = 8;
@@ -40,7 +39,7 @@ export class CatalogComponent implements OnInit {
 
   categories = ['Todos', ...BOOK_CATEGORIES];
   conditions = [{ value: 'Todos', label: 'Todos los estados' }, ...BOOK_CONDITIONS];
-  locations = ['Todas', ...QUERETARO_LOCATIONS];
+  readonly shelfLocation = SHELF_LOCATION;
 
   conditionLabels: Record<string, string> = {
     new: 'Nuevo',
@@ -103,7 +102,6 @@ export class CatalogComponent implements OnInit {
     this.searchTerm = '';
     this.selectedCategory = 'Todos';
     this.selectedCondition = 'Todos';
-    this.selectedLocation = 'Todas';
     this.sortBy = 'recent';
     this.currentPage = 1;
   }
@@ -152,22 +150,16 @@ export class CatalogComponent implements OnInit {
       result = result.filter((book) => book.condition === this.selectedCondition);
     }
 
-    if (this.selectedLocation !== 'Todas') {
-      result = result.filter((book) => this.normalizeText(book.location) === this.normalizeText(this.selectedLocation));
-    }
-
     if (this.searchTerm.trim()) {
       const term = this.normalizeText(this.searchTerm);
       result = result.filter((book) =>
         this.normalizeText(book.title).includes(term) ||
-        this.normalizeText(book.author).includes(term) ||
-        this.normalizeText(book.location).includes(term)
+        this.normalizeText(book.author).includes(term)
       );
     }
 
     return [...result].sort((a, b) => {
       if (this.sortBy === 'title') return a.title.localeCompare(b.title, 'es');
-      if (this.sortBy === 'location') return a.location.localeCompare(b.location, 'es');
       return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
     });
   }
@@ -181,7 +173,7 @@ export class CatalogComponent implements OnInit {
       author: book.author,
       category: book.category,
       condition: book.condition,
-      location: this.normalizeLocation(book.location),
+      location: SHELF_LOCATION,
       owner: book.ownerName || 'Usuario',
       status: book.status || 'available',
       imageColor: colors[index % colors.length],
@@ -194,15 +186,4 @@ export class CatalogComponent implements OnInit {
     return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   }
 
-  private normalizeLocation(location: string): string {
-    const legacyLocations: Record<string, string> = {
-      'Bogotá, Colombia': 'Santiago de Querétaro',
-      'Medellín, Colombia': 'Corregidora',
-      'Cali, Colombia': 'San Juan del Río',
-      'Barranquilla, Colombia': 'El Marqués',
-      'Cartagena, Colombia': 'Tequisquiapan'
-    };
-
-    return legacyLocations[location] || location || 'Sin especificar';
-  }
 }

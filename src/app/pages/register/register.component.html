@@ -70,11 +70,8 @@
         </div>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Zona (opcional)</mat-label>
-          <mat-select formControlName="location">
-            <mat-option value="">Prefiero elegir despues</mat-option>
-            <mat-option *ngFor="let location of locations" [value]="location">{{ location }}</mat-option>
-          </mat-select>
+          <mat-label>Ciudad o campus (opcional)</mat-label>
+          <input matInput formControlName="location" placeholder="Ej. Santiago de Querétaro">
           <mat-icon matPrefix>location_on</mat-icon>
         </mat-form-field>
 

@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
-import { QUERETARO_LOCATIONS } from '../../models/book';
 
 /**
  * Validador personalizado: verifica que dos campos coincidan
@@ -48,7 +47,6 @@ export class RegisterComponent {
   hidePassword = true;
   hideConfirmPassword = true;
   loading = false;
-  locations = QUERETARO_LOCATIONS;
 
   constructor(
     private fb: FormBuilder,

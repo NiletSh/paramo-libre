@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { BookService } from '../../services/book';
 import { AuthService } from '../../core/services/auth.service';
-import { Book } from '../../models/book';
+import { Book, SHELF_INSTRUCTIONS, SHELF_LOCATION } from '../../models/book';
 
 interface BookDetail {
   id: string | number;
@@ -31,6 +31,9 @@ interface BookDetail {
   styleUrl: './book-detail.component.scss'
 })
 export class BookDetailComponent implements OnInit {
+  readonly shelfLocation = SHELF_LOCATION;
+  readonly shelfInstructions = SHELF_INSTRUCTIONS;
+
   book: BookDetail | null = null;
   notFound = false;
   isLoggedIn = false;
@@ -119,7 +122,7 @@ export class BookDetailComponent implements OnInit {
       description: book.description,
       category: book.category,
       condition: book.condition,
-      location: this.normalizeLocation(book.location),
+      location: SHELF_LOCATION,
       owner: book.ownerName || 'Usuario',
       status: book.status || 'available',
       publishedDate: this.formatDate(book.createdAt),
@@ -136,18 +139,6 @@ export class BookDetailComponent implements OnInit {
       month: 'short',
       year: 'numeric'
     });
-  }
-
-  private normalizeLocation(location: string): string {
-    const legacyLocations: Record<string, string> = {
-      'Bogotá, Colombia': 'Santiago de Querétaro',
-      'Medellín, Colombia': 'Corregidora',
-      'Cali, Colombia': 'San Juan del Río',
-      'Barranquilla, Colombia': 'El Marqués',
-      'Cartagena, Colombia': 'Tequisquiapan'
-    };
-
-    return legacyLocations[location] || location || 'Sin especificar';
   }
 
   private canEdit(book: BookDetail): boolean {

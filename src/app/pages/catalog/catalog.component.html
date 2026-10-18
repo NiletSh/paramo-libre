@@ -21,7 +21,7 @@
       type="text"
       [(ngModel)]="searchTerm"
       (input)="onSearch()"
-      placeholder="Buscar por título, autor o zona..."
+      placeholder="Buscar por título o autor..."
       class="search-input">
     <button class="search-btn" (click)="onSearch()">
       <span class="material-icons">arrow_forward</span>
@@ -44,18 +44,10 @@
     </label>
 
     <label class="tool-field">
-      <span>Zona</span>
-      <select [(ngModel)]="selectedLocation" (change)="applyFilters()">
-        <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-      </select>
-    </label>
-
-    <label class="tool-field">
       <span>Ordenar</span>
       <select [(ngModel)]="sortBy" (change)="applyFilters()">
         <option value="recent">Más recientes</option>
         <option value="title">Título A-Z</option>
-        <option value="location">Zona A-Z</option>
       </select>
     </label>
 
@@ -98,8 +90,8 @@
         
         <div class="book-meta">
           <span class="meta-item">
-            <span class="material-icons">place</span>
-            {{ book.location }}
+            <span class="material-icons">shelves</span>
+            {{ shelfLocation }}
           </span>
           <span class="meta-item">
             <span class="material-icons">person</span>
@@ -135,7 +127,7 @@
     <div class="empty-state" *ngIf="!loading">
       <span class="material-icons">search_off</span>
       <h3>No encontramos libros</h3>
-      <p>Intenta con otro título, autor, categoría o zona.</p>
+      <p>Intenta con otro titulo, autor, categoria o punto.</p>
       <button class="btn-clear" (click)="clearFilters()">
         Limpiar filtros
       </button>

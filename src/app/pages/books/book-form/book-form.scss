@@ -173,6 +173,7 @@
   width: 100%;
 }
 
+.shelf-note,
 .trade-note {
   display: flex;
   align-items: flex-start;
@@ -184,10 +185,12 @@
   background: #f8fdea;
 }
 
+.shelf-note mat-icon,
 .trade-note mat-icon {
   color: #5d8b1f;
 }
 
+.shelf-note strong,
 .trade-note strong {
   display: block;
   margin-bottom: 4px;
@@ -195,6 +198,7 @@
   font-size: 14px;
 }
 
+.shelf-note span,
 .trade-note span {
   color: #6a7d3b;
   font-size: 13px;

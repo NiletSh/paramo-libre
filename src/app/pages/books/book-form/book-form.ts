@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BookService } from './../../../services/book';
-import { Book, BOOK_CATEGORIES, BOOK_CONDITIONS, QUERETARO_LOCATIONS } from './../../../models/book';
+import { Book, BOOK_CATEGORIES, BOOK_CONDITIONS, SHELF_LOCATION } from './../../../models/book';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class BookFormComponent implements OnInit {
   bookForm: FormGroup;
   categories = BOOK_CATEGORIES;
   conditions = BOOK_CONDITIONS;
-  locations = QUERETARO_LOCATIONS;
+  readonly shelfLocation = SHELF_LOCATION;
   imagePreview: string | null = null;
   selectedFile: File | null = null;
   isDragOver = false;
@@ -57,7 +57,6 @@ export class BookFormComponent implements OnInit {
       category: ['', Validators.required],
       condition: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(1000)]],
-      location: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       image: [null]
     });
   }
@@ -148,7 +147,7 @@ export class BookFormComponent implements OnInit {
       category: formValue.category,
       condition: formValue.condition,
       description: formValue.description,
-      location: formValue.location,
+      location: SHELF_LOCATION,
       imageUrl: formValue.image,
       ownerId: currentUser ? String(currentUser.id) : undefined
     };
@@ -202,7 +201,6 @@ export class BookFormComponent implements OnInit {
           category: book.category,
           condition: book.condition,
           description: book.description,
-          location: book.location,
           image: book.imageUrl || null
         });
         this.imagePreview = book.imageUrl || null;
