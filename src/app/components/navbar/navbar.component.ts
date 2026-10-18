@@ -12,13 +12,10 @@ import { AuthService } from '../../core/services/auth.service';
     <nav class="navbar">
       <div class="navbar-inner">
         <a class="navbar-brand" routerLink="/" (click)="closeMenu()">
-          <span class="brand-mark" aria-hidden="true">
-            <img src="assets/images/logo_paramo.png" alt="" />
-          </span>
-          <span class="brand-name">P&aacute;ramo Libre</span>
+          <img class="brand-logo" src="assets/images/logo_paramo.png" alt="Páramo Libre" />
         </a>
 
-        <div class="nav-links" *ngIf="!isHomePage || !isLoggedIn">
+        <div class="nav-links" *ngIf="!isHomePage">
           <ng-container *ngIf="isLoggedIn; else publicLinks">
             <a class="nav-link" routerLink="/catalogo" routerLinkActive="active">Cat&aacute;logo</a>
             <a class="nav-link" routerLink="/publicar-libro" routerLinkActive="active">Publicar libro</a>
@@ -33,14 +30,14 @@ import { AuthService } from '../../core/services/auth.service';
           </ng-template>
         </div>
 
-        <button class="menu-toggle" *ngIf="!isHomePage || !isLoggedIn" type="button" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Men&uacute;">
+        <button class="menu-toggle" *ngIf="!isHomePage" type="button" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Men&uacute;">
           <span></span>
           <span></span>
           <span></span>
         </button>
       </div>
 
-      <div class="mobile-menu" [class.open]="menuOpen" *ngIf="!isHomePage || !isLoggedIn">
+      <div class="mobile-menu" [class.open]="menuOpen" *ngIf="!isHomePage">
         <ng-container *ngIf="isLoggedIn && !isHomePage; else publicMobileLinks">
           <a class="mobile-link" routerLink="/catalogo" (click)="closeMenu()" routerLinkActive="active">Cat&aacute;logo</a>
           <a class="mobile-link" routerLink="/publicar-libro" (click)="closeMenu()" routerLinkActive="active">Publicar libro</a>
@@ -70,7 +67,7 @@ import { AuthService } from '../../core/services/auth.service';
 
     .navbar-inner {
       max-width: 1280px;
-      height: 60px;
+      height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -89,31 +86,14 @@ import { AuthService } from '../../core/services/auth.service';
       text-decoration: none;
     }
 
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      padding: 3px;
-      border-radius: 8px;
-      background: #ffffff;
-      box-shadow: 0 8px 20px rgba(92, 140, 40, 0.12);
-    }
-
-    .brand-mark img {
-      width: 100%;
-      height: 100%;
+    .brand-logo {
+      height: 62px;
+      width: auto;
       display: block;
       object-fit: contain;
-    }
-
-    .brand-name {
-      font-size: 16px;
-      font-weight: 850;
-      letter-spacing: 0;
-      white-space: nowrap;
+      padding: 4px 8px;
+      border-radius: 12px;
+      background: #111111;
     }
 
     .nav-links {

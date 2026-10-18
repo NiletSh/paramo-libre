@@ -26,7 +26,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 
     .main-content {
       flex: 1;
-      padding-top: 60px;
+      padding-top: 78px;
     }
   `]
 })

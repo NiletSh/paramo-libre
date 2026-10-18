@@ -1,88 +1,70 @@
 :host {
   display: block;
-  height: calc(100vh - 60px - 56px);
+  height: calc(100vh - 78px - 56px);
   overflow: hidden;
 }
 
 .landing {
   height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 28px 40px 18px;
+  align-items: center;
+  padding: 12px 48px;
   box-sizing: border-box;
   color: #243924;
   background:
-    radial-gradient(circle at 90% 20%, rgba(123, 189, 47, 0.18), transparent 26%),
-    linear-gradient(160deg, #fbfef4 0%, #eef6d4 100%);
+    radial-gradient(circle at 80% 18%, rgba(213, 138, 20, 0.16), transparent 24%),
+    radial-gradient(circle at 12% 80%, rgba(123, 189, 47, 0.2), transparent 28%),
+    linear-gradient(160deg, #fbfef4 0%, #e7f3c8 100%);
 }
 
 .hero {
-  min-height: 0;
-  flex: 1;
+  width: min(1100px, 100%);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.7fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(280px, 1.15fr);
   align-items: center;
-  gap: 32px;
+  gap: 36px;
 }
 
 .copy {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 640px;
-}
-
-.eyebrow {
-  margin: 0;
-  color: #5d8b1f;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  gap: 16px;
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(36px, 4.5vw, 58px);
+  font-size: clamp(40px, 5vw, 64px);
   font-weight: 900;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-}
-
-h1 span {
-  display: block;
-  color: #4f7a16;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
 }
 
 .lead {
   margin: 0;
-  max-width: 460px;
+  max-width: 360px;
   color: #516244;
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.45;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 6px;
 }
 
 .btn-primary,
-.btn-secondary,
 .btn-share {
-  min-height: 44px;
+  min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 0 16px;
-  border-radius: 12px;
+  padding: 0 18px;
+  border-radius: 14px;
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
@@ -90,11 +72,11 @@ h1 span {
 
 .btn-primary {
   color: #fff;
-  background: linear-gradient(135deg, #6eae24 0%, #4d7c16 100%);
+  background: linear-gradient(135deg, #6eae24 0%, #3f6b12 100%);
   border: 0;
+  box-shadow: 0 12px 24px rgba(93, 139, 31, 0.22);
 }
 
-.btn-secondary,
 .btn-share {
   color: #2f4f2f;
   background: #fff;
@@ -105,82 +87,51 @@ h1 span {
   font-size: 18px;
 }
 
-.hero-photo {
-  min-height: 0;
-  height: 100%;
+.account-links {
   display: flex;
-  align-items: center;
+  gap: 16px;
+}
+
+.account-links a {
+  color: #3f6212;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.account-links a:hover {
+  text-decoration: underline;
+}
+
+.hero-photo {
+  display: flex;
   justify-content: center;
 }
 
 .hero-photo img {
-  width: 100%;
-  max-height: min(42vh, 320px);
-  object-fit: contain;
-  border-radius: 18px;
-  box-shadow: 0 16px 36px rgba(47, 79, 47, 0.16);
-}
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.steps li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.86);
-  color: #2f4f2f;
-  font-weight: 800;
-}
-
-.steps span {
-  color: #5d8b1f;
+  width: min(100%, 560px);
+  max-height: min(52vh, 420px);
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 22px 48px rgba(47, 79, 47, 0.18);
 }
 
 @media (max-width: 800px) {
   .landing {
-    padding: 18px 16px 12px;
+    padding: 16px;
   }
 
   .hero {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 16px;
   }
 
   .hero-photo {
     order: -1;
-    height: auto;
   }
 
   .hero-photo img {
-    max-height: 150px;
-  }
-
-  h1 {
-    font-size: 34px;
-  }
-
-  .lead {
-    font-size: 15px;
-  }
-
-  .steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-height: 700px) {
-  .hero-photo img {
-    max-height: 140px;
+    max-height: 34vh;
   }
 
   h1 {

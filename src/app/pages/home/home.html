@@ -1,17 +1,18 @@
 <div class="landing">
   <section class="hero">
     <div class="copy">
-      <p class="eyebrow">Trueque de libros</p>
-      <h1>Intercambia un libro <span>por otro libro.</span></h1>
-      <p class="lead">Encuentra una lectura, propone el cambio y recógela en el estante.</p>
+      <h1>Un libro por otro.</h1>
+      <p class="lead">Encuentra una lectura y recógela en el estante.</p>
       <div class="actions">
         <a class="btn-primary" routerLink="/catalogo">Ver catálogo</a>
-        <a class="btn-secondary" routerLink="/auth/registro">Crear cuenta</a>
-        <a class="btn-secondary" routerLink="/auth/login">Iniciar sesión</a>
         <button type="button" class="btn-share" (click)="openShareModal()">
           <span class="material-icons">share</span>
           Compartir
         </button>
+      </div>
+      <div class="account-links">
+        <a routerLink="/auth/login">Iniciar sesión</a>
+        <a routerLink="/auth/registro">Crear cuenta</a>
       </div>
     </div>
 
@@ -19,13 +20,6 @@
       <img src="assets/images/libroparamo.png" alt="Libro abierto con montañas y el nombre Páramo Libre" />
     </div>
   </section>
-
-  <ol class="steps">
-    <li><span>1</span> Explora</li>
-    <li><span>2</span> Elige</li>
-    <li><span>3</span> Propón</li>
-    <li><span>4</span> Estante</li>
-  </ol>
 </div>
 
 <app-share-modal *ngIf="shareOpen" (close)="closeShareModal()"></app-share-modal>
