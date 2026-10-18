@@ -85,7 +85,7 @@ import { AuthService } from '../../core/services/auth.service';
     }
 
     .brand-logo {
-      height: 56px;
+      height: 64px;
       width: auto;
       display: block;
       object-fit: contain;
@@ -104,12 +104,12 @@ import { AuthService } from '../../core/services/auth.service';
 
     .home-bar .brand-name,
     .home-bar .nav-link {
-      color: #f6f1e8;
+      color: #2c3328;
     }
 
     .home-bar .nav-link:hover,
     .home-bar .nav-link.active {
-      color: #e7c27a;
+      color: #6e4524;
       background: transparent;
     }
 
