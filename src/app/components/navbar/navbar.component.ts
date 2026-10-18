@@ -12,15 +12,10 @@ import { AuthService } from '../../core/services/auth.service';
     <nav class="navbar">
       <div class="navbar-inner">
         <a class="navbar-brand" routerLink="/" (click)="closeMenu()">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16">
-              <path fill="currentColor" d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5v-16zm16 0v16A2.5 2.5 0 0 1 17.5 19H12V3h5.5A2.5 2.5 0 0 1 20 5.5z"/>
-            </svg>
-          </span>
-          <span class="brand-name">P&aacute;ramo Libre</span>
+          <img class="brand-logo" src="assets/images/logo_paramo.png" alt="Páramo Libre" />
         </a>
 
-        <div class="nav-links" *ngIf="!isHomePage">
+        <div class="nav-links">
           <ng-container *ngIf="isLoggedIn; else publicLinks">
             <a class="nav-link" routerLink="/catalogo" routerLinkActive="active">Cat&aacute;logo</a>
             <a class="nav-link" routerLink="/publicar-libro" routerLinkActive="active">Publicar libro</a>
@@ -35,15 +30,15 @@ import { AuthService } from '../../core/services/auth.service';
           </ng-template>
         </div>
 
-        <button class="menu-toggle" *ngIf="!isHomePage" type="button" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Men&uacute;">
+        <button class="menu-toggle" type="button" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Men&uacute;">
           <span></span>
           <span></span>
           <span></span>
         </button>
       </div>
 
-      <div class="mobile-menu" [class.open]="menuOpen" *ngIf="!isHomePage">
-        <ng-container *ngIf="isLoggedIn && !isHomePage; else publicMobileLinks">
+      <div class="mobile-menu" [class.open]="menuOpen">
+        <ng-container *ngIf="isLoggedIn; else publicMobileLinks">
           <a class="mobile-link" routerLink="/catalogo" (click)="closeMenu()" routerLinkActive="active">Cat&aacute;logo</a>
           <a class="mobile-link" routerLink="/publicar-libro" (click)="closeMenu()" routerLinkActive="active">Publicar libro</a>
           <a class="mobile-link" routerLink="/mis-propuestas" (click)="closeMenu()" routerLinkActive="active">Propuestas</a>
@@ -91,21 +86,11 @@ import { AuthService } from '../../core/services/auth.service';
       text-decoration: none;
     }
 
-    .brand-mark {
-      width: 28px;
-      height: 28px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      color: #3d4a32;
-      background: #e7f0dc;
-    }
-
-    .brand-name {
-      color: #2c3328;
-      font-size: 15px;
-      font-weight: 750;
+    .brand-logo {
+      height: 52px;
+      width: auto;
+      display: block;
+      object-fit: contain;
     }
 
     .nav-links {
