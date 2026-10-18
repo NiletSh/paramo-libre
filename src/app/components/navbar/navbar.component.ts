@@ -12,8 +12,7 @@ import { AuthService } from '../../core/services/auth.service';
     <nav class="navbar" [class.home-bar]="isHomePage">
       <div class="navbar-inner">
         <a class="navbar-brand" routerLink="/" (click)="closeMenu()">
-          <img class="brand-logo" src="assets/images/logo_paramo.png" alt="" />
-          <span class="brand-name">P&aacute;ramo Libre</span>
+          <img class="brand-logo" src="assets/images/logo_paramo.png" alt="Páramo Libre" />
         </a>
 
         <div class="nav-links" *ngIf="isLoggedIn || !isHomePage">
@@ -91,18 +90,10 @@ import { AuthService } from '../../core/services/auth.service';
       object-fit: contain;
     }
 
-    .brand-name {
-      color: #2c3328;
-      font-size: 18px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
     .home-bar {
       background: transparent;
     }
 
-    .home-bar .brand-name,
     .home-bar .nav-link {
       color: #2c3328;
     }
