@@ -12,7 +12,12 @@ import { AuthService } from '../../core/services/auth.service';
     <nav class="navbar">
       <div class="navbar-inner">
         <a class="navbar-brand" routerLink="/" (click)="closeMenu()">
-          <img class="brand-logo" src="assets/images/logo_paramo.png" alt="Páramo Libre" />
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16">
+              <path fill="currentColor" d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5v-16zm16 0v16A2.5 2.5 0 0 1 17.5 19H12V3h5.5A2.5 2.5 0 0 1 20 5.5z"/>
+            </svg>
+          </span>
+          <span class="brand-name">P&aacute;ramo Libre</span>
         </a>
 
         <div class="nav-links" *ngIf="!isHomePage">
@@ -60,14 +65,14 @@ import { AuthService } from '../../core/services/auth.service';
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(247, 246, 241, 0.94);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(110, 168, 56, 0.1);
     }
 
     .navbar-inner {
       max-width: 1280px;
-      height: 78px;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -86,11 +91,21 @@ import { AuthService } from '../../core/services/auth.service';
       text-decoration: none;
     }
 
-    .brand-logo {
-      height: 58px;
-      width: auto;
-      display: block;
-      object-fit: contain;
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: #3d4a32;
+      background: #e7f0dc;
+    }
+
+    .brand-name {
+      color: #2c3328;
+      font-size: 15px;
+      font-weight: 750;
     }
 
     .nav-links {
