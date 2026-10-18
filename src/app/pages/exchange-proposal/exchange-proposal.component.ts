@@ -84,6 +84,15 @@ export class ExchangeProposalComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser && this.requestedBook && Number(this.requestedBook.ownerId) === Number(currentUser.id)) {
+      this.snackBar.open('No puedes hacer un trueque con un libro que tú publicaste.', 'Cerrar', {
+        duration: 4000,
+        panelClass: ['snackbar-warning']
+      });
+      return;
+    }
+
     if (!this.selectedBookId || !this.requestedBook) {
       this.snackBar.open('Debes seleccionar uno de tus libros para ofrecer.', 'Cerrar', {
         duration: 4000,
@@ -126,6 +135,16 @@ export class ExchangeProposalComponent implements OnInit {
       next: (book) => {
         if (!book) {
           this.handleMissingBook();
+          return;
+        }
+
+        const currentUser = this.authService.getCurrentUser();
+        if (currentUser && book.ownerId != null && Number(book.ownerId) === Number(currentUser.id)) {
+          this.snackBar.open('No puedes hacer un trueque con un libro que tú publicaste.', 'Cerrar', {
+            duration: 4000,
+            panelClass: ['snackbar-warning']
+          });
+          this.router.navigate(['/libro', this.bookId]);
           return;
         }
 

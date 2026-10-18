@@ -108,7 +108,7 @@
               <span class="material-icons">visibility</span>
               Ver
             </a>
-            <a class="btn-exchange" *ngIf="isLoggedIn" [routerLink]="['/intercambio', book.id]">
+            <a class="btn-exchange" *ngIf="isLoggedIn && !isOwnBook(book)" [routerLink]="['/intercambio', book.id]">
               <span class="material-icons">swap_horiz</span>
               Trueque
             </a>

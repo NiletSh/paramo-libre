@@ -17,8 +17,8 @@ exports.createExchange = async (req, res) => {
       return res.status(404).json({ message: 'Libro no encontrado' });
     }
 
-    if (book.user_id === requester_id) {
-      return res.status(400).json({ message: 'No puedes intercambiar tu propio libro' });
+    if (Number(book.user_id) === Number(requester_id) || Number(book_id) === Number(offered_book_id)) {
+      return res.status(400).json({ message: 'No puedes hacer un trueque con un libro que tú publicaste.' });
     }
 
     if (book.status !== 'available') {

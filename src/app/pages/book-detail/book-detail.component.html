@@ -117,7 +117,7 @@
           Editar libro
         </button>
 
-        <button class="btn-exchange-main" *ngIf="book.status === 'available' && isLoggedIn && !canEditBook" [routerLink]="['/intercambio', book.id]">
+        <button class="btn-exchange-main" *ngIf="book.status === 'available' && isLoggedIn && !isOwnBook" [routerLink]="['/intercambio', book.id]">
           <span class="material-icons">swap_horiz</span>
           Proponer trueque
         </button>

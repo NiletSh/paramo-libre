@@ -15,6 +15,7 @@ interface CatalogBook {
   condition: 'new' | 'like_new' | 'good' | 'fair';
   location: string;
   owner: string;
+  ownerId?: string;
   status: 'available' | 'exchanged' | 'reserved';
   imageColor: string;
   imageUrl?: string | null;
@@ -63,6 +64,7 @@ export class CatalogComponent implements OnInit {
 
   allBooks: CatalogBook[] = [];
   isLoggedIn = false;
+  private currentUserId: number | null = null;
 
   constructor(
     private bookService: BookService,
@@ -72,6 +74,9 @@ export class CatalogComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated$.subscribe((status) => {
       this.isLoggedIn = status;
+    });
+    this.authService.currentUser$.subscribe((user) => {
+      this.currentUserId = user?.id ?? null;
     });
     this.loadBooks();
   }
@@ -175,11 +180,18 @@ export class CatalogComponent implements OnInit {
       condition: book.condition,
       location: SHELF_LOCATION,
       owner: book.ownerName || 'Usuario',
+      ownerId: book.ownerId,
       status: book.status || 'available',
       imageColor: colors[index % colors.length],
       imageUrl: book.imageUrl,
       createdAt: book.createdAt
     };
+  }
+
+  isOwnBook(book: CatalogBook): boolean {
+    return this.currentUserId != null
+      && book.ownerId != null
+      && Number(book.ownerId) === Number(this.currentUserId);
   }
 
   private normalizeText(value: string): string {

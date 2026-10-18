@@ -38,6 +38,7 @@ export class BookDetailComponent implements OnInit {
   notFound = false;
   isLoggedIn = false;
   canEditBook = false;
+  isOwnBook = false;
 
   conditionLabels: Record<string, string> = {
     new: 'Nuevo',
@@ -92,6 +93,7 @@ export class BookDetailComponent implements OnInit {
 
         this.book = this.toBookDetail(book);
         this.canEditBook = this.canEdit(this.book);
+        this.isOwnBook = this.ownsBook(this.book);
         this.notFound = false;
       },
       error: () => {
@@ -143,6 +145,15 @@ export class BookDetailComponent implements OnInit {
 
   private canEdit(book: BookDetail): boolean {
     const user = this.authService.getCurrentUser();
-    return !!user && (!!book.ownerId && Number(book.ownerId) === user.id || user.rol === 'admin');
+    return !!user && (this.sameUser(book.ownerId, user.id) || user.rol === 'admin');
+  }
+
+  private ownsBook(book: BookDetail): boolean {
+    const user = this.authService.getCurrentUser();
+    return !!user && this.sameUser(book.ownerId, user.id);
+  }
+
+  private sameUser(ownerId: string | undefined, userId: number): boolean {
+    return ownerId != null && ownerId !== '' && Number(ownerId) === Number(userId);
   }
 }
