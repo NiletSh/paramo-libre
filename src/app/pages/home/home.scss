@@ -10,8 +10,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 18px;
-  padding: 8px 48px 10px;
+  gap: 22px;
+  padding: 12px 56px 16px;
   box-sizing: border-box;
   overflow: hidden;
   color: #243024;
@@ -41,18 +41,20 @@
 .stage {
   position: relative;
   z-index: 1;
-  width: min(1080px, 100%);
+  width: min(1280px, 100%);
   margin: 0 auto;
+  flex: 1;
+  min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.92fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.15fr);
   align-items: center;
-  gap: 42px;
+  gap: 48px;
 }
 
 .kicker {
   margin: 0 0 12px;
   color: #66725d;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -60,20 +62,20 @@
 
 h1 {
   margin: 0;
-  max-width: 520px;
+  max-width: 640px;
   color: #1d241c;
   font-family: Fraunces, Georgia, serif;
-  font-size: clamp(40px, 4.6vw, 58px);
+  font-size: clamp(48px, 5.4vw, 76px);
   font-weight: 560;
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
 
 .lead {
-  max-width: 420px;
-  margin: 16px 0 0;
+  max-width: 480px;
+  margin: 18px 0 0;
   color: #4e574c;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.5;
 }
 
@@ -87,15 +89,15 @@ h1 {
 
 .btn-catalog,
 .btn-outline {
-  min-height: 42px;
+  min-height: 52px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 0 16px;
+  gap: 8px;
+  padding: 0 22px;
   border-radius: 999px;
   font: inherit;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
@@ -124,21 +126,25 @@ h1 {
 
 .frame {
   margin: 0;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .frame img {
   display: block;
   width: 100%;
-  max-height: min(46vh, 340px);
+  height: min(62vh, 520px);
   object-fit: cover;
-  border-radius: 18px;
-  box-shadow: 0 16px 36px rgba(55, 48, 32, 0.12);
+  border-radius: 22px;
+  box-shadow: 0 20px 44px rgba(55, 48, 32, 0.14);
 }
 
 .steps {
   position: relative;
   z-index: 1;
-  width: min(1080px, 100%);
+  width: min(1280px, 100%);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -151,14 +157,14 @@ h1 {
 }
 
 .steps li {
-  min-height: 46px;
+  min-height: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border-radius: 12px;
+  gap: 10px;
+  border-radius: 14px;
   color: #2c382b;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -169,7 +175,7 @@ h1 {
 .steps .material-icons {
   margin-left: auto;
   color: #8ea184;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 @media (max-width: 860px) {
