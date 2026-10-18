@@ -24,7 +24,6 @@
           <div class="field">
             <label class="field-label" for="register-name">Nombre completo</label>
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Nombre completo</mat-label>
               <input id="register-name" matInput type="text" formControlName="name" placeholder="Juan Perez" autocomplete="name">
               <mat-icon matPrefix>person</mat-icon>
               <mat-error *ngIf="name?.hasError('required')">El nombre es obligatorio</mat-error>
@@ -35,7 +34,6 @@
           <div class="field">
             <label class="field-label" for="register-email">Correo electronico</label>
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Correo electronico</mat-label>
               <input id="register-email" matInput type="email" formControlName="email" placeholder="tu@email.com" autocomplete="email">
               <mat-icon matPrefix>email</mat-icon>
               <mat-error *ngIf="email?.hasError('required')">El correo es obligatorio</mat-error>
@@ -46,7 +44,6 @@
           <div class="field">
             <label class="field-label" for="register-password">Contrasena</label>
             <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Contrasena</mat-label>
             <input id="register-password" matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" autocomplete="new-password">
             <mat-icon matPrefix>lock</mat-icon>
             <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" aria-label="Mostrar contrasena">
@@ -60,7 +57,6 @@
           <div class="field">
             <label class="field-label" for="register-confirm">Confirmar contrasena</label>
             <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Confirmar contrasena</mat-label>
             <input id="register-confirm" matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" autocomplete="new-password">
             <mat-icon matPrefix>lock_outline</mat-icon>
             <button mat-icon-button matSuffix type="button" (click)="hideConfirmPassword = !hideConfirmPassword" aria-label="Mostrar confirmacion">
