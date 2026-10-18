@@ -9,11 +9,17 @@ $color-texto-muted: #6a7d3b;
 $color-borde: #dfeac7;
 $color-card: #ffffff;
 
+:host {
+  display: block;
+  min-height: calc(100vh - 72px);
+  background: #d3ee96;
+}
+
 .perfil-container {
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 72px);
   width: 100%;
   overflow-x: hidden;
-  background: linear-gradient(135deg, #f8fdea 0%, #e9f7c8 100%);
+  background: transparent;
   display: flex;
   align-items: flex-start;
   justify-content: center;
