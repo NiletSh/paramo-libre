@@ -95,26 +95,36 @@ h1 em {
 }
 
 .still {
-  position: relative;
+  position: absolute;
+  top: 12px;
+  right: 0;
+  bottom: 48px;
   z-index: 1;
+  width: min(54vw, 820px);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  min-height: 520px;
+  pointer-events: none;
 }
 
 figure {
-  width: min(100%, 680px);
+  width: 100%;
+  height: 100%;
   margin: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   animation: drift 8s ease-in-out infinite;
 }
 
 figure img {
   display: block;
-  width: 100%;
-  height: min(68vh, 560px);
+  width: auto;
+  height: 100%;
+  max-width: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 22px 28px rgba(62, 42, 22, 0.22));
+  object-position: center bottom;
+  filter: drop-shadow(0 22px 28px rgba(62, 42, 22, 0.18));
 }
 
 .ticker {
@@ -122,6 +132,8 @@ figure img {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 3;
+  height: 48px;
   overflow: hidden;
   background: rgba(47, 79, 47, 0.92);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -130,8 +142,9 @@ figure img {
 .ticker-track {
   display: flex;
   gap: 42px;
+  align-items: center;
   width: max-content;
-  padding: 14px 0;
+  height: 48px;
   animation: marquee 28s linear infinite;
 }
 
@@ -151,7 +164,7 @@ figure img {
 
 @keyframes drift {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
+  50% { transform: translateY(-12px); }
 }
 
 @keyframes marquee {
@@ -162,7 +175,7 @@ figure img {
 @media (max-width: 900px) {
   .night {
     grid-template-columns: 1fr;
-    padding: 108px 22px 78px;
+    padding: 96px 22px 64px;
   }
 
   h1 {
@@ -170,11 +183,20 @@ figure img {
   }
 
   .still {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: 46vh;
     min-height: 280px;
+    margin-top: 8px;
+    pointer-events: none;
   }
 
   figure img {
-    height: 280px;
+    height: 100%;
+    max-width: 100%;
   }
 }
 
