@@ -65,11 +65,18 @@ h1 {
 
 .actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
   margin-top: 28px;
   margin-left: 12%;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
 }
 
 .enter,
@@ -85,14 +92,15 @@ h1 {
   align-items: center;
   padding: 0 22px;
   border-radius: 999px;
-  color: #f7f1e6;
-  background: #2f4f2f;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+  box-shadow: 0 8px 20px rgba(93, 139, 31, 0.16);
   font-size: 15px;
   font-weight: 750;
 }
 
 .enter:hover {
-  background: #3d6340;
+  background: linear-gradient(135deg, #6eae28 0%, #4f7a1b 100%);
 }
 
 .soft {

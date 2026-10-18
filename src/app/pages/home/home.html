@@ -7,10 +7,12 @@
     </h1>
     <p class="line note">Páramo Libre junta a quien suelta una historia con quien la está buscando.</p>
     <div class="line actions">
-      <a class="enter" routerLink="/catalogo">Ver el catálogo</a>
+      <div class="action-row">
+        <a class="enter" routerLink="/catalogo">Ver el catálogo</a>
+        <a class="soft" routerLink="/auth/login">Iniciar sesión</a>
+        <a class="soft" routerLink="/auth/registro">Crear cuenta</a>
+      </div>
       <button type="button" class="soft" (click)="openShareModal()">Compartir</button>
-      <a class="soft" routerLink="/auth/registro">Crear cuenta</a>
-      <a class="soft" routerLink="/auth/login">Iniciar sesión</a>
     </div>
   </div>
 
