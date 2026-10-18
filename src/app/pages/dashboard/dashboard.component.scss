@@ -1,9 +1,16 @@
+:host {
+  display: block;
+  min-height: calc(100vh - 72px);
+  background: #d3ee96;
+}
+
 .dashboard {
   max-width: 1400px;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - 72px);
   margin: 0 auto;
   padding: 32px 48px 48px;
   color: #2f4f2f;
+  background: transparent;
   animation: fadeIn 0.5s ease-out;
 }
 
@@ -62,7 +69,7 @@
   gap: 8px;
   flex: 0 0 auto;
   padding: 0 22px;
-  border-radius: 12px;
+  border-radius: 22px;
   color: #ffffff;
   background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
   box-shadow: 0 12px 24px rgba(123, 189, 47, 0.24);
@@ -225,6 +232,84 @@
 
 .section-header a:hover {
   text-decoration: underline;
+}
+
+.books-empty,
+.activity-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 28px 20px;
+  border: 1px dashed rgba(93, 139, 31, 0.35);
+  border-radius: 16px;
+  background: #f8fdea;
+  text-align: center;
+}
+
+.books-empty .material-icons {
+  color: #5d8b1f;
+  font-size: 36px;
+}
+
+.books-empty h3 {
+  margin: 0;
+  color: #2f4f2f;
+  font-size: 18px;
+}
+
+.books-empty p,
+.activity-empty p {
+  margin: 0;
+  max-width: 360px;
+  color: #6a7d3b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.books-empty a {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 22px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.shelf-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid rgba(123, 189, 47, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 34px rgba(47, 79, 47, 0.08);
+}
+
+.shelf-card .material-icons {
+  color: #5d8b1f;
+  font-size: 28px;
+}
+
+.shelf-card strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #2f4f2f;
+  font-size: 15px;
+}
+
+.shelf-card p {
+  margin: 0;
+  color: #6a7d3b;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .books-grid {

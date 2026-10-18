@@ -6,7 +6,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { PerfilService } from '../../services/perfil.service';
 import { DashboardActivity, DashboardBook, DashboardService } from '../../services/dashboard.service';
 import { BookService } from '../../services/book';
-import { Book } from '../../models/book';
+import { Book, SHELF_LOCATION } from '../../models/book';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +18,7 @@ import { Book } from '../../models/book';
 export class DashboardComponent implements OnInit {
   userName = 'Lector';
   loading = true;
+  readonly shelfLocation = SHELF_LOCATION;
 
   stats = [
     { label: 'Propuestas', value: 0, icon: 'send', tone: 'green', link: '/mis-propuestas' },

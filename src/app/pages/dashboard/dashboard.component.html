@@ -23,7 +23,6 @@
         <div class="stat-icon">
           <span class="material-icons">{{ stat.icon }}</span>
         </div>
-        <span class="stat-trend material-icons" aria-hidden="true">trending_up</span>
       </div>
       <div class="stat-info">
         <span class="stat-value">{{ stat.value }}</span>
@@ -42,10 +41,17 @@
         <a routerLink="/catalogo">Ver catálogo</a>
       </div>
 
-      <div class="books-grid">
+      <div class="books-empty" *ngIf="!loading && recentBooks.length === 0">
+        <span class="material-icons">menu_book</span>
+        <h3>Todavía no publicas un libro</h3>
+        <p>Suelta una historia para que otra persona la encuentre en el catálogo.</p>
+        <a routerLink="/publicar-libro">Publicar mi primer libro</a>
+      </div>
+
+      <div class="books-grid" *ngIf="recentBooks.length > 0">
         <article class="book-card" *ngFor="let book of recentBooks; let i = index" [style.animation-delay]="0.24 + i * 0.08 + 's'">
           <div class="book-cover" [style.background]="book.cover">
-            <span class="material-icons">auto_stories</span>
+            <span class="material-icons" *ngIf="!book.imageUrl">auto_stories</span>
             <span class="book-status" [class]="book.status">{{ getStatusLabel(book.status) }}</span>
           </div>
           <div class="book-card-body">
@@ -94,7 +100,11 @@
           <a routerLink="/mis-propuestas">Ver todo</a>
         </div>
 
-        <div class="activity-list">
+        <div class="activity-empty" *ngIf="!loading && activities.length === 0">
+          <p>Cuando publiques un libro o envíes una propuesta, el movimiento queda aquí.</p>
+        </div>
+
+        <div class="activity-list" *ngIf="activities.length > 0">
           <div class="activity-item" *ngFor="let activity of activities; let i = index" [style.animation-delay]="0.42 + i * 0.08 + 's'">
             <div class="activity-icon">
               <span class="material-icons">{{ activity.icon }}</span>
@@ -104,6 +114,14 @@
               <span>{{ activity.time }}</span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="shelf-card">
+        <span class="material-icons">inventory_2</span>
+        <div>
+          <strong>El trueque se entrega en el estante</strong>
+          <p>Cuando aceptan un intercambio, los dos libros se dejan en {{ shelfLocation }}.</p>
         </div>
       </section>
     </div>
