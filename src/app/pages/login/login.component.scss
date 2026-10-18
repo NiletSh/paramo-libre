@@ -1,32 +1,35 @@
 .auth-page {
   width: 100%;
-  min-height: calc(100vh - 48px);
+  height: calc(100vh - 72px);
+  min-height: 0;
+  overflow: hidden;
   display: grid;
   place-items: center;
-  padding: 28px 20px;
+  padding: 16px;
   color: #2f4f2f;
-  background: linear-gradient(160deg, #eef8d4 0%, #dff3b4 100%);
+  background: #f4fbe6;
   animation: fadeInUp 0.55s ease-out;
 }
 
 .auth-card {
-  width: min(980px, 100%);
+  width: min(900px, 100%);
+  max-height: 100%;
   display: grid;
-  grid-template-columns: minmax(280px, 0.95fr) minmax(340px, 1fr);
+  grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1fr);
   overflow: hidden;
   border: 0;
   border-radius: 28px;
-  background: #f6fbe8;
-  box-shadow: 0 22px 50px rgba(47, 79, 47, 0.14);
+  background: #f4fbe6;
+  box-shadow: 0 18px 40px rgba(47, 79, 47, 0.12);
 }
 
 .auth-visual {
   display: flex;
-  min-height: 560px;
+  min-height: 0;
   flex-direction: column;
   justify-content: space-between;
-  gap: 32px;
-  padding: 40px 36px;
+  gap: 24px;
+  padding: 32px;
   color: #ffffff;
   background:
     linear-gradient(160deg, rgba(47, 79, 47, 0.9), rgba(93, 139, 31, 0.78)),
@@ -85,7 +88,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px 42px;
+  padding: 28px 36px;
   background: #f4fbe6;
 }
 
@@ -149,6 +152,20 @@
 ::ng-deep .login-form .mat-mdc-text-field-wrapper {
   background: #ffffff !important;
   border-radius: 22px !important;
+}
+
+::ng-deep .login-form .mdc-notched-outline__leading {
+  border-radius: 22px 0 0 22px !important;
+}
+
+::ng-deep .login-form .mdc-notched-outline__trailing {
+  border-radius: 0 22px 22px 0 !important;
+}
+
+::ng-deep .login-form .mat-mdc-form-field-infix {
+  min-height: 42px;
+  padding-top: 10px !important;
+  padding-bottom: 8px !important;
 }
 
 ::ng-deep .login-form .mat-mdc-form-field-subscript-wrapper {
@@ -271,6 +288,12 @@
 }
 
 @media (max-width: 820px) {
+  .auth-page {
+    height: auto;
+    min-height: calc(100vh - 72px);
+    overflow: auto;
+  }
+
   .auth-card {
     grid-template-columns: 1fr;
     max-width: 520px;

@@ -8,7 +8,7 @@ import { filter } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <footer class="footer" *ngIf="!isHomePage">
+    <footer class="footer" *ngIf="!hideFooter">
       <div class="footer-inner">
         <span class="footer-copy">© 2026 Páramo Libre. Plataforma de intercambio de libros.</span>
       </div>
@@ -43,14 +43,18 @@ import { filter } from 'rxjs';
   `]
 })
 export class FooterComponent {
-  isHomePage = false;
+  hideFooter = false;
 
   constructor(private router: Router) {
-    this.isHomePage = this.router.url === '/' || this.router.url.startsWith('/?');
+    this.hideFooter = this.shouldHide(this.router.url);
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => {
-        this.isHomePage = event.urlAfterRedirects === '/' || event.urlAfterRedirects.startsWith('/?');
+        this.hideFooter = this.shouldHide(event.urlAfterRedirects);
       });
+  }
+
+  private shouldHide(url: string): boolean {
+    return url === '/' || url.startsWith('/?') || url.startsWith('/auth');
   }
 }

@@ -1,36 +1,39 @@
 .auth-page {
   width: 100%;
-  min-height: calc(100vh - 48px);
+  height: calc(100vh - 72px);
+  min-height: 0;
+  overflow: hidden;
   display: grid;
   place-items: center;
-  padding: 28px 20px;
+  padding: 16px;
   color: #2f4f2f;
-  background: linear-gradient(160deg, #eef8d4 0%, #dff3b4 100%);
+  background: #f4fbe6;
   animation: fadeInUp 0.55s ease-out;
 }
 
 .auth-card {
-  width: min(1040px, 100%);
+  width: min(860px, 100%);
+  max-height: 100%;
   display: grid;
-  grid-template-columns: minmax(280px, 0.82fr) minmax(420px, 1.18fr);
+  grid-template-columns: minmax(220px, 0.72fr) minmax(340px, 1.2fr);
   overflow: hidden;
   border: 0;
   border-radius: 28px;
-  background: #f6fbe8;
-  box-shadow: 0 22px 50px rgba(47, 79, 47, 0.14);
+  background: #f4fbe6;
+  box-shadow: 0 18px 40px rgba(47, 79, 47, 0.12);
 }
 
 .auth-visual {
   display: flex;
-  min-height: 620px;
+  min-height: 0;
   flex-direction: column;
   justify-content: space-between;
-  gap: 32px;
-  padding: 40px 36px;
+  gap: 16px;
+  padding: 24px;
   color: #ffffff;
   background:
     linear-gradient(160deg, rgba(47, 79, 47, 0.9), rgba(93, 139, 31, 0.78)),
-    url('/assets/images/logo_paramo.png') center 58% / 68% no-repeat;
+    url('/assets/images/logo_paramo.png') center 58% / 62% no-repeat;
 }
 
 .eyebrow {
@@ -49,7 +52,7 @@
 .auth-visual h1 {
   max-width: 360px;
   margin: 0;
-  font-size: clamp(30px, 4vw, 42px);
+  font-size: clamp(24px, 2.6vw, 32px);
   font-weight: 850;
   line-height: 1.08;
   letter-spacing: 0;
@@ -85,18 +88,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 36px 40px;
+  padding: 20px 26px;
   background: #f4fbe6;
 }
 
 .register-brand {
-  margin-bottom: 22px;
+  margin-bottom: 10px;
 }
 
 .register-brand h2 {
   margin: 0;
   color: #2f4f2f;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 850;
   line-height: 1.1;
   letter-spacing: 0;
@@ -136,6 +139,20 @@
 ::ng-deep .register-form .mat-mdc-text-field-wrapper {
   background: #ffffff !important;
   border-radius: 22px !important;
+}
+
+::ng-deep .register-form .mdc-notched-outline__leading {
+  border-radius: 22px 0 0 22px !important;
+}
+
+::ng-deep .register-form .mdc-notched-outline__trailing {
+  border-radius: 0 22px 22px 0 !important;
+}
+
+::ng-deep .register-form .mat-mdc-form-field-infix {
+  min-height: 36px;
+  padding-top: 8px !important;
+  padding-bottom: 6px !important;
 }
 
 ::ng-deep .register-form .mat-mdc-form-field-subscript-wrapper {
@@ -231,7 +248,7 @@
 
 .btn-register-submit {
   width: 100%;
-  height: 42px !important;
+  height: 40px !important;
   border-radius: 22px !important;
   background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%) !important;
   color: #ffffff !important;
@@ -287,9 +304,15 @@
 }
 
 @media (max-width: 920px) {
+  .auth-page {
+    height: auto;
+    min-height: calc(100vh - 72px);
+    overflow: auto;
+  }
+
   .auth-card {
     grid-template-columns: 1fr;
-    max-width: 580px;
+    max-width: 560px;
   }
 
   .auth-visual {
