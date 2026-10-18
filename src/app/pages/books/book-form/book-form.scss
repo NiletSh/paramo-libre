@@ -226,19 +226,65 @@
   justify-content: flex-end;
 }
 
+.input-label {
+  display: block;
+  margin: 0 4px 8px;
+  color: #24381f;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
 .btn-publish {
   min-height: 42px !important;
   padding: 0 22px !important;
   color: #ffffff !important;
   background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%) !important;
-  border-radius: 10px !important;
+  border-radius: 22px !important;
   font-weight: 850 !important;
 }
 
+::ng-deep .book-form-page .mdc-notched-outline,
+::ng-deep .book-form-page .mdc-floating-label {
+  display: none !important;
+}
+
+::ng-deep .book-form-page .mat-mdc-text-field-wrapper {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(93, 139, 31, 0.35) !important;
+  border-radius: 24px !important;
+  overflow: hidden;
+}
+
+::ng-deep .book-form-page .mat-mdc-form-field-flex {
+  border-radius: 24px !important;
+  overflow: hidden;
+}
+
+::ng-deep .book-form-page .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
+  border-color: #5d8b1f !important;
+  box-shadow: none;
+}
+
+::ng-deep .book-form-page .mat-mdc-form-field.mat-form-field-invalid .mat-mdc-text-field-wrapper {
+  border-color: #c64b3d !important;
+}
+
+::ng-deep .book-form-page .mat-mdc-form-field,
+::ng-deep .book-form-page .mat-mdc-text-field-wrapper,
+::ng-deep .book-form-page input,
+::ng-deep .book-form-page textarea {
+  outline: none !important;
+}
+
+::ng-deep .book-form-page .mat-mdc-select-arrow {
+  color: #5d8b1f;
+}
+
 ::ng-deep .book-form-page .mat-mdc-form-field-infix {
-  min-height: 40px;
-  padding-top: 8px !important;
-  padding-bottom: 6px !important;
+  min-height: 44px;
+  padding-top: 10px !important;
+  padding-bottom: 8px !important;
 }
 
 ::ng-deep .book-form-page .textarea-field textarea {

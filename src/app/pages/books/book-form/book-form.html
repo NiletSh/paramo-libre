@@ -60,35 +60,43 @@
           <!-- COLUMNA DERECHA: Campos -->
           <div class="col-fields">
             <div class="fields-row">
-              <mat-form-field appearance="outline" class="field-grow">
-                <mat-label>Título</mat-label>
-                <input matInput formControlName="title" placeholder="Ej. Cien años de soledad">
-                <mat-error *ngIf="bookForm.get('title')?.invalid">Título inválido</mat-error>
-              </mat-form-field>
+              <div class="field-block">
+                <label class="input-label" for="book-title">Título</label>
+                <mat-form-field appearance="outline" class="field-grow">
+                  <input id="book-title" matInput formControlName="title" placeholder="Ej. Cien años de soledad">
+                  <mat-error *ngIf="bookForm.get('title')?.invalid">Título inválido</mat-error>
+                </mat-form-field>
+              </div>
 
-              <mat-form-field appearance="outline" class="field-grow">
-                <mat-label>Autor</mat-label>
-                <input matInput formControlName="author" placeholder="Ej. Gabriel García Márquez">
-                <mat-error *ngIf="bookForm.get('author')?.invalid">Autor inválido</mat-error>
-              </mat-form-field>
+              <div class="field-block">
+                <label class="input-label" for="book-author">Autor</label>
+                <mat-form-field appearance="outline" class="field-grow">
+                  <input id="book-author" matInput formControlName="author" placeholder="Ej. Gabriel García Márquez">
+                  <mat-error *ngIf="bookForm.get('author')?.invalid">Autor inválido</mat-error>
+                </mat-form-field>
+              </div>
             </div>
 
             <div class="fields-row">
-              <mat-form-field appearance="outline" class="field-grow">
-                <mat-label>Categoría</mat-label>
-                <mat-select formControlName="category">
-                  <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="bookForm.get('category')?.invalid">Requerido</mat-error>
-              </mat-form-field>
+              <div class="field-block">
+                <label class="input-label">Categoría</label>
+                <mat-form-field appearance="outline" class="field-grow">
+                  <mat-select formControlName="category" placeholder="Elige una categoría">
+                    <mat-option *ngFor="let cat of categories" [value]="cat">{{ cat }}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="bookForm.get('category')?.invalid">Requerido</mat-error>
+                </mat-form-field>
+              </div>
 
-              <mat-form-field appearance="outline" class="field-grow">
-                <mat-label>Estado</mat-label>
-                <mat-select formControlName="condition">
-                  <mat-option *ngFor="let cond of conditions" [value]="cond.value">{{ cond.label }}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="bookForm.get('condition')?.invalid">Requerido</mat-error>
-              </mat-form-field>
+              <div class="field-block">
+                <label class="input-label">Estado</label>
+                <mat-form-field appearance="outline" class="field-grow">
+                  <mat-select formControlName="condition" placeholder="Elige el estado">
+                    <mat-option *ngFor="let cond of conditions" [value]="cond.value">{{ cond.label }}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="bookForm.get('condition')?.invalid">Requerido</mat-error>
+                </mat-form-field>
+              </div>
             </div>
 
             <div class="shelf-note">
@@ -99,9 +107,9 @@
               </div>
             </div>
 
+            <label class="input-label" for="book-description">Descripción</label>
             <mat-form-field appearance="outline" class="w-100 textarea-field">
-              <mat-label>Descripción</mat-label>
-              <textarea matInput formControlName="description" rows="2" placeholder="Describe el libro, su estado, edición y qué tipo de trueque buscas..."></textarea>
+              <textarea id="book-description" matInput formControlName="description" rows="2" placeholder="Describe el libro, su estado, edición y qué tipo de trueque buscas..."></textarea>
               <mat-hint align="end" class="hint-count">{{ (bookForm.get('description')?.value || '').length }}/1000</mat-hint>
               <mat-error *ngIf="bookForm.get('description')?.invalid">Mínimo 20 caracteres</mat-error>
             </mat-form-field>
