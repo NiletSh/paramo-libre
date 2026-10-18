@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService, AuthUser } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,6 +29,11 @@ import { AuthService } from '../../core/services/auth.service';
             <a class="nav-link nav-link-register" routerLink="/auth/registro" routerLinkActive="active">Registrarse</a>
           </ng-template>
         </div>
+
+        <a class="nav-avatar" *ngIf="isLoggedIn" routerLink="/perfil" (click)="closeMenu()" [attr.aria-label]="'Perfil de ' + userName">
+          <img *ngIf="photoUrl && !photoFailed" [src]="photoUrl" alt="" (error)="photoFailed = true">
+          <span *ngIf="!photoUrl || photoFailed">{{ initials }}</span>
+        </a>
 
         <button class="menu-toggle" *ngIf="isLoggedIn || !isHomePage" type="button" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Men&uacute;">
           <span></span>
@@ -136,6 +141,31 @@ import { AuthService } from '../../core/services/auth.service';
       box-shadow: 0 8px 20px rgba(93, 139, 31, 0.16);
     }
 
+    .nav-avatar {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 2px rgba(93, 139, 31, 0.45);
+      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .nav-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .menu-toggle {
       display: none;
       flex-direction: column;
@@ -203,14 +233,32 @@ export class NavbarComponent {
   menuOpen = false;
   isLoggedIn = false;
   isHomePage = true;
+  userName = 'Perfil';
+  photoUrl = '';
+  initials = 'P';
+  photoFailed = false;
+  private profileLoaded = false;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {
+    this.authService.currentUser$.subscribe((user) => this.applyUser(user));
+
     this.authService.isAuthenticated$.subscribe((status) => {
       this.isLoggedIn = status;
       this.menuOpen = false;
+      if (!status) {
+        this.profileLoaded = false;
+        return;
+      }
+      if (this.profileLoaded) return;
+      this.profileLoaded = true;
+      this.authService.loadProfile().subscribe({
+        error: () => {
+          this.profileLoaded = false;
+        }
+      });
     });
 
     this.isHomePage = this.router.url === '/';
@@ -228,5 +276,20 @@ export class NavbarComponent {
 
   closeMenu(): void {
     this.menuOpen = false;
+  }
+
+  private applyUser(user: AuthUser | null): void {
+    this.photoFailed = false;
+    if (!user) {
+      this.userName = 'Perfil';
+      this.photoUrl = '';
+      this.initials = 'P';
+      return;
+    }
+
+    this.userName = user.nombre?.trim() || 'Perfil';
+    this.photoUrl = user.foto_perfil || '';
+    const parts = this.userName.split(/\s+/).filter(Boolean);
+    this.initials = parts.slice(0, 2).map((part) => part.charAt(0)).join('').toUpperCase() || 'P';
   }
 }
