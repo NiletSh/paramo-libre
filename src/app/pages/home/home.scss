@@ -96,11 +96,11 @@ h1 em {
 
 .still {
   position: absolute;
-  top: 12px;
-  right: 0;
+  top: 16px;
+  right: 36px;
   bottom: 48px;
   z-index: 1;
-  width: min(54vw, 820px);
+  width: min(48vw, 460px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -108,7 +108,6 @@ h1 em {
 }
 
 figure {
-  width: 100%;
   height: 100%;
   margin: 0;
   display: flex;
@@ -120,11 +119,10 @@ figure {
 figure img {
   display: block;
   width: auto;
-  height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center bottom;
-  filter: drop-shadow(0 22px 28px rgba(62, 42, 22, 0.18));
+  height: auto;
+  max-width: min(100%, 432px);
+  max-height: min(100%, 577px);
+  margin-bottom: -18px;
 }
 
 .ticker {
@@ -195,8 +193,8 @@ figure img {
   }
 
   figure img {
-    height: 100%;
-    max-width: 100%;
+    max-width: min(100%, 432px);
+    max-height: min(100%, 577px);
   }
 }
 
