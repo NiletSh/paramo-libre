@@ -1,17 +1,20 @@
 :host {
   display: block;
   margin-top: -72px;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .night {
   position: relative;
-  min-height: 100vh;
+  min-height: 0;
+  height: 100vh;
+  max-height: 100vh;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
   align-items: center;
   gap: 40px;
-  padding: 112px 72px 88px 124px;
+  padding: 96px 72px 72px 124px;
   box-sizing: border-box;
   overflow: hidden;
   color: #2a241c;
@@ -41,12 +44,12 @@ h1 {
 
 .word.one,
 .word.two {
-  font-size: clamp(78px, 8.4vw, 132px);
+  font-size: clamp(64px, 6.6vw, 96px);
 }
 
 .word.mid {
-  margin: 18px 0 18px 22%;
-  font-size: clamp(52px, 5.6vw, 86px);
+  margin: 6px 0 6px 22%;
+  font-size: clamp(40px, 4.2vw, 64px);
 }
 
 .word.mid em {
@@ -57,7 +60,7 @@ h1 {
 
 .note {
   max-width: 460px;
-  margin: 42px 0 0 12%;
+  margin: 22px 0 0 12%;
   color: rgba(42, 36, 28, 0.78);
   font-size: 22px;
   line-height: 1.55;
@@ -190,7 +193,15 @@ figure img {
 }
 
 @media (max-width: 900px) {
+  :host {
+    height: auto;
+    overflow: visible;
+  }
+
   .night {
+    height: auto;
+    max-height: none;
+    min-height: 100vh;
     grid-template-columns: 1fr;
     padding: 100px 28px 72px;
   }
@@ -201,7 +212,7 @@ figure img {
 
   .word.one,
   .word.two {
-    font-size: 64px;
+    font-size: 52px;
   }
 
   .word.mid {
