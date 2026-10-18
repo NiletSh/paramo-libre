@@ -9,7 +9,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
   template: `
-    <nav class="navbar" [class.home-bar]="isHomePage">
+    <nav class="navbar" [class.home-bar]="isHomePage" [class.has-user]="isLoggedIn">
       <div class="navbar-inner">
         <a class="navbar-brand" routerLink="/" (click)="closeMenu()">
           <img class="brand-logo" src="assets/images/logo_paramo.png" alt="Páramo Libre" />
@@ -78,6 +78,10 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       padding: 0 20px 0 12px;
     }
 
+    .navbar.has-user .navbar-inner {
+      padding-right: 72px;
+    }
+
     .navbar-brand {
       min-width: 0;
       display: flex;
@@ -142,9 +146,11 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
     }
 
     .nav-avatar {
+      position: absolute;
+      top: 15px;
+      right: 8px;
       width: 42px;
       height: 42px;
-      flex: 0 0 auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -217,8 +223,18 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
         display: none;
       }
 
+      .navbar.has-user .navbar-inner {
+        padding-right: 112px;
+      }
+
       .menu-toggle {
         display: flex;
+      }
+
+      .navbar.has-user .menu-toggle {
+        position: absolute;
+        top: 16px;
+        right: 62px;
       }
     }
 
