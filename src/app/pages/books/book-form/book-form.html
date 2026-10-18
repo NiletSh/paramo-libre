@@ -92,7 +92,7 @@
             </div>
 
             <div class="shelf-note">
-              <mat-icon>shelves</mat-icon>
+              <mat-icon>inventory_2</mat-icon>
               <div>
                 <strong>Entrega en el estante</strong>
                 <span>Todos los libros se intercambian en <em>{{ shelfLocation }}</em>. No necesitas elegir otra zona.</span>
@@ -116,7 +116,7 @@
 
             <div class="actions">
               <button type="submit" mat-flat-button class="btn-publish" [disabled]="bookForm.invalid">
-                <mat-icon>{{ isEditMode ? 'save' : 'publish' }}</mat-icon>
+                <mat-icon>{{ isEditMode ? 'save' : 'post_add' }}</mat-icon>
                 {{ isEditMode ? 'Guardar cambios' : 'Publicar libro' }}
               </button>
             </div>

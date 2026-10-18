@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Book } from '../models/book';
+import { Book, SHELF_LOCATION } from '../models/book';
 
 interface BooksResponse {
   success: boolean;
@@ -82,7 +82,7 @@ export class BookService {
     formData.append('description', book.description || '');
     formData.append('category', book.category || 'Otros');
     formData.append('condition', book.condition || 'good');
-    formData.append('location', book.location || '');
+    formData.append('location', book.location || SHELF_LOCATION);
 
     if (file) {
       formData.append('image', file, file.name);
@@ -102,7 +102,7 @@ export class BookService {
     formData.append('description', changes.description || '');
     formData.append('category', changes.category || 'Otros');
     formData.append('condition', changes.condition || 'good');
-    formData.append('location', changes.location || '');
+    formData.append('location', changes.location || SHELF_LOCATION);
 
     if (file) {
       formData.append('image', file, file.name);
@@ -129,7 +129,7 @@ export class BookService {
       category: book.categoryName || book.category_name || book.category || 'Sin categoria',
       condition: book.condition || book.condition_status || 'good',
       description: book.description || '',
-      location: book.location || '',
+      location: book.location || SHELF_LOCATION,
       imageUrl,
       ownerId: book.ownerId ? String(book.ownerId) : undefined,
       ownerName: book.ownerName || book.owner_name,

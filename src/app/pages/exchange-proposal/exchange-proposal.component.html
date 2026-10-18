@@ -9,7 +9,7 @@
     <p class="page-subtitle">Selecciona uno de tus libros y acuerda el trueque con el dueño</p>
 
     <!-- Libro solicitado -->
-    <section class="requested-section" *ngIf="requestedBook">
+    <section class="requested-section" *ngIf="requestedBook && !submitted">
       <span class="section-label">LIBRO QUE DESEAS</span>
       <div class="requested-card">
         <div class="requested-image">
@@ -48,7 +48,7 @@
     </section>
 
     <!-- Selección de mi libro -->
-    <section class="mybooks-section">
+    <section class="mybooks-section" *ngIf="!submitted">
       <span class="section-label">TU LIBRO PARA OFRECER</span>
 
       <div class="row g-4">

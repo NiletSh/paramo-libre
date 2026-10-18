@@ -55,52 +55,65 @@ exports.handleWeightEvent = async (req, res) => {
     const exchange = await findActiveExchangeForBook(bookId);
     const title = book.title || book.titulo || 'Libro';
 
+    let notifiedUsers = 0;
+
     if (event === 'removed') {
-      await Notification.createNotification({
-        userId: book.user_id,
-        tipo: 'estante_retiro',
-        titulo: 'Libro retirado del estante',
-        mensaje: SHELF_REMOVED_MESSAGE(title),
-        exchangeId: exchange?.id,
-        bookId
-      });
-
-      if (exchange) {
-        const otherUserId =
-          exchange.solicitante_id === book.user_id
-            ? exchange.receptor_id
-            : exchange.solicitante_id;
-
+      try {
         await Notification.createNotification({
-          userId: otherUserId,
-          tipo: 'estante_retiro_par',
-          titulo: 'Retiro detectado en el trueque',
-          mensaje: `"${title}" salió del ${SHELF_LOCATION}. Si te corresponde, ya puedes recoger tu libro del estante.`,
-          exchangeId: exchange.id,
+          userId: book.user_id,
+          tipo: 'estante_retiro',
+          titulo: 'Libro retirado del estante',
+          mensaje: SHELF_REMOVED_MESSAGE(title),
+          exchangeId: exchange?.id,
           bookId
         });
+        notifiedUsers += 1;
+
+        if (exchange) {
+          const otherUserId =
+            exchange.solicitante_id === book.user_id
+              ? exchange.receptor_id
+              : exchange.solicitante_id;
+
+          await Notification.createNotification({
+            userId: otherUserId,
+            tipo: 'estante_retiro_par',
+            titulo: 'Retiro detectado en el trueque',
+            mensaje: `"${title}" salió del ${SHELF_LOCATION}. Si te corresponde, ya puedes recoger tu libro del estante.`,
+            exchangeId: exchange.id,
+            bookId
+          });
+          notifiedUsers += 1;
+        }
+      } catch (notificationError) {
+        console.warn('Evento de estante registrado sin notificación:', notificationError.message);
       }
 
       return res.json({
         message: 'Evento de retiro registrado',
         book_id: bookId,
-        notified_users: exchange ? 2 : 1
+        notified_users: notifiedUsers
       });
     }
 
-    await Notification.createNotification({
-      userId: book.user_id,
-      tipo: 'estante_deposito',
-      titulo: 'Libro depositado en el estante',
-      mensaje: `El sensor confirmó que "${title}" está en el ${SHELF_LOCATION}.`,
-      exchangeId: exchange?.id,
-      bookId
-    });
+    try {
+      await Notification.createNotification({
+        userId: book.user_id,
+        tipo: 'estante_deposito',
+        titulo: 'Libro depositado en el estante',
+        mensaje: `El sensor confirmó que "${title}" está en el ${SHELF_LOCATION}.`,
+        exchangeId: exchange?.id,
+        bookId
+      });
+      notifiedUsers = 1;
+    } catch (notificationError) {
+      console.warn('Depósito en estante sin notificación:', notificationError.message);
+    }
 
     res.json({
       message: 'Evento de depósito registrado',
       book_id: bookId,
-      notified_users: 1
+      notified_users: notifiedUsers
     });
   } catch (error) {
     console.error('Error en evento de estante:', error);

@@ -1,0 +1,22 @@
+<svg width="640" height="520" viewBox="0 0 640 520" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Libros en el estante de Páramo Libre">
+  <rect width="640" height="520" rx="28" fill="#F4FBE4"/>
+  <circle cx="520" cy="78" r="86" fill="#D7F0A4"/>
+  <circle cx="92" cy="430" r="70" fill="#E7F6C4"/>
+  <rect x="78" y="86" width="150" height="210" rx="10" fill="#2F4F2F"/>
+  <rect x="92" y="104" width="122" height="8" rx="4" fill="#F8FDEA" opacity="0.7"/>
+  <rect x="92" y="124" width="90" height="6" rx="3" fill="#C6E58A"/>
+  <rect x="92" y="140" width="104" height="6" rx="3" fill="#C6E58A" opacity="0.7"/>
+  <rect x="210" y="118" width="168" height="178" rx="10" fill="#7BBD2F"/>
+  <rect x="228" y="138" width="132" height="10" rx="5" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="228" y="160" width="96" height="7" rx="3" fill="#2F4F2F" opacity="0.35"/>
+  <rect x="228" y="176" width="110" height="7" rx="3" fill="#2F4F2F" opacity="0.25"/>
+  <rect x="360" y="70" width="142" height="226" rx="10" fill="#5D8B1F"/>
+  <rect x="378" y="92" width="106" height="9" rx="4" fill="#F8FDEA"/>
+  <rect x="378" y="112" width="78" height="6" rx="3" fill="#E7F6C4" opacity="0.8"/>
+  <rect x="118" y="318" width="404" height="18" rx="6" fill="#3E5C28"/>
+  <rect x="104" y="336" width="432" height="14" rx="4" fill="#6A8A45"/>
+  <rect x="150" y="368" width="86" height="92" rx="6" fill="#D58A14"/>
+  <rect x="248" y="352" width="78" height="108" rx="6" fill="#0D7377"/>
+  <rect x="338" y="376" width="92" height="84" rx="6" fill="#C64B3D"/>
+  <rect x="442" y="360" width="70" height="100" rx="6" fill="#2F4F2F"/>
+</svg>

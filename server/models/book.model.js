@@ -150,16 +150,27 @@ class Book {
     return sql;
   }
 
+  static normalizeCategoryName(name = '') {
+    return String(name)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase();
+  }
+
   static async resolveCategoryId(categoryId, categoryName) {
     if (categoryId) return categoryId;
-    if (!categoryName) return null;
+    if (!categoryName || Book.normalizeCategoryName(categoryName) === 'otros') {
+      return null;
+    }
 
     const [rows] = await db.execute(
-      'SELECT id FROM categorias WHERE nombre = ? AND activo = TRUE LIMIT 1',
-      [categoryName]
+      'SELECT id, nombre FROM categorias WHERE activo = TRUE'
     );
 
-    return rows[0]?.id || null;
+    const target = Book.normalizeCategoryName(categoryName);
+    const match = rows.find((row) => Book.normalizeCategoryName(row.nombre) === target);
+    return match?.id || null;
   }
 
   static async findAll(filters = {}) {

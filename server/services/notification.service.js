@@ -35,13 +35,14 @@ async function createNotification({ userId, tipo, titulo, mensaje, exchangeId, b
 
 async function listForUser(userId, limit = 20) {
   await ensureTable();
+  const safeLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 20, 1), 100);
   const [rows] = await pool.execute(
     `SELECT id, tipo, titulo, mensaje, intercambio_id, libro_id, leida, fecha_creacion
      FROM notificaciones
      WHERE usuario_id = ?
      ORDER BY fecha_creacion DESC
-     LIMIT ?`,
-    [userId, limit]
+     LIMIT ${safeLimit}`,
+    [userId]
   );
   return rows;
 }

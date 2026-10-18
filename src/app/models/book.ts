@@ -20,17 +20,18 @@ export const SHELF_LOCATION = 'Estante Páramo Libre';
 export const SHELF_INSTRUCTIONS =
   'Cuando el trueque sea aceptado, deposita y recoge los libros en el estante. Los sensores avisarán cuando alguien retire un libro.';
 
+/** Nombres alineados con la tabla `categorias` en MySQL (+ Otros sin fila dedicada). */
 export const BOOK_CATEGORIES: string[] = [
   'Novela',
-  'Ciencia Ficcion',
-  'Fantasia',
+  'Ciencia Ficción',
+  'Fantasía',
   'Historia',
   'Ciencia',
-  'Tecnologia',
-  'Filosofia',
+  'Tecnología',
+  'Filosofía',
   'Arte',
-  'Poesia',
-  'Biografia',
+  'Poesía',
+  'Biografía',
   'Otros'
 ];
 

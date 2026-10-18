@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   loading = true;
 
   stats = [
-    { label: 'Propuestas', value: 0, icon: 'outgoing_mail', tone: 'green', link: '/mis-propuestas' },
+    { label: 'Propuestas', value: 0, icon: 'send', tone: 'green', link: '/mis-propuestas' },
     { label: 'Solicitudes', value: 0, icon: 'mark_email_unread', tone: 'gold', link: '/mis-propuestas' },
     { label: 'Trueques realizados', value: 0, icon: 'published_with_changes', tone: 'forest', link: '/mis-propuestas' },
     { label: 'Libros publicados', value: 0, icon: 'library_books', tone: 'leaf', link: '/catalogo' }
@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
 
   quickActions = [
     { label: 'Publicar libro', description: 'Agrega un titulo disponible', icon: 'add_circle', link: '/publicar-libro', tone: 'publish' },
-    { label: 'Explorar catalogo', description: 'Encuentra tu siguiente lectura', icon: 'travel_explore', link: '/catalogo', tone: 'catalog' },
+    { label: 'Explorar catalogo', description: 'Encuentra tu siguiente lectura', icon: 'explore', link: '/catalogo', tone: 'catalog' },
     { label: 'Ver propuestas', description: 'Da seguimiento a tus trueques', icon: 'swap_horiz', link: '/mis-propuestas', tone: 'proposals' },
     { label: 'Editar perfil', description: 'Actualiza tus datos', icon: 'manage_accounts', link: '/perfil', tone: 'profile' }
   ];

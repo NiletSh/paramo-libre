@@ -128,22 +128,26 @@ exports.acceptExchange = async (req, res) => {
     await Book.updateStatus(exchange.offered_book_id, 'reserved');
 
     const shelfDetail = `${SHELF_ACCEPT_MESSAGE} Ubicación: ${SHELF_LOCATION}.`;
-    await Promise.all([
-      Notification.createNotification({
-        userId: exchange.requester_id,
-        tipo: 'trueque_aceptado',
-        titulo: 'Trueque aceptado — ve al estante',
-        mensaje: shelfDetail,
-        exchangeId: Number(id)
-      }),
-      Notification.createNotification({
-        userId: exchange.owner_id,
-        tipo: 'trueque_aceptado',
-        titulo: 'Aceptaste un trueque — estante',
-        mensaje: shelfDetail,
-        exchangeId: Number(id)
-      })
-    ]);
+    try {
+      await Promise.all([
+        Notification.createNotification({
+          userId: exchange.requester_id,
+          tipo: 'trueque_aceptado',
+          titulo: 'Trueque aceptado — ve al estante',
+          mensaje: shelfDetail,
+          exchangeId: Number(id)
+        }),
+        Notification.createNotification({
+          userId: exchange.owner_id,
+          tipo: 'trueque_aceptado',
+          titulo: 'Aceptaste un trueque — estante',
+          mensaje: shelfDetail,
+          exchangeId: Number(id)
+        })
+      ]);
+    } catch (notificationError) {
+      console.warn('Trueque aceptado, pero falló guardar notificación:', notificationError.message);
+    }
 
     const updated = await Exchange.findById(id);
     res.json({

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import QRCode from 'qrcode';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -19,8 +20,11 @@ import { environment } from '../../../environments/environment';
         <p class="share-subtitle">Invita a más lectores a intercambiar libros de forma gratuita.</p>
 
         <div class="qr-block">
-          <img [src]="qrUrl" width="200" height="200" alt="Código QR de Páramo Libre" class="qr-image" />
-          <span class="qr-hint">Escanea para visitar la página principal</span>
+          <img *ngIf="qrUrl; else qrLoading" [src]="qrUrl" width="200" height="200" alt="Código QR de Páramo Libre" class="qr-image" />
+          <ng-template #qrLoading>
+            <div class="qr-image qr-placeholder">Generando código...</div>
+          </ng-template>
+          <span class="qr-hint">Al escanearlo se abre la página principal</span>
         </div>
 
         <div class="share-url">{{ siteUrl }}</div>
@@ -104,10 +108,22 @@ import { environment } from '../../../environments/environment';
     }
 
     .qr-image {
+      width: 200px;
+      height: 200px;
       border: 1px solid rgba(123, 189, 47, 0.2);
       border-radius: 12px;
       padding: 8px;
       background: #ffffff;
+      object-fit: contain;
+    }
+
+    .qr-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6a7d3b;
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .qr-hint {
@@ -174,26 +190,71 @@ import { environment } from '../../../environments/environment';
     }
   `]
 })
-export class ShareModalComponent {
+export class ShareModalComponent implements OnInit {
   @Input() open = false;
   @Output() close = new EventEmitter<void>();
 
-  readonly siteUrl = environment.siteUrl;
-  readonly qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(environment.siteUrl)}`;
+  readonly siteUrl = this.resolveShareUrl();
+  qrUrl = '';
   readonly canShare = typeof navigator !== 'undefined' && !!navigator.share;
 
   copied = false;
 
   constructor(private snackBar: MatSnackBar) {}
 
-  copyLink(): void {
-    navigator.clipboard.writeText(this.siteUrl).then(() => {
-      this.copied = true;
-      this.snackBar.open('Enlace copiado al portapapeles', 'Cerrar', { duration: 2500 });
-      setTimeout(() => (this.copied = false), 2000);
+  ngOnInit(): void {
+    QRCode.toDataURL(this.siteUrl, {
+      width: 220,
+      margin: 1,
+      errorCorrectionLevel: 'M',
+      color: { dark: '#2f4f2f', light: '#ffffff' }
+    }).then((url) => {
+      this.qrUrl = url;
     }).catch(() => {
-      this.snackBar.open('No se pudo copiar el enlace', 'Cerrar', { duration: 3000 });
+      this.snackBar.open('No se pudo generar el código QR', 'Cerrar', { duration: 3000 });
     });
+  }
+
+  copyLink(): void {
+    const done = () => {
+      this.copied = true;
+      this.snackBar.open('Enlace copiado. Abre la página principal.', 'Cerrar', { duration: 2500 });
+      setTimeout(() => (this.copied = false), 2000);
+    };
+
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(this.siteUrl).then(done).catch(() => this.copyWithFallback(done));
+      return;
+    }
+
+    this.copyWithFallback(done);
+  }
+
+  private copyWithFallback(done: () => void): void {
+    const input = document.createElement('textarea');
+    input.value = this.siteUrl;
+    input.setAttribute('readonly', 'true');
+    input.style.position = 'fixed';
+    input.style.left = '-9999px';
+    document.body.appendChild(input);
+    input.select();
+    const ok = document.execCommand('copy');
+    input.remove();
+    if (ok) {
+      done();
+      return;
+    }
+    this.snackBar.open('No se pudo copiar el enlace', 'Cerrar', { duration: 3000 });
+  }
+
+  private resolveShareUrl(): string {
+    if (typeof window !== 'undefined') {
+      const host = window.location.hostname;
+      if (host && host !== 'localhost' && host !== '127.0.0.1') {
+        return `${window.location.origin}/`;
+      }
+    }
+    return `${environment.siteUrl.replace(/\/$/, '')}/`;
   }
 
   shareNative(): void {
