@@ -180,7 +180,25 @@ CREATE TABLE configuraciones_usuario (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================
--- 10. TRIGGER: Crear configuración por defecto al registrar usuario
+-- 10. TABLA: notificaciones (estante / trueques)
+-- ============================================================
+CREATE TABLE notificaciones (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT UNSIGNED NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    titulo VARCHAR(150) NOT NULL,
+    mensaje TEXT NOT NULL,
+    intercambio_id INT UNSIGNED NULL,
+    libro_id INT UNSIGNED NULL,
+    leida BOOLEAN DEFAULT FALSE NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_notif_usuario (usuario_id),
+    INDEX idx_notif_fecha (fecha_creacion),
+    CONSTRAINT fk_notif_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+-- 11. TRIGGER: Crear configuración por defecto al registrar usuario
 -- ============================================================
 DELIMITER //
 
@@ -235,28 +253,28 @@ INSERT INTO categorias (nombre, descripcion, icono, color) VALUES
 -- Hash de ejemplo para Password123: $2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
 -- ============================================================
 INSERT INTO usuarios (nombre, email, password_hash, foto_perfil, biografia, ubicacion, telefono, rol, activo, email_verificado) VALUES
-('Carlos Mendoza', 'carlos@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Amante de la literatura clásica y moderna. Siempre buscando nuevas historias.', 'Santiago de Querétaro', '4421234567', 'admin', TRUE, TRUE),
-('Ana María Ríos', 'ana@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Estudiante de filosofía. Intercambio libros de pensamiento crítico.', 'Corregidora', '4429876543', 'usuario', TRUE, TRUE),
-('Luis Fernando Vega', 'luis@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Ingeniero y aficionado a la ciencia ficción. Colecciono ediciones especiales.', 'San Juan del Río', '4275558899', 'usuario', TRUE, TRUE),
-('Sofía Herrera', 'sofia@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Artista visual. Busco libros de arte y diseño para inspirarme.', 'El Marqués', '4424447766', 'usuario', TRUE, TRUE),
-('Javier Torres', 'javier@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Historiador aficionado. Especializado en historia contemporánea.', 'Tequisquiapan', '4142223344', 'usuario', TRUE, TRUE);
+('Carlos Mendoza', 'carlos@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Amante de la literatura clasica y moderna. Siempre buscando nuevas historias.', 'Biblioteca', '4421234567', 'admin', TRUE, TRUE),
+('Ana Maria Rios', 'ana@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Estudiante de filosofia. Intercambio libros de pensamiento critico.', 'Entrada principal', '4429876543', 'usuario', TRUE, TRUE),
+('Luis Fernando Vega', 'luis@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Ingeniero y aficionado a la ciencia ficcion. Colecciono ediciones especiales.', 'Laboratorio de computo', '4275558899', 'usuario', TRUE, TRUE),
+('Sofia Herrera', 'sofia@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Artista visual. Busco libros de arte y diseno para inspirarme.', 'Patio central', '4424447766', 'usuario', TRUE, TRUE),
+('Javier Torres', 'javier@example.com', '$2b$10$mZkao69Q4TmCZAvHtSOkR.7MBTLK3un4sMhHKf.za.LerVGRze44e', NULL, 'Historiador aficionado. Especializado en historia contemporanea.', 'Cafeteria', '4142223344', 'usuario', TRUE, TRUE);
 
 -- ============================================================
 -- 13. DATOS DE PRUEBA: Libros
 -- ============================================================
 INSERT INTO libros (usuario_id, categoria_id, titulo, autor, isbn, descripcion, estado_libro, estado_publicacion, ubicacion, imagen_portada) VALUES
-(1, 1, 'Cien años de soledad', 'Gabriel García Márquez', '978-0307474728', 'La obra cumbre del realismo mágico. Disponible para trueque local.', 'buen_estado', 'disponible', 'San Juan del Río', NULL),
-(1, 3, 'El nombre del viento', 'Patrick Rothfuss', '978-0756404741', 'Primera novela de la crónica del asesino de reyes. Fantasía épica en buen estado.', 'como_nuevo', 'disponible', 'San Juan del Río', NULL),
-(2, 6, 'Así habló Zaratustra', 'Friedrich Nietzsche', '978-0140441185', 'Obra filosófica fundamental. Ideal para estudiantes de bachillerato o universidad.', 'usado', 'disponible', 'San Juan del Río', NULL),
-(2, 1, '1984', 'George Orwell', '978-0451524935', 'Distopía clásica sobre el totalitarismo y la vigilancia. Estado impecable.', 'como_nuevo', 'disponible', 'San Juan del Río', NULL),
-(3, 2, 'Dune', 'Frank Herbert', '978-0441172719', 'Épica de ciencia ficción en el desierto de Arrakis. Edición completa.', 'buen_estado', 'disponible', 'San Juan del Río', NULL),
-(3, 2, 'Neuromante', 'William Gibson', '978-0441569595', 'Novela fundacional del ciberpunk. Disponible para trueque por ciencia ficción.', 'usado', 'disponible', 'San Juan del Río', NULL),
-(4, 7, 'Historia del arte', 'E.H. Gombrich', '978-0714832470', 'El clásico manual de historia del arte. Con ilustraciones a color.', 'buen_estado', 'disponible', 'San Juan del Río', NULL),
-(4, 7, 'Steal Like an Artist', 'Austin Kleon', '978-0761169253', 'Guía creativa para artistas. Libro pequeño con grandes ideas.', 'nuevo', 'disponible', 'San Juan del Río', NULL),
-(5, 4, 'Sapiens: De animales a dioses', 'Yuval Noah Harari', '978-0062316097', 'Historia de la humanidad desde la prehistoria hasta la era moderna.', 'buen_estado', 'disponible', 'San Juan del Río', NULL),
-(5, 4, 'Los derechos humanos y la civilización', 'Norberto Bobbio', '978-9505572573', 'Ensayo sobre fundamentos filosóficos de los derechos humanos.', 'usado', 'disponible', 'San Juan del Río', NULL),
-(1, 5, 'Una breve historia del tiempo', 'Stephen Hawking', '978-0553380163', 'Divulgación científica sobre el origen del universo. Excelente estado.', 'como_nuevo', 'disponible', 'San Juan del Río', NULL),
-(3, 8, 'Clean Code', 'Robert C. Martin', '978-0132350884', 'Manual esencial para desarrolladores de software. Con anotaciones.', 'usado', 'disponible', 'San Juan del Río', NULL);
+(1, 1, 'Cien anos de soledad', 'Gabriel Garcia Marquez', '978-0307474728', 'La obra cumbre del realismo magico. Disponible para trueque local.', 'buen_estado', 'disponible', 'Biblioteca', NULL),
+(1, 3, 'El nombre del viento', 'Patrick Rothfuss', '978-0756404741', 'Primera novela de la cronica del asesino de reyes. Fantasia epica en buen estado.', 'como_nuevo', 'disponible', 'Entrada principal', NULL),
+(2, 6, 'Asi hablo Zaratustra', 'Friedrich Nietzsche', '978-0140441185', 'Obra filosofica fundamental. Ideal para estudiantes de bachillerato o universidad.', 'usado', 'disponible', 'Cafeteria', NULL),
+(2, 1, '1984', 'George Orwell', '978-0451524935', 'Distopia clasica sobre el totalitarismo y la vigilancia. Estado impecable.', 'como_nuevo', 'disponible', 'Patio central', NULL),
+(3, 2, 'Dune', 'Frank Herbert', '978-0441172719', 'Epica de ciencia ficcion en el desierto de Arrakis. Edicion completa.', 'buen_estado', 'disponible', 'Laboratorio de computo', NULL),
+(3, 2, 'Neuromante', 'William Gibson', '978-0441569595', 'Novela fundacional del ciberpunk. Disponible para trueque por ciencia ficcion.', 'usado', 'disponible', 'Edificio A', NULL),
+(4, 7, 'Historia del arte', 'E.H. Gombrich', '978-0714832470', 'El clasico manual de historia del arte. Con ilustraciones a color.', 'buen_estado', 'disponible', 'Edificio B', NULL),
+(4, 7, 'Steal Like an Artist', 'Austin Kleon', '978-0761169253', 'Guia creativa para artistas. Libro pequeno con grandes ideas.', 'nuevo', 'disponible', 'Cancha deportiva', NULL),
+(5, 4, 'Sapiens: De animales a dioses', 'Yuval Noah Harari', '978-0062316097', 'Historia de la humanidad desde la prehistoria hasta la era moderna.', 'buen_estado', 'disponible', 'Control escolar', NULL),
+(5, 4, 'Los derechos humanos y la civilizacion', 'Norberto Bobbio', '978-9505572573', 'Ensayo sobre fundamentos filosoficos de los derechos humanos.', 'usado', 'disponible', 'Direccion', NULL),
+(1, 5, 'Una breve historia del tiempo', 'Stephen Hawking', '978-0553380163', 'Divulgacion cientifica sobre el origen del universo. Excelente estado.', 'como_nuevo', 'disponible', 'Aula acordada', NULL),
+(3, 8, 'Clean Code', 'Robert C. Martin', '978-0132350884', 'Manual esencial para desarrolladores de software. Con anotaciones.', 'usado', 'disponible', 'Otro punto del plantel', NULL);
 
 -- ============================================================
 -- 14. DATOS DE PRUEBA: Intercambios (propuestas)
