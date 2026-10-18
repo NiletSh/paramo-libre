@@ -87,13 +87,10 @@ import { AuthService } from '../../core/services/auth.service';
     }
 
     .brand-logo {
-      height: 62px;
+      height: 58px;
       width: auto;
       display: block;
       object-fit: contain;
-      padding: 4px 8px;
-      border-radius: 12px;
-      background: #111111;
     }
 
     .nav-links {
