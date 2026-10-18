@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -36,7 +35,6 @@ export function passwordMatchValidator(matchTo: string): ValidatorFn {
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
-    MatSelectModule,
     MatSnackBarModule
   ],
   templateUrl: './register.component.html',
@@ -59,7 +57,6 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, passwordMatchValidator('password')]],
-      location: [''],
       terms: [false, Validators.requiredTrue]
     });
 
@@ -71,13 +68,12 @@ export class RegisterComponent {
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.loading = true;
-      const { name, email, password, location } = this.registerForm.value;
+      const { name, email, password } = this.registerForm.value;
 
       this.authService.register({
         nombre: name,
         email,
-        password,
-        ubicacion: location
+        password
       }).subscribe({
         next: () => {
           this.loading = false;
@@ -112,7 +108,6 @@ export class RegisterComponent {
   get email() { return this.registerForm.get('email'); }
   get password() { return this.registerForm.get('password'); }
   get confirmPassword() { return this.registerForm.get('confirmPassword'); }
-  get location() { return this.registerForm.get('location'); }
   get terms() { return this.registerForm.get('terms'); }
 
   /**

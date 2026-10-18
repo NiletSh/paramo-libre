@@ -63,7 +63,6 @@ export class PerfilComponent implements OnInit {
       apellido: [this.perfil?.apellido || '', [Validators.maxLength(50)]],
       email: [this.perfil?.email || '', [Validators.required, Validators.email]],
       telefono: [this.perfil?.telefono || ''],
-      ubicacion: [this.perfil?.ubicacion || '', Validators.maxLength(100)],
       biografia: [this.perfil?.biografia || '', Validators.maxLength(500)]
     });
 
@@ -121,7 +120,6 @@ export class PerfilComponent implements OnInit {
           nombre: p.nombre,
           email: p.email,
           rol: this.authService.getCurrentUser()?.rol || 'usuario',
-          ubicacion: p.ubicacion,
           telefono: p.telefono,
           foto_perfil: p.fotoUrl
         });
