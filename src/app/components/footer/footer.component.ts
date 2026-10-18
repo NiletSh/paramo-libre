@@ -55,6 +55,11 @@ export class FooterComponent {
   }
 
   private shouldHide(url: string): boolean {
-    return url === '/' || url.startsWith('/?') || url.startsWith('/auth');
+    const path = url.split('?')[0];
+    return path === '/' || path.startsWith('/auth')
+      || path.startsWith('/publicar')
+      || path.startsWith('/propuestas')
+      || path.startsWith('/mis-propuestas')
+      || path.endsWith('/editar');
   }
 }
