@@ -161,7 +161,7 @@
 
 ::ng-deep .register-form .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
   border-color: #5d8b1f !important;
-  box-shadow: 0 0 0 3px rgba(123, 189, 47, 0.2);
+  box-shadow: none;
 }
 
 ::ng-deep .register-form .mat-mdc-form-field.mat-form-field-invalid .mat-mdc-text-field-wrapper {
@@ -170,12 +170,18 @@
 
 .field-label {
   display: block;
-  margin: 0 4px 6px;
+  margin: 0 4px 12px;
   color: #24381f;
   font-size: 14px;
   font-weight: 750;
   line-height: 1.2;
   white-space: nowrap;
+}
+
+::ng-deep .register-form .mat-mdc-form-field,
+::ng-deep .register-form .mat-mdc-text-field-wrapper,
+::ng-deep .register-form input {
+  outline: none !important;
 }
 
 ::ng-deep .register-form .mat-mdc-form-field-infix {
