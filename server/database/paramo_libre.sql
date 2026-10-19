@@ -92,6 +92,14 @@ CREATE TABLE libros (
     FULLTEXT INDEX idx_busqueda (titulo, autor, descripcion)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE fotos_libros (
+    libro_id INT UNSIGNED PRIMARY KEY,
+    mime VARCHAR(40) NOT NULL,
+    datos MEDIUMBLOB NOT NULL,
+    actualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_foto_libro FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- ============================================================
 -- 5. TABLA: imagenes_libros
 -- ============================================================

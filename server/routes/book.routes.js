@@ -6,6 +6,7 @@ const { authenticate } = require('../middlewares/auth.middleware');
 
 router.get('/', bookController.getAllBooks);
 router.get('/user/:user_id', bookController.getBooksByUser);
+router.get('/:id/cover', bookController.getCover);
 router.get('/:id', bookController.getBookById);
 router.post('/', authenticate, upload.single('image'), bookController.createBook);
 router.put('/:id', authenticate, upload.single('image'), bookController.updateBook);

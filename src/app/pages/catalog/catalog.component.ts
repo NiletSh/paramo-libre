@@ -188,6 +188,10 @@ export class CatalogComponent implements OnInit {
     };
   }
 
+  hideCover(book: CatalogBook): void {
+    book.imageUrl = null;
+  }
+
   isOwnBook(book: CatalogBook): boolean {
     return this.currentUserId != null
       && book.ownerId != null

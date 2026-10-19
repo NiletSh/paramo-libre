@@ -102,6 +102,12 @@ export class BookDetailComponent implements OnInit {
     });
   }
 
+  hideCover(): void {
+    if (this.book) {
+      this.book.imageUrl = '';
+    }
+  }
+
   goBack(): void {
     this.router.navigate(['/catalogo']);
   }

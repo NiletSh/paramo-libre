@@ -76,7 +76,7 @@
     <div class="book-card" *ngFor="let book of paginatedBooks; let i = index" [style.animation-delay]="i * 0.05 + 's'">
       
       <div class="book-cover" [style.background]="book.imageUrl ? 'transparent' : 'linear-gradient(135deg, ' + book.imageColor + ' 0%, ' + book.imageColor + 'dd 100%)'">
-        <img *ngIf="book.imageUrl" [src]="book.imageUrl" [alt]="book.title">
+        <img *ngIf="book.imageUrl" [src]="book.imageUrl" alt="" (error)="hideCover(book)">
         <span class="material-icons" *ngIf="!book.imageUrl">auto_stories</span>
         <div class="book-status-badge" [style.background]="book.status === 'available' ? '#2d6a4f' : (book.status === 'reserved' ? '#e76f51' : '#868e96')">
           {{ statusLabels[book.status] }}

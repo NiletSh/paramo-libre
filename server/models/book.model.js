@@ -299,6 +299,14 @@ class Book {
     return result.affectedRows;
   }
 
+  static async updateCover(id, imageUrl) {
+    const [result] = await db.execute(
+      'UPDATE libros SET imagen_portada = ? WHERE id = ?',
+      [imageUrl, id]
+    );
+    return result.affectedRows;
+  }
+
   static async updateStatus(id, status) {
     const [result] = await db.execute(
       `UPDATE libros SET estado_publicacion = ? WHERE id = ?`,

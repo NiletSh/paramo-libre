@@ -1,25 +1,7 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 
-// Factory para crear configuraciones de multer
-const createUpload = (folder, prefix) => {
-  const uploadDir = path.join(__dirname, '../uploads', folder);
-
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-  }
-
-  const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, uploadDir);
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      const ext = path.extname(file.originalname);
-      cb(null, prefix + '-' + uniqueSuffix + ext);
-    }
-  });
+const createUpload = () => {
+  const storage = multer.memoryStorage();
 
   const fileFilter = (req, file, cb) => {
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
@@ -37,8 +19,7 @@ const createUpload = (folder, prefix) => {
   });
 };
 
-// Instancia para libros (guarda en uploads/books)
-const upload = createUpload('books', 'book');
+const upload = createUpload();
 
 // Middleware para manejar errores de multer (lo añadimos como propiedad)
 upload.handleUploadError = (err, req, res, next) => {

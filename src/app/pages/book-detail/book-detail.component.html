@@ -17,7 +17,7 @@
     <!-- Panel izquierdo: Portada -->
     <div class="detail-left">
       <div class="book-cover-large" [style.background]="book.imageUrl ? 'transparent' : 'linear-gradient(135deg, ' + book.imageColor + ' 0%, ' + book.imageColor + 'dd 100%)'">
-        <img *ngIf="book.imageUrl" [src]="book.imageUrl" [alt]="book.title">
+        <img *ngIf="book.imageUrl" [src]="book.imageUrl" [alt]="book.title" (error)="hideCover()">
         <span class="material-icons" *ngIf="!book.imageUrl">auto_stories</span>
       </div>
       
