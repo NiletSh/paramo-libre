@@ -115,7 +115,7 @@ exports.acceptExchange = async (req, res) => {
       return res.status(404).json({ message: 'Intercambio no encontrado' });
     }
 
-    if (exchange.owner_id !== req.userId) {
+    if (Number(exchange.owner_id) !== Number(req.userId)) {
       return res.status(403).json({ message: 'Solo el dueño del libro puede aceptar' });
     }
 
@@ -170,7 +170,7 @@ exports.rejectExchange = async (req, res) => {
       return res.status(404).json({ message: 'Intercambio no encontrado' });
     }
 
-    if (exchange.owner_id !== req.userId) {
+    if (Number(exchange.owner_id) !== Number(req.userId)) {
       return res.status(403).json({ message: 'Solo el dueño del libro puede rechazar' });
     }
 

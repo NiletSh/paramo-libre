@@ -13,6 +13,7 @@
         (click)="setTab(tab.value)"
       >
         {{ tab.label }}
+        <span class="tab-count" *ngIf="tab.value === 'received' && pendingReceivedCount">{{ pendingReceivedCount }}</span>
       </button>
     </div>
 
@@ -128,7 +129,7 @@
         <div class="proposal-actions" *ngIf="p.status === 'pending' && activeTab === 'received'">
           <button class="btn-accept" (click)="acceptProposal(p.id)">
             <mat-icon>check</mat-icon>
-            Aceptar
+            Aceptar trueque
           </button>
           <button class="btn-reject" (click)="rejectProposal(p.id)">
             <mat-icon>close</mat-icon>

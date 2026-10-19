@@ -35,7 +35,7 @@ export class MyProposalsComponent implements OnInit {
   sentProposals: ExchangeProposal[] = [];
   receivedProposals: ExchangeProposal[] = [];
   filteredProposals: ExchangeProposal[] = [];
-  activeTab: ProposalTab = 'sent';
+  activeTab: ProposalTab = 'received';
   activeFilter: StatusFilter = 'all';
   loading = true;
 
@@ -77,6 +77,9 @@ export class MyProposalsComponent implements OnInit {
         this.exchangeService.getReceivedProposals().subscribe({
           next: (received) => {
             this.receivedProposals = received;
+            if (this.pendingReceivedCount > 0) {
+              this.activeTab = 'received';
+            }
             this.applyFilter();
             this.loading = false;
           },
@@ -95,6 +98,10 @@ export class MyProposalsComponent implements OnInit {
         });
       }
     });
+  }
+
+  get pendingReceivedCount(): number {
+    return this.receivedProposals.filter((proposal) => proposal.status === 'pending').length;
   }
 
   setFilter(filter: StatusFilter): void {
