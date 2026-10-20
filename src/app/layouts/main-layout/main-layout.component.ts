@@ -21,7 +21,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: #f7f6f1;
+      background: var(--pl-page);
     }
 
     .main-content {

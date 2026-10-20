@@ -6,19 +6,19 @@
   display: block;
   height: calc(100vh - 72px);
   overflow: hidden;
-  background: #d3ee96;
+  background: var(--pl-page);
 }
 
 .book-detail {
   background: transparent !important;
-  color: #2f4f2f !important;
+  color: var(--pl-ink) !important;
 }
 
 .book-title,
 .owner-name,
 .detail-title,
 .detail-value {
-  color: #2f4f2f !important;
+  color: var(--pl-ink) !important;
 }
 
 .book-author,
@@ -27,23 +27,23 @@
 .detail-label,
 .detail-meta,
 .not-found p {
-  color: #6a7d3b !important;
+  color: var(--pl-muted) !important;
 }
 
 .owner-card,
 .detail-card,
 .info-card,
 .proposal-card {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1px solid rgba(123, 189, 47, 0.16) !important;
-  box-shadow: 0 12px 30px rgba(47, 79, 47, 0.08) !important;
+  background: var(--pl-card) !important;
+  border: 1px solid rgba(107, 138, 100, 0.16) !important;
+  box-shadow: 0 12px 30px rgba(44, 58, 46, 0.08) !important;
 }
 
 .badge-category,
 .btn-primary,
 .btn-secondary,
 .proposal-btn {
-  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%) !important;
+  background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%) !important;
   color: #ffffff !important;
 }
 
@@ -81,14 +81,14 @@
 
 .not-found .material-icons {
   font-size: 72px;
-  color: #5d8b1f;
+  color: var(--pl-accent-2);
   margin-bottom: 24px;
 }
 
 .not-found h2 {
   font-size: 28px;
   font-weight: 800;
-  color: #2f4f2f;
+  color: var(--pl-ink);
   margin: 0 0 8px;
 }
 
@@ -170,7 +170,7 @@
 .owner-avatar {
   width: 52px;
   height: 52px;
-  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+  background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -232,8 +232,8 @@
 
 .badge-category {
   padding: 6px 14px;
-  background: rgba(123, 189, 47, 0.12);
-  color: #5d8b1f;
+  background: rgba(107, 138, 100, 0.12);
+  color: var(--pl-accent-2);
   font-size: 12px;
   font-weight: 700;
   border-radius: 8px;
@@ -251,7 +251,7 @@
 .book-title {
   font-size: 32px;
   font-weight: 800;
-  color: #2f4f2f;
+  color: var(--pl-ink);
   margin: 0 0 8px;
   line-height: 1.15;
   letter-spacing: -1px;
@@ -259,7 +259,7 @@
 
 .book-author {
   font-size: 17px;
-  color: #6a7d3b;
+  color: var(--pl-muted);
   margin: 0;
   font-weight: 500;
 }
@@ -280,7 +280,7 @@
 
 .book-description {
   font-size: 14px;
-  color: #5e6f45;
+  color: var(--pl-muted);
   line-height: 1.45;
   margin: 0;
   display: -webkit-box;
@@ -290,7 +290,7 @@
 }
 
 .detail-section h3 {
-  color: #6a7d3b;
+  color: var(--pl-muted);
 }
 
 /* Grid de detalles */
@@ -305,15 +305,15 @@
   align-items: center;
   gap: 12px;
   padding: 14px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(123, 189, 47, 0.14);
+  background: var(--pl-card);
+  border: 1px solid rgba(107, 138, 100, 0.14);
   border-radius: 16px;
   transition: all 0.25s ease;
 }
 
 .detail-item:hover {
-  background: #ffffff;
-  border-color: rgba(123, 189, 47, 0.24);
+  background: var(--pl-card);
+  border-color: rgba(107, 138, 100, 0.24);
 }
 
 .detail-icon {
@@ -329,7 +329,7 @@
 
 .detail-icon .material-icons {
   font-size: 22px;
-  color: #5d8b1f;
+  color: var(--pl-accent-2);
 }
 
 .detail-item div {
@@ -340,14 +340,14 @@
 
 .detail-label {
   font-size: 12px;
-  color: #6a7d3b;
+  color: var(--pl-muted);
   font-weight: 500;
 }
 
 .detail-value {
   font-size: 15px;
   font-weight: 700;
-  color: #2f4f2f;
+  color: var(--pl-ink);
 }
 
 .trade-guide {
@@ -362,10 +362,10 @@
   align-items: flex-start;
   gap: 12px;
   padding: 16px;
-  border: 1px solid rgba(123, 189, 47, 0.16);
+  border: 1px solid rgba(107, 138, 100, 0.16);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 12px 28px rgba(47, 79, 47, 0.06);
+  background: var(--pl-card);
+  box-shadow: 0 12px 28px rgba(44, 58, 46, 0.06);
 }
 
 .guide-item .material-icons {
@@ -375,8 +375,8 @@
   width: 38px;
   height: 38px;
   border-radius: 8px;
-  background: rgba(123, 189, 47, 0.14);
-  color: #5d8b1f;
+  background: rgba(107, 138, 100, 0.14);
+  color: var(--pl-accent-2);
   font-size: 20px;
   flex: 0 0 auto;
 }
@@ -384,13 +384,13 @@
 .guide-item strong {
   display: block;
   margin-bottom: 4px;
-  color: #2f4f2f;
+  color: var(--pl-ink);
   font-size: 14px;
 }
 
 .guide-item p {
   margin: 0;
-  color: #6a7d3b;
+  color: var(--pl-muted);
   font-size: 13px;
   line-height: 1.5;
 }
@@ -519,23 +519,23 @@
   font-size: 15px;
   font-weight: 700;
   color: #ffffff;
-  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+  background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(123, 189, 47, 0.28);
+  box-shadow: 0 4px 20px rgba(107, 138, 100, 0.28);
   text-decoration: none;
 }
 
 .btn-exchange-main:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(123, 189, 47, 0.35);
+  box-shadow: 0 8px 28px rgba(107, 138, 100, 0.35);
 }
 
 .btn-login-required {
-  background: #ffffff;
-  color: #2f4f2f;
-  border: 1px solid rgba(123, 189, 47, 0.22);
+  background: var(--pl-card);
+  color: var(--pl-ink);
+  border: 1px solid rgba(107, 138, 100, 0.22);
   box-shadow: none;
 }
 
@@ -558,17 +558,17 @@
   border-radius: 22px;
   font-size: 15px;
   font-weight: 600;
-  color: #4b5d32;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1.5px solid rgba(123, 189, 47, 0.2);
+  color: var(--pl-muted);
+  background: var(--pl-card);
+  border: 1.5px solid rgba(107, 138, 100, 0.2);
   cursor: pointer;
   transition: all 0.25s ease;
   font-family: inherit;
 }
 
 .btn-back-secondary:hover {
-  background: #ffffff;
-  color: #2f4f2f;
+  background: var(--pl-card);
+  color: var(--pl-ink);
 }
 
 .btn-back-secondary .material-icons {
@@ -584,7 +584,7 @@
   font-size: 15px;
   font-weight: 600;
   color: #ffffff;
-  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+  background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
   border: none;
   border-radius: 12px;
   cursor: pointer;
@@ -593,7 +593,7 @@
 
 .btn-back:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(93, 139, 31, 0.35);
+  box-shadow: 0 4px 16px rgba(82, 107, 76, 0.35);
 }
 
 /* ============================================

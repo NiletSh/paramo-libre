@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.95);
+      background: var(--pl-card);
       display: flex;
       flex-direction: column;
       align-items: center;

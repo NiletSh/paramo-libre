@@ -1,13 +1,13 @@
 // Paleta verde premium
-$bg-dark: #f8fdea;
-$bg-card: #ffffff;
-$bg-card-hover: #f4fbe8;
-$bg-input: #f7fbeb;
-$border-color: #dfeac7;
-$text-primary: #2f4f2f;
-$text-secondary: #6a7d3b;
-$accent-cyan: #7bbd2f;
-$accent-cyan-hover: #5d8b1f;
+$bg-dark: var(--pl-soft);
+$bg-card: var(--pl-card);
+$bg-card-hover: var(--pl-soft);
+$bg-input: var(--pl-soft);
+$border-color: #d5ddd4;
+$text-primary: var(--pl-ink);
+$text-secondary: #5d6b5f;
+$accent-cyan: #6b8a64;
+$accent-cyan-hover: #526b4c;
 $accent-purple: #4f7d2a;
 $success: #4f7d2a;
 $warning: #d58a14;
@@ -376,7 +376,7 @@ $warning: #d58a14;
 
 // Botón principal
 .btn-primary {
-  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%) !important;
+  background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%) !important;
   color: #ffffff !important;
   padding: 0.6rem 2rem !important;
   border-radius: 0.75rem !important;

@@ -28,7 +28,7 @@ import { CommonModule } from '@angular/common';
   styles: [
     `.admin-shell{padding:2rem;max-width:1100px;margin:0 auto;}`,
     `.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.5rem;}`,
-    `.card{background:#fff;border-radius:16px;padding:1.25rem;box-shadow:0 8px 24px rgba(0,0,0,.08);}`
+    `.card{background: var(--pl-card);border-radius:16px;padding:1.25rem;box-shadow:0 8px 24px rgba(0,0,0,.08);}`
   ]
 })
 export class AdminComponent {}

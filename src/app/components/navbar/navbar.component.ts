@@ -65,7 +65,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(247, 246, 241, 0.94);
+      background: var(--pl-nav);
       backdrop-filter: blur(10px);
     }
 
@@ -87,7 +87,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #2f4f2f;
+      color: var(--pl-ink);
       font-weight: 700;
       text-decoration: none;
     }
@@ -124,7 +124,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
     .nav-link {
       padding: 8px 12px;
       border-radius: 999px;
-      color: #4d5d3a;
+      color: var(--pl-muted);
       font-size: 14px;
       font-weight: 700;
       text-decoration: none;
@@ -134,15 +134,15 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
 
     .nav-link:hover,
     .nav-link.active {
-      color: #5d8b1f;
-      background: rgba(128, 199, 64, 0.12);
+      color: var(--pl-accent-2);
+      background: rgba(107, 138, 100, 0.12);
     }
 
     .nav-link-register,
     .mobile-register {
       color: #ffffff !important;
-      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%) !important;
-      box-shadow: 0 8px 20px rgba(93, 139, 31, 0.16);
+      background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%) !important;
+      box-shadow: 0 8px 20px rgba(82, 107, 76, 0.16);
     }
 
     .nav-avatar {
@@ -157,8 +157,8 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       overflow: hidden;
       border-radius: 50%;
       border: 2px solid #ffffff;
-      box-shadow: 0 0 0 2px rgba(93, 139, 31, 0.45);
-      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+      box-shadow: 0 0 0 2px rgba(82, 107, 76, 0.45);
+      background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
       color: #ffffff;
       font-size: 14px;
       font-weight: 800;
@@ -187,7 +187,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       height: 2px;
       display: block;
       border-radius: 2px;
-      background: #2f4f2f;
+      background: var(--pl-ink);
     }
 
     .mobile-menu {
@@ -195,8 +195,8 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       flex-direction: column;
       gap: 6px;
       padding: 14px 24px 24px;
-      border-top: 1px solid rgba(123, 189, 47, 0.16);
-      background: #ffffff;
+      border-top: 1px solid rgba(107, 138, 100, 0.16);
+      background: var(--pl-card);
     }
 
     .mobile-menu.open {
@@ -206,7 +206,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
     .mobile-link {
       padding: 11px 12px;
       border-radius: 8px;
-      color: #4d5d3a;
+      color: var(--pl-muted);
       font-size: 15px;
       font-weight: 700;
       text-decoration: none;
@@ -214,8 +214,8 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
 
     .mobile-link.active,
     .mobile-link:hover {
-      color: #5d8b1f;
-      background: rgba(128, 199, 64, 0.12);
+      color: var(--pl-accent-2);
+      background: rgba(107, 138, 100, 0.12);
     }
 
     @media (max-width: 1080px) {

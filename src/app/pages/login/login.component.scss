@@ -9,8 +9,8 @@
   display: grid;
   place-items: center;
   padding: 16px;
-  color: #2f4f2f;
-  background: #d3ee96;
+  color: var(--pl-ink);
+  background: var(--pl-page);
   animation: fadeInUp 0.55s ease-out;
 }
 
@@ -22,8 +22,8 @@
   overflow: hidden;
   border: 0;
   border-radius: 28px;
-  background: #f4fbe6;
-  box-shadow: 0 18px 40px rgba(47, 79, 47, 0.12);
+  background: var(--pl-soft);
+  box-shadow: 0 18px 40px rgba(44, 58, 46, 0.12);
 }
 
 .auth-visual {
@@ -35,13 +35,13 @@
   padding: 32px;
   color: #ffffff;
   background:
-    linear-gradient(160deg, rgba(47, 79, 47, 0.9), rgba(93, 139, 31, 0.78)),
+    linear-gradient(160deg, rgba(44, 58, 46, 0.9), rgba(82, 107, 76, 0.78)),
     url('/assets/images/logo_paramo.png') center 58% / 68% no-repeat;
 }
 
 .eyebrow {
   margin: 0 0 8px;
-  color: #5d8b1f;
+  color: var(--pl-accent-2);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -49,7 +49,7 @@
 }
 
 .auth-visual .eyebrow {
-  color: #d9efb1;
+  color: #d7e6d4;
 }
 
 .auth-visual h1 {
@@ -84,7 +84,7 @@
 }
 
 .visual-points mat-icon {
-  color: #d9efb1;
+  color: #d7e6d4;
 }
 
 .auth-form-panel {
@@ -109,7 +109,7 @@
 
 .login-brand h2 {
   margin: 0;
-  color: #2f4f2f;
+  color: var(--pl-ink);
   font-size: 30px;
   font-weight: 850;
   line-height: 1.1;
@@ -122,16 +122,16 @@
   gap: 10px;
   margin-bottom: 20px;
   padding: 12px 14px;
-  border: 1px solid rgba(123, 189, 47, 0.22);
+  border: 1px solid rgba(107, 138, 100, 0.22);
   border-radius: 10px;
-  background: #f8fdea;
-  color: #4b5d32;
+  background: var(--pl-soft);
+  color: var(--pl-muted);
   font-size: 14px;
   line-height: 1.5;
 }
 
 .auth-notice mat-icon {
-  color: #5d8b1f;
+  color: var(--pl-accent-2);
   font-size: 20px;
   width: 20px;
   height: 20px;
@@ -150,12 +150,12 @@
 
 ::ng-deep .login-form .mat-mdc-form-field {
   --mdc-outlined-text-field-container-shape: 22px;
-  --mdc-outlined-text-field-outline-color: rgba(123, 189, 47, 0.25);
-  --mdc-outlined-text-field-hover-outline-color: rgba(123, 189, 47, 0.42);
-  --mdc-outlined-text-field-focus-outline-color: #5d8b1f;
-  --mdc-outlined-text-field-input-text-color: #2f4f2f;
-  --mdc-outlined-text-field-label-text-color: #6a7d3b;
-  --mdc-outlined-text-field-focus-label-text-color: #5d8b1f;
+  --mdc-outlined-text-field-outline-color: rgba(107, 138, 100, 0.25);
+  --mdc-outlined-text-field-hover-outline-color: rgba(107, 138, 100, 0.42);
+  --mdc-outlined-text-field-focus-outline-color: var(--pl-accent-2);
+  --mdc-outlined-text-field-input-text-color: var(--pl-ink);
+  --mdc-outlined-text-field-label-text-color: var(--pl-muted);
+  --mdc-outlined-text-field-focus-label-text-color: var(--pl-accent-2);
   --mdc-outlined-text-field-error-outline-color: #c64b3d;
   --mdc-outlined-text-field-error-label-text-color: #c64b3d;
 }
@@ -166,14 +166,14 @@
 }
 
 ::ng-deep .login-form .mat-mdc-text-field-wrapper {
-  background: #ffffff !important;
-  border: 1.5px solid rgba(93, 139, 31, 0.35) !important;
+  background: var(--pl-card) !important;
+  border: 1.5px solid rgba(82, 107, 76, 0.35) !important;
   border-radius: 24px !important;
   overflow: hidden;
 }
 
 ::ng-deep .login-form .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
-  border-color: #5d8b1f !important;
+  border-color: var(--pl-accent-2) !important;
   box-shadow: none;
 }
 
@@ -184,7 +184,7 @@
 .field-label {
   display: block;
   margin: 0 4px 12px;
-  color: #24381f;
+  color: var(--pl-ink);
   font-size: 14px;
   font-weight: 750;
   line-height: 1.2;
@@ -214,7 +214,7 @@
 ::ng-deep .login-form .mat-mdc-form-field-icon-prefix,
 ::ng-deep .login-form .mat-mdc-form-field-icon-suffix,
 ::ng-deep .login-form .mat-mdc-form-field-icon-suffix button {
-  color: #5d8b1f !important;
+  color: var(--pl-accent-2) !important;
 }
 
 .security-note {
@@ -222,10 +222,10 @@
   align-items: flex-start;
   gap: 10px;
   padding: 12px;
-  border: 1px solid rgba(123, 189, 47, 0.22);
+  border: 1px solid rgba(107, 138, 100, 0.22);
   border-radius: 8px;
-  background: rgba(233, 247, 200, 0.72);
-  color: #5e6f45;
+  background: var(--pl-soft);
+  color: var(--pl-muted);
   font-size: 12px;
   line-height: 1.45;
 }
@@ -234,7 +234,7 @@
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
-  color: #5d8b1f;
+  color: var(--pl-accent-2);
   font-size: 20px;
 }
 
@@ -248,19 +248,19 @@
 
 ::ng-deep .login-options .mat-mdc-checkbox {
   --mdc-checkbox-selected-checkmark-color: #ffffff;
-  --mdc-checkbox-selected-focus-icon-color: #5d8b1f;
-  --mdc-checkbox-selected-hover-icon-color: #5d8b1f;
-  --mdc-checkbox-selected-icon-color: #5d8b1f;
-  --mdc-checkbox-selected-pressed-icon-color: #5d8b1f;
-  --mdc-checkbox-unselected-focus-icon-color: #6a7d3b;
-  --mdc-checkbox-unselected-hover-icon-color: #6a7d3b;
+  --mdc-checkbox-selected-focus-icon-color: var(--pl-accent-2);
+  --mdc-checkbox-selected-hover-icon-color: var(--pl-accent-2);
+  --mdc-checkbox-selected-icon-color: var(--pl-accent-2);
+  --mdc-checkbox-selected-pressed-icon-color: var(--pl-accent-2);
+  --mdc-checkbox-unselected-focus-icon-color: var(--pl-muted);
+  --mdc-checkbox-unselected-hover-icon-color: var(--pl-muted);
   --mdc-checkbox-unselected-icon-color: rgba(106, 125, 59, 0.55);
-  --mdc-checkbox-unselected-pressed-icon-color: #6a7d3b;
+  --mdc-checkbox-unselected-pressed-icon-color: var(--pl-muted);
 }
 
 ::ng-deep .login-options .mat-mdc-checkbox .mdc-label,
 .access-note {
-  color: #4d5d3a;
+  color: var(--pl-muted);
   font-size: 13px;
   font-weight: 700;
 }
@@ -269,19 +269,19 @@
   width: 100%;
   height: 42px !important;
   border-radius: 22px !important;
-  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%) !important;
+  background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%) !important;
   color: #ffffff !important;
   font-size: 15px !important;
   font-weight: 800 !important;
   letter-spacing: 0;
   text-transform: none !important;
-  box-shadow: 0 12px 24px rgba(123, 189, 47, 0.26) !important;
+  box-shadow: 0 12px 24px rgba(107, 138, 100, 0.26) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .btn-login-submit:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 16px 30px rgba(123, 189, 47, 0.34) !important;
+  box-shadow: 0 16px 30px rgba(107, 138, 100, 0.34) !important;
 }
 
 .btn-login-submit:disabled {
@@ -302,18 +302,18 @@
 .login-footer {
   margin-top: 24px;
   padding-top: 20px;
-  border-top: 1px solid rgba(123, 189, 47, 0.16);
+  border-top: 1px solid rgba(107, 138, 100, 0.16);
   text-align: center;
 }
 
 .login-footer p {
   margin: 0;
-  color: #6a7d3b;
+  color: var(--pl-muted);
   font-size: 14px;
 }
 
 .login-footer a {
-  color: #5d8b1f;
+  color: var(--pl-accent-2);
   font-weight: 800;
   text-decoration: none;
 }
