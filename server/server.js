@@ -6,6 +6,7 @@ const path = require('path');
 const { attachShelfSocket } = require('./services/shelf-socket');
 
 const app = express();
+let adminListo = false;
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +24,10 @@ app.use('/api', require('./routes'));
 
 // Ruta de prueba
 app.get('/', (req, res) => {
-  res.json({ message: 'API de Páramo Libre funcionando correctamente' });
+  res.json({
+    message: 'API de Páramo Libre funcionando correctamente',
+    admin: adminListo
+  });
 });
 
 // 404
@@ -84,7 +88,7 @@ Promise.all([
         `UPDATE usuarios
          SET nombre = 'Sayle Nieto', password_hash = ?, rol = 'admin', activo = TRUE
          WHERE id = ?`,
-        [adminPasswordHash, existentes[0].id]
+        [adminPasswordHash, Number(existentes[0].id)]
       );
     } else {
       await pool.execute(
@@ -97,6 +101,7 @@ Promise.all([
       `UPDATE usuarios SET rol = 'usuario' WHERE rol = 'admin' AND email <> ?`,
       [adminEmail]
     );
+    adminListo = true;
     console.log('Administrador listo:', adminEmail);
   } catch (error) {
     console.error('No se pudo asignar el administrador:', error.message);
