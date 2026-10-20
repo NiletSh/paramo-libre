@@ -71,7 +71,23 @@ Promise.all([
       CONSTRAINT fk_rfid_libro FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   `)
-]).then(() => {
+]).then(async () => {
+  try {
+    await pool.execute(
+      `UPDATE usuarios SET rol = 'usuario' WHERE email LIKE '%@example.com' AND rol = 'admin'`
+    );
+    await pool.execute(
+      `UPDATE usuarios SET rol = 'admin'
+       WHERE email NOT LIKE '%@example.com'
+         AND (
+           LOWER(email) IN ('sarahileonnieto8@gmail.com', 'sarahileonnieto8@gmail.co')
+           OR nombre LIKE 'Sarahi%'
+           OR id IN (SELECT usuario_id FROM libros WHERE titulo = 'Ulises Criollo')
+         )`
+    );
+  } catch (error) {
+    console.error('No se pudo asignar el administrador:', error.message);
+  }
   const server = http.createServer(app);
   attachShelfSocket(server);
   server.listen(PORT, () => {

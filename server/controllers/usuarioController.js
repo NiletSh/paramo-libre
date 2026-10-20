@@ -628,6 +628,19 @@ const usuarioController = {
     }
   },
 
+  marcarNotificacionesLeidas: async (req, res) => {
+    try {
+      await Notification.markAllRead(req.usuario.id);
+      res.json({ exito: true });
+    } catch (error) {
+      console.error('Error en marcarNotificacionesLeidas:', error);
+      res.status(500).json({
+        exito: false,
+        mensaje: 'No se pudieron marcar las notificaciones.'
+      });
+    }
+  },
+
   // LISTAR TODOS LOS USUARIOS (Admin)
   listarUsuarios: async (req, res) => {
     try {

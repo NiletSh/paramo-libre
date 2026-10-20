@@ -2,7 +2,6 @@ const db = require('../config/db');
 const Book = require('../models/book.model');
 const Exchange = require('../models/exchange.model');
 const Notification = require('./notification.service');
-const { SHELF_LOCATION } = require('../constants/shelf');
 
 function normalizeUid(value) {
   const uid = String(value || '').replace(/[^0-9a-f]/gi, '').toUpperCase();
@@ -82,6 +81,11 @@ async function notifyUsers(userIds, payload) {
   }
 }
 
+async function notifyEveryone(payload) {
+  const [users] = await db.execute('SELECT id FROM usuarios WHERE activo = TRUE');
+  await notifyUsers(users.map((user) => user.id), payload);
+}
+
 async function handleShelfReading({ bookId, uid, event, weight }) {
   const normalizedEvent = String(event || 'removed').toLowerCase();
   const cleanUid = normalizeUid(uid);
@@ -133,15 +137,13 @@ async function handleShelfReading({ bookId, uid, event, weight }) {
 
   if (normalizedEvent === 'placed') {
     const correct = Boolean(exchange);
-    if (exchange) {
-      await notifyUsers([exchange.solicitante_id, exchange.receptor_id], {
-        tipo: 'estante_deposito',
-        titulo: 'Libro en el estante',
-        mensaje: `"${title}" quedó en el ${SHELF_LOCATION}.`,
-        exchangeId: exchange.id,
-        bookId: resolvedBookId
-      });
-    }
+    await notifyEveryone({
+      tipo: 'estante_deposito',
+      titulo: 'Libro en el estante',
+      mensaje: `Se colocó "${title}" en el estante.`,
+      exchangeId: exchange?.id || null,
+      bookId: resolvedBookId
+    });
     return {
       type: 'shelf',
       result: correct ? 'placed' : 'wrong',
@@ -161,10 +163,10 @@ async function handleShelfReading({ bookId, uid, event, weight }) {
     await Exchange.updateStatus(exchange.id, 'completed');
     await Book.updateStatus(exchange.libro_solicitado_id, 'exchanged');
     await Book.updateStatus(exchange.libro_ofrecido_id, 'exchanged');
-    await notifyUsers([exchange.solicitante_id, exchange.receptor_id], {
-      tipo: 'trueque_completado',
-      titulo: 'Trueque realizado con éxito',
-      mensaje: `Se retiró el libro correcto: "${title}". El trueque quedó completado en el ${SHELF_LOCATION}.`,
+    await notifyEveryone({
+      tipo: 'libro_retirado',
+      titulo: 'Libro retirado',
+      mensaje: `Se retiró "${title}" del estante. El trueque quedó completado.`,
       exchangeId: exchange.id,
       bookId: resolvedBookId
     });
@@ -183,6 +185,13 @@ async function handleShelfReading({ bookId, uid, event, weight }) {
 
   const recent = await findRecentCompletedExchange(resolvedBookId);
   if (recent) {
+    await notifyEveryone({
+      tipo: 'libro_retirado',
+      titulo: 'Libro retirado',
+      mensaje: `Se retiró "${title}" del estante.`,
+      exchangeId: recent.id,
+      bookId: resolvedBookId
+    });
     return {
       type: 'shelf',
       result: 'completed',
@@ -196,6 +205,12 @@ async function handleShelfReading({ bookId, uid, event, weight }) {
     };
   }
 
+  await notifyEveryone({
+    tipo: 'libro_retirado',
+    titulo: 'Libro retirado',
+    mensaje: `Se retiró "${title}" del estante.`,
+    bookId: resolvedBookId
+  });
   return {
     type: 'shelf',
     result: 'wrong',

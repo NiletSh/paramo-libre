@@ -38,6 +38,7 @@ router.get('/dashboard', authenticate, usuarioController.obtenerDashboard);
 
 // GET /api/users/notifications
 router.get('/notifications', authenticate, usuarioController.obtenerNotificaciones);
+router.put('/notifications/read', authenticate, usuarioController.marcarNotificacionesLeidas);
 
 // ==========================================
 // RUTAS PROTEGIDAS - ADMINISTRACIÓN

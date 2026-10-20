@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { AuthService, AuthUser } from '../../core/services/auth.service';
+import { AppNotification, DashboardService } from '../../services/dashboard.service';
+import { ShelfLiveService } from '../../services/shelf-live.service';
 
 @Component({
   selector: 'app-navbar',
@@ -28,6 +30,21 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
             <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">Iniciar sesi&oacute;n</a>
             <a class="nav-link nav-link-register" routerLink="/auth/registro" routerLinkActive="active">Registrarse</a>
           </ng-template>
+        </div>
+
+        <div class="nav-alerts" *ngIf="isLoggedIn" (click)="$event.stopPropagation()">
+          <button type="button" class="alert-button" (click)="toggleAlerts()" aria-label="Notificaciones">
+            <span class="material-icons">notifications</span>
+            <span class="alert-count" *ngIf="unreadCount">{{ unreadCount }}</span>
+          </button>
+          <div class="alert-panel" *ngIf="alertsOpen">
+            <strong>Notificaciones</strong>
+            <p class="alert-empty" *ngIf="!notifications.length">No hay avisos todavía.</p>
+            <button type="button" class="alert-item" *ngFor="let item of notifications">
+              <b>{{ item.titulo || 'Aviso' }}</b>
+              <span>{{ item.mensaje }}</span>
+            </button>
+          </div>
         </div>
 
         <a class="nav-avatar" *ngIf="isLoggedIn" routerLink="/perfil" (click)="closeMenu()" [attr.aria-label]="'Perfil de ' + userName">
@@ -79,7 +96,100 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
     }
 
     .navbar.has-user .navbar-inner {
-      padding-right: 72px;
+      padding-right: 118px;
+    }
+
+    .nav-alerts {
+      position: absolute;
+      top: 16px;
+      right: 58px;
+      z-index: 2;
+    }
+
+    .alert-button {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      color: #2f4f2f;
+      cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(93, 139, 31, 0.18);
+    }
+
+    .alert-button .material-icons {
+      font-size: 22px;
+    }
+
+    .alert-count {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      border-radius: 999px;
+      background: #c64b3d;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 18px;
+    }
+
+    .alert-panel {
+      position: absolute;
+      top: 48px;
+      right: 0;
+      width: min(320px, calc(100vw - 24px));
+      max-height: 360px;
+      overflow: auto;
+      padding: 12px;
+      border-radius: 16px;
+      background: #ffffff;
+      border: 1px solid rgba(123, 189, 47, 0.2);
+      box-shadow: 0 16px 40px rgba(47, 79, 47, 0.16);
+    }
+
+    .alert-panel strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #2f4f2f;
+    }
+
+    .alert-empty {
+      margin: 0;
+      color: #6a7d3b;
+      font-size: 14px;
+    }
+
+    .alert-item {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      margin-top: 8px;
+      padding: 10px;
+      border: 0;
+      border-radius: 12px;
+      background: #f7f6f1;
+      text-align: left;
+      cursor: default;
+    }
+
+    .alert-item b {
+      color: #2f4f2f;
+      font-size: 13px;
+    }
+
+    .alert-item span {
+      color: #4b5d32;
+      font-size: 13px;
+      line-height: 1.4;
     }
 
     .navbar-brand {
@@ -224,7 +334,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       }
 
       .navbar.has-user .navbar-inner {
-        padding-right: 112px;
+        padding-right: 156px;
       }
 
       .menu-toggle {
@@ -234,7 +344,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       .navbar.has-user .menu-toggle {
         position: absolute;
         top: 16px;
-        right: 62px;
+        right: 108px;
       }
     }
 
@@ -256,7 +366,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
     }
   `]
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
   menuOpen = false;
   isLoggedIn = false;
   isHomePage = true;
@@ -264,11 +374,18 @@ export class NavbarComponent {
   photoUrl = '';
   initials = 'P';
   photoFailed = false;
+  alertsOpen = false;
+  notifications: AppNotification[] = [];
+  unreadCount = 0;
   private profileLoaded = false;
+  private alertTimer?: ReturnType<typeof setInterval>;
+  private alertSub?: Subscription;
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dashboardService: DashboardService,
+    private shelfLive: ShelfLiveService
   ) {
     this.authService.currentUser$.subscribe((user) => this.applyUser(user));
 
@@ -277,8 +394,10 @@ export class NavbarComponent {
       this.menuOpen = false;
       if (!status) {
         this.profileLoaded = false;
+        this.stopAlerts();
         return;
       }
+      this.startAlerts();
       if (this.profileLoaded) return;
       this.profileLoaded = true;
       this.authService.loadProfile().subscribe({
@@ -303,6 +422,52 @@ export class NavbarComponent {
 
   closeMenu(): void {
     this.menuOpen = false;
+  }
+
+  ngOnDestroy(): void {
+    this.stopAlerts();
+  }
+
+  @HostListener('document:click')
+  closeAlerts(): void {
+    this.alertsOpen = false;
+  }
+
+  toggleAlerts(): void {
+    this.alertsOpen = !this.alertsOpen;
+    if (!this.alertsOpen || !this.unreadCount) return;
+    this.dashboardService.markNotificationsRead().subscribe({
+      next: () => {
+        this.unreadCount = 0;
+        this.notifications = this.notifications.map((item) => ({ ...item, leida: true }));
+      }
+    });
+  }
+
+  private startAlerts(): void {
+    this.loadAlerts();
+    if (this.alertTimer) return;
+    this.alertTimer = setInterval(() => this.loadAlerts(), 20000);
+    this.alertSub = this.shelfLive.events$.subscribe(() => this.loadAlerts());
+  }
+
+  private stopAlerts(): void {
+    if (this.alertTimer) clearInterval(this.alertTimer);
+    this.alertTimer = undefined;
+    this.alertSub?.unsubscribe();
+    this.alertSub = undefined;
+    this.alertsOpen = false;
+    this.notifications = [];
+    this.unreadCount = 0;
+  }
+
+  private loadAlerts(): void {
+    this.dashboardService.getNotifications().subscribe({
+      next: (items) => {
+        this.notifications = items;
+        this.unreadCount = items.filter((item) => item.leida === false).length;
+      }
+    });
   }
 
   private applyUser(user: AuthUser | null): void {

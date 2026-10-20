@@ -5,7 +5,7 @@
       <p class="page-subtitle">Seguimiento de tus propuestas de trueque enviadas y recibidas</p>
     </div>
 
-    <section class="shelf-live" aria-live="polite">
+    <section class="shelf-live" *ngIf="isAdmin" aria-live="polite">
       <div class="shelf-live-head">
         <strong>Estante en vivo</strong>
         <span [class.on]="live.connected">{{ live.connected ? 'EN LÍNEA' : 'SIN ENLACE' }}</span>

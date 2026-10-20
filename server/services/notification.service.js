@@ -33,6 +33,14 @@ async function createNotification({ userId, tipo, titulo, mensaje, exchangeId, b
   return result.insertId;
 }
 
+async function markAllRead(userId) {
+  await ensureTable();
+  await pool.execute(
+    'UPDATE notificaciones SET leida = TRUE WHERE usuario_id = ? AND leida = FALSE',
+    [userId]
+  );
+}
+
 async function listForUser(userId, limit = 20) {
   await ensureTable();
   const safeLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 20, 1), 100);
@@ -50,5 +58,6 @@ async function listForUser(userId, limit = 20) {
 module.exports = {
   ensureTable,
   createNotification,
+  markAllRead,
   listForUser
 };

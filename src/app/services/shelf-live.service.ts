@@ -116,11 +116,13 @@ export class ShelfLiveService implements OnDestroy {
 
     if (!data.result || data.result === 'status' || !data.message) return;
 
+    this.events$.next(next);
+    if (this.auth.getCurrentUser()?.rol !== 'admin') return;
+
     const alert = data.result === 'wrong' || data.result === 'unknown';
     this.snackBar.open(data.message, 'Cerrar', {
       duration: 8000,
       panelClass: [alert ? 'snackbar-error' : 'snackbar-success']
     });
-    this.events$.next(next);
   }
 }

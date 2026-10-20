@@ -10,6 +10,7 @@ import { ExchangeService } from '../../services/exchange.service';
 import { ExchangeProposal, ExchangeStatus } from '../../models/exchange.model';
 import { SHELF_INSTRUCTIONS, SHELF_LOCATION } from '../../models/book';
 import { ShelfLiveService, ShelfLiveState } from '../../services/shelf-live.service';
+import { AuthService } from '../../core/services/auth.service';
 import { Subscription } from 'rxjs';
 
 type StatusFilter = 'all' | ExchangeStatus;
@@ -40,6 +41,7 @@ export class MyProposalsComponent implements OnInit, OnDestroy {
   activeTab: ProposalTab = 'received';
   activeFilter: StatusFilter = 'all';
   loading = true;
+  isAdmin = false;
   live: ShelfLiveState = {
     connected: false,
     deviceOnline: false,
@@ -53,6 +55,7 @@ export class MyProposalsComponent implements OnInit, OnDestroy {
   };
   private liveSub?: Subscription;
   private eventSub?: Subscription;
+  private adminSub?: Subscription;
 
   readonly tabs: { value: ProposalTab; label: string }[] = [
     { value: 'sent', label: 'Enviadas' },
@@ -71,10 +74,14 @@ export class MyProposalsComponent implements OnInit, OnDestroy {
   constructor(
     private exchangeService: ExchangeService,
     private snackBar: MatSnackBar,
-    private shelfLive: ShelfLiveService
+    private shelfLive: ShelfLiveService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.adminSub = this.authService.currentUser$.subscribe((user) => {
+      this.isAdmin = user?.rol === 'admin';
+    });
     this.loadProposals();
     this.liveSub = this.shelfLive.state$.subscribe((state) => {
       this.live = state;
@@ -85,6 +92,7 @@ export class MyProposalsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.adminSub?.unsubscribe();
     this.liveSub?.unsubscribe();
     this.eventSub?.unsubscribe();
   }

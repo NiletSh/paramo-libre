@@ -60,4 +60,10 @@ export class DashboardService {
       map((response) => response.notificaciones || [])
     );
   }
+
+  markNotificationsRead(): Observable<void> {
+    return this.http.put<{ exito: boolean }>(`${this.apiUrl}/notifications/read`, {}).pipe(
+      map(() => undefined)
+    );
+  }
 }
