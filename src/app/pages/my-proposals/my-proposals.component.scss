@@ -460,6 +460,20 @@
     transform: rotate(90deg);
   }
 
+  .page-title {
+    font-size: 24px;
+  }
+
+  .shelf-live-head {
+    align-items: flex-start;
+  }
+
+  .shelf-meters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 10px;
+  }
+
   .proposal-actions {
     flex-direction: column;
   }

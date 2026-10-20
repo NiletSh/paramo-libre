@@ -238,9 +238,20 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       }
     }
 
+    @media (max-width: 720px) {
+      .brand-logo {
+        height: 46px;
+        max-width: 42vw;
+      }
+
+      .navbar-inner {
+        gap: 8px;
+      }
+    }
+
     @media (max-width: 460px) {
       .navbar-inner {
-        padding: 0 16px;
+        padding: 0 12px;
       }
     }
   `]

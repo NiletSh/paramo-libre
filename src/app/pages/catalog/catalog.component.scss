@@ -76,13 +76,26 @@
 }
 
 @media (max-width: 640px) {
+  .catalog {
+    padding: 18px 16px 32px;
+  }
+
   .catalog-header {
     align-items: flex-start;
     flex-direction: column;
   }
 
+  .header-content h1 {
+    font-size: 26px;
+  }
+
   .btn-publish-catalog {
     width: 100%;
+  }
+
+  .books-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 

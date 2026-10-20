@@ -396,106 +396,92 @@
 }
 
 @media (max-width: 820px) {
+  :host {
+    height: auto;
+    min-height: calc(100vh - 72px);
+    overflow: auto;
+  }
+
   .book-detail {
+    height: auto;
     max-width: none;
-    padding: 12px;
+    align-items: flex-start;
+    overflow: visible;
+    padding: 16px 16px 28px;
   }
 
   .detail-content {
-    grid-template-columns: 34% minmax(0, 1fr);
-    gap: 10px;
-  }
-
-  .detail-left,
-  .detail-right {
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-height: none;
+    align-items: start;
   }
 
   .book-cover-large {
-    height: min(220px, 32vh);
-    border-radius: 16px;
-  }
-
-  .owner-card {
-    gap: 8px;
-    padding: 8px;
-  }
-
-  .owner-avatar {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
+    height: 240px;
+    max-width: 220px;
+    margin: 0 auto;
+    border-radius: 18px;
   }
 
   .book-title {
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .book-author,
-  .book-description,
-  .guide-item p,
-  .detail-label,
-  .detail-value {
-    font-size: 12px;
+    font-size: 26px;
+    line-height: 1.15;
   }
 
   .book-description {
-    -webkit-line-clamp: 3;
-  }
-
-  .badges-row {
-    margin-bottom: 8px;
+    -webkit-line-clamp: 8;
   }
 
   .details-grid,
   .trade-guide {
-    gap: 6px;
-  }
-
-  .detail-item,
-  .guide-item {
-    gap: 6px;
-    padding: 8px;
-  }
-
-  .detail-icon,
-  .guide-item .material-icons {
-    width: 28px;
-    height: 28px;
-  }
-
-  .detail-icon .material-icons,
-  .guide-item .material-icons {
-    font-size: 16px;
-  }
-
-  .detail-item,
-  .guide-item,
-  .detail-item div {
-    min-width: 0;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .guide-item p {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    display: block;
+    overflow: visible;
+  }
+
+  .rfid-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 4px;
+    padding: 12px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(123, 189, 47, 0.2);
+  }
+
+  .rfid-row label {
+    white-space: normal;
+  }
+
+  .rfid-row input,
+  .rfid-row button {
+    width: 100%;
+  }
+
+  .rfid-row button {
+    min-height: 44px;
+    height: auto;
+    background: linear-gradient(135deg, #7bbd2f, #5d8b1f);
+    font-size: 15px;
   }
 
   .detail-actions {
-    flex-wrap: nowrap;
-    gap: 6px;
+    flex-direction: column;
   }
 
   .btn-exchange-main,
   .btn-back-secondary {
-    flex: 1 1 0;
+    width: 100%;
     justify-content: center;
-    min-width: 0;
-    padding: 8px 10px;
-    font-size: 12px;
-    text-align: center;
+    min-height: 44px;
+    font-size: 15px;
+    padding: 10px 14px;
   }
 }
 
