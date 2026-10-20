@@ -119,6 +119,10 @@ export class BookService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  linkShelfCard(id: string | number, uid: string): Observable<{ message: string; uid: string }> {
+    return this.http.put<{ message: string; uid: string }>(`${this.apiUrl}/${id}/rfid`, { uid });
+  }
+
   private normalizeBook(book: ApiBook): Book {
     const imageUrl = this.normalizeAssetUrl(book.imageUrl || book.image_url);
 

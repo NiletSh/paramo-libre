@@ -92,6 +92,13 @@ CREATE TABLE libros (
     FULLTEXT INDEX idx_busqueda (titulo, autor, descripcion)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE tarjetas_rfid (
+    uid VARCHAR(32) PRIMARY KEY,
+    libro_id INT UNSIGNED NOT NULL,
+    actualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_rfid_libro FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE fotos_libros (
     libro_id INT UNSIGNED PRIMARY KEY,
     mime VARCHAR(40) NOT NULL,

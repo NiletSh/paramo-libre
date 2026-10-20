@@ -111,6 +111,12 @@
       </div>
 
       <!-- Acciones -->
+      <div class="rfid-row" *ngIf="canEditBook">
+        <label for="card-uid">Tarjeta del estante</label>
+        <input id="card-uid" [(ngModel)]="cardUid" placeholder="UID, ej. 2A34651A" autocomplete="off" />
+        <button type="button" (click)="saveCard()" [disabled]="savingCard">Vincular</button>
+      </div>
+
       <div class="detail-actions">
         <button class="btn-exchange-main" *ngIf="canEditBook" [routerLink]="['/libro', book.id, 'editar']">
           <span class="material-icons">edit</span>

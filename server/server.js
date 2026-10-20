@@ -1,7 +1,9 @@
 require('dotenv').config();
+const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const { attachShelfSocket } = require('./services/shelf-socket');
 
 const app = express();
 
@@ -60,9 +62,19 @@ Promise.all([
       actualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
       CONSTRAINT fk_foto_libro FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  `),
+  pool.query(`
+    CREATE TABLE IF NOT EXISTS tarjetas_rfid (
+      uid VARCHAR(32) PRIMARY KEY,
+      libro_id INT UNSIGNED NOT NULL,
+      actualizado TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      CONSTRAINT fk_rfid_libro FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   `)
 ]).then(() => {
-  app.listen(PORT, () => {
+  const server = http.createServer(app);
+  attachShelfSocket(server);
+  server.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
   });
 }).catch((error) => {

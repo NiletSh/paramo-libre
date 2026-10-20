@@ -503,6 +503,41 @@
    ACCIONES
    ============================================ */
 
+.rfid-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.rfid-row label {
+  color: #2f4f2f;
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.rfid-row input {
+  width: 160px;
+  height: 36px;
+  border: 1.5px solid rgba(93, 139, 31, 0.35);
+  border-radius: 18px;
+  padding: 0 12px;
+  color: #24381f;
+  background: #ffffff;
+}
+
+.rfid-row button {
+  height: 36px;
+  border: 0;
+  border-radius: 18px;
+  padding: 0 14px;
+  color: #ffffff;
+  background: #5d8b1f;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .detail-actions {
   display: flex;
   gap: 12px;

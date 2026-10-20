@@ -39,7 +39,54 @@
 .page-subtitle {
   margin: 0;
   color: #6a7d3b;
-  font-size: 15px;
+  font-size: 14px;
+}
+
+.shelf-live {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(123, 189, 47, 0.2);
+}
+
+.shelf-live-head,
+.shelf-meters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+}
+
+.shelf-live-head strong {
+  color: #2f4f2f;
+  margin-right: auto;
+}
+
+.shelf-live-head span,
+.shelf-meters span {
+  color: #6a7d3b;
+  font-size: 13px;
+}
+
+.shelf-live-head span.on {
+  color: #3f6b16;
+  font-weight: 750;
+}
+
+.shelf-meters {
+  margin-top: 6px;
+}
+
+.shelf-meters b {
+  color: #2f4f2f;
+}
+
+.shelf-msg {
+  margin: 8px 0 0;
+  color: #2f4f2f;
+  font-size: 14px;
+  font-weight: 650;
 }
 
 .tabs-row {

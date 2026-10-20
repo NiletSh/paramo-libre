@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -9,6 +9,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ExchangeService } from '../../services/exchange.service';
 import { ExchangeProposal, ExchangeStatus } from '../../models/exchange.model';
 import { SHELF_INSTRUCTIONS, SHELF_LOCATION } from '../../models/book';
+import { ShelfLiveService, ShelfLiveState } from '../../services/shelf-live.service';
+import { Subscription } from 'rxjs';
 
 type StatusFilter = 'all' | ExchangeStatus;
 type ProposalTab = 'sent' | 'received';
@@ -28,7 +30,7 @@ type ProposalTab = 'sent' | 'received';
   templateUrl: './my-proposals.component.html',
   styleUrls: ['./my-proposals.component.scss']
 })
-export class MyProposalsComponent implements OnInit {
+export class MyProposalsComponent implements OnInit, OnDestroy {
   readonly shelfLocation = SHELF_LOCATION;
   readonly shelfInstructions = SHELF_INSTRUCTIONS;
 
@@ -38,6 +40,19 @@ export class MyProposalsComponent implements OnInit {
   activeTab: ProposalTab = 'received';
   activeFilter: StatusFilter = 'all';
   loading = true;
+  live: ShelfLiveState = {
+    connected: false,
+    deviceOnline: false,
+    peso: null,
+    mov: false,
+    oscuro: false,
+    rfid: false,
+    result: '',
+    message: '',
+    exchangeId: null
+  };
+  private liveSub?: Subscription;
+  private eventSub?: Subscription;
 
   readonly tabs: { value: ProposalTab; label: string }[] = [
     { value: 'sent', label: 'Enviadas' },
@@ -55,11 +70,23 @@ export class MyProposalsComponent implements OnInit {
 
   constructor(
     private exchangeService: ExchangeService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private shelfLive: ShelfLiveService
   ) {}
 
   ngOnInit(): void {
     this.loadProposals();
+    this.liveSub = this.shelfLive.state$.subscribe((state) => {
+      this.live = state;
+    });
+    this.eventSub = this.shelfLive.events$.subscribe((state) => {
+      if (state.result === 'completed') this.loadProposals();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.liveSub?.unsubscribe();
+    this.eventSub?.unsubscribe();
   }
 
   setTab(tab: ProposalTab): void {

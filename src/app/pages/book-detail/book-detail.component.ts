@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BookService } from '../../services/book';
 import { AuthService } from '../../core/services/auth.service';
 import { Book, SHELF_INSTRUCTIONS, SHELF_LOCATION } from '../../models/book';
@@ -26,7 +28,7 @@ interface BookDetail {
 @Component({
   selector: 'app-book-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatIconModule],
+  imports: [CommonModule, FormsModule, RouterLink, MatIconModule, MatSnackBarModule],
   templateUrl: './book-detail.component.html',
   styleUrl: './book-detail.component.scss'
 })
@@ -39,6 +41,8 @@ export class BookDetailComponent implements OnInit {
   isLoggedIn = false;
   canEditBook = false;
   isOwnBook = false;
+  cardUid = '';
+  savingCard = false;
 
   conditionLabels: Record<string, string> = {
     new: 'Nuevo',
@@ -70,7 +74,8 @@ export class BookDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private bookService: BookService,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -137,6 +142,32 @@ export class BookDetailComponent implements OnInit {
       imageColor: '#0d7377',
       imageUrl: book.imageUrl || 'assets/images/hero-books.svg'
     };
+  }
+
+  saveCard(): void {
+    if (!this.book || this.savingCard) return;
+    const uid = this.cardUid.trim();
+    if (uid.length < 4) {
+      this.snackBar.open('Escribe el UID de la tarjeta, por ejemplo 2A34651A.', 'Cerrar', { duration: 5000 });
+      return;
+    }
+    this.savingCard = true;
+    this.bookService.linkShelfCard(this.book.id, uid).subscribe({
+      next: () => {
+        this.savingCard = false;
+        this.snackBar.open('Tarjeta vinculada. El estante ya puede reconocer este libro.', 'Cerrar', {
+          duration: 5000,
+          panelClass: ['snackbar-success']
+        });
+      },
+      error: () => {
+        this.savingCard = false;
+        this.snackBar.open('No se pudo vincular la tarjeta.', 'Cerrar', {
+          duration: 5000,
+          panelClass: ['snackbar-error']
+        });
+      }
+    });
   }
 
   private formatDate(value?: string): string {

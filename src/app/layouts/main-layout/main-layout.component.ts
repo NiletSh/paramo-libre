@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { ShelfLiveService } from '../../services/shelf-live.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -30,4 +31,8 @@ import { FooterComponent } from '../../components/footer/footer.component';
     }
   `]
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent {
+  constructor(shelfLive: ShelfLiveService) {
+    shelfLive.connect();
+  }
+}
