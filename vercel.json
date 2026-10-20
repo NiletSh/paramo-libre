@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://paramo-libre-api.onrender.com/api/:path*"
+      "destination": "https://paramo-libre.onrender.com/api/:path*"
     },
     {
       "source": "/uploads/:path*",
-      "destination": "https://paramo-libre-api.onrender.com/uploads/:path*"
+      "destination": "https://paramo-libre.onrender.com/uploads/:path*"
     }
   ]
 }
