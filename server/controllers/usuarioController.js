@@ -641,6 +641,189 @@ const usuarioController = {
     }
   },
 
+  // ACTIVIDAD DE LOS LECTORES (Admin)
+  actividad: async (req, res) => {
+    try {
+      const [conteos] = await pool.execute(
+        `SELECT
+           (SELECT COUNT(*) FROM usuarios WHERE rol = 'usuario' AND activo = TRUE) AS usuarios,
+           (SELECT COUNT(*) FROM libros WHERE activo = TRUE) AS libros,
+           (SELECT COUNT(*) FROM intercambios WHERE activo = TRUE AND estado = 'pendiente') AS propuestas,
+           (SELECT COUNT(*) FROM intercambios WHERE activo = TRUE AND estado = 'completado') AS trueques`
+      );
+
+      const [usuarios] = await pool.execute(
+        `SELECT u.id, u.nombre, u.email, u.rol, u.activo, u.fecha_registro, u.ultima_conexion,
+                (SELECT COUNT(*) FROM libros l WHERE l.usuario_id = u.id AND l.activo = TRUE) AS libros,
+                (SELECT COUNT(*) FROM intercambios i
+                  WHERE i.activo = TRUE AND (i.solicitante_id = u.id OR i.receptor_id = u.id)) AS trueques
+         FROM usuarios u
+         ORDER BY u.fecha_registro DESC`
+      );
+
+      const [libros] = await pool.execute(
+        `SELECT l.id, l.titulo, l.autor, l.estado_publicacion, l.fecha_publicacion,
+                u.nombre AS dueno
+         FROM libros l
+         JOIN usuarios u ON u.id = l.usuario_id
+         WHERE l.activo = TRUE
+         ORDER BY l.fecha_publicacion DESC
+         LIMIT 40`
+      );
+
+      const [intercambios] = await pool.execute(
+        `SELECT i.id, i.estado, i.fecha_propuesta, i.fecha_respuesta, i.fecha_completado,
+                s.nombre AS solicitante, r.nombre AS receptor,
+                ls.titulo AS libro_solicitado, lo.titulo AS libro_ofrecido
+         FROM intercambios i
+         JOIN usuarios s ON s.id = i.solicitante_id
+         JOIN usuarios r ON r.id = i.receptor_id
+         JOIN libros ls ON ls.id = i.libro_solicitado_id
+         JOIN libros lo ON lo.id = i.libro_ofrecido_id
+         WHERE i.activo = TRUE
+         ORDER BY i.fecha_propuesta DESC
+         LIMIT 40`
+      );
+
+      let avisosEstante = [];
+      try {
+        const [filas] = await pool.execute(
+          `SELECT tipo, titulo, mensaje, libro_id, fecha_creacion AS fecha
+           FROM notificaciones
+           WHERE tipo IN ('estante_deposito', 'libro_retirado')
+           ORDER BY fecha_creacion DESC
+           LIMIT 80`
+        );
+        avisosEstante = filas;
+      } catch (error) {
+        avisosEstante = [];
+      }
+
+      const actividades = [];
+      for (const usuario of usuarios) {
+        if (usuario.rol === 'admin') continue;
+        actividades.push({
+          tipo: 'registro',
+          texto: `${usuario.nombre} creó su cuenta`,
+          detalle: usuario.email,
+          fecha: usuario.fecha_registro
+        });
+        if (usuario.ultima_conexion) {
+          actividades.push({
+            tipo: 'sesion',
+            texto: `${usuario.nombre} entró a la página`,
+            detalle: usuario.email,
+            fecha: usuario.ultima_conexion
+          });
+        }
+      }
+
+      for (const libro of libros) {
+        actividades.push({
+          tipo: 'libro',
+          texto: `${libro.dueno} publicó "${libro.titulo}"`,
+          detalle: libro.autor,
+          fecha: libro.fecha_publicacion,
+          libroId: Number(libro.id)
+        });
+      }
+
+      for (const intercambio of intercambios) {
+        actividades.push({
+          tipo: 'trueque',
+          texto: `${intercambio.solicitante} propuso "${intercambio.libro_ofrecido}" por "${intercambio.libro_solicitado}" a ${intercambio.receptor}`,
+          detalle: intercambio.estado,
+          fecha: intercambio.fecha_propuesta
+        });
+        if (intercambio.fecha_completado) {
+          actividades.push({
+            tipo: 'trueque',
+            texto: `${intercambio.solicitante} y ${intercambio.receptor} completaron el trueque de "${intercambio.libro_solicitado}"`,
+            detalle: 'completado',
+            fecha: intercambio.fecha_completado
+          });
+        } else if (intercambio.fecha_respuesta && intercambio.estado === 'aceptado') {
+          actividades.push({
+            tipo: 'trueque',
+            texto: `${intercambio.receptor} aceptó el trueque de "${intercambio.libro_solicitado}"`,
+            detalle: 'aceptado',
+            fecha: intercambio.fecha_respuesta
+          });
+        } else if (intercambio.fecha_respuesta && intercambio.estado === 'rechazado') {
+          actividades.push({
+            tipo: 'trueque',
+            texto: `${intercambio.receptor} rechazó la propuesta de ${intercambio.solicitante}`,
+            detalle: 'rechazado',
+            fecha: intercambio.fecha_respuesta
+          });
+        }
+      }
+
+      const vistos = new Set();
+      for (const aviso of avisosEstante) {
+        const marca = new Date(aviso.fecha).toISOString().slice(0, 19);
+        const clave = `${aviso.mensaje}|${marca}`;
+        if (vistos.has(clave)) continue;
+        vistos.add(clave);
+        actividades.push({
+          tipo: 'estante',
+          texto: aviso.mensaje,
+          detalle: aviso.titulo,
+          fecha: aviso.fecha,
+          libroId: aviso.libro_id ? Number(aviso.libro_id) : null
+        });
+      }
+
+      actividades.sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
+
+      const conteo = conteos[0] || {};
+      res.json({
+        exito: true,
+        resumen: {
+          usuarios: Number(conteo.usuarios) || 0,
+          libros: Number(conteo.libros) || 0,
+          propuestas: Number(conteo.propuestas) || 0,
+          trueques: Number(conteo.trueques) || 0
+        },
+        actividades: actividades.slice(0, 40),
+        usuarios: usuarios.map((usuario) => ({
+          id: Number(usuario.id),
+          nombre: usuario.nombre,
+          email: usuario.email,
+          rol: usuario.rol,
+          activo: Boolean(usuario.activo),
+          libros: Number(usuario.libros) || 0,
+          trueques: Number(usuario.trueques) || 0,
+          fecha_registro: usuario.fecha_registro,
+          ultima_conexion: usuario.ultima_conexion
+        })),
+        libros: libros.map((libro) => ({
+          id: Number(libro.id),
+          titulo: libro.titulo,
+          autor: libro.autor,
+          estado: libro.estado_publicacion,
+          fecha: libro.fecha_publicacion,
+          dueno: libro.dueno
+        })),
+        intercambios: intercambios.map((intercambio) => ({
+          id: Number(intercambio.id),
+          estado: intercambio.estado,
+          fecha: intercambio.fecha_propuesta,
+          solicitante: intercambio.solicitante,
+          receptor: intercambio.receptor,
+          libroSolicitado: intercambio.libro_solicitado,
+          libroOfrecido: intercambio.libro_ofrecido
+        }))
+      });
+    } catch (error) {
+      console.error('Error en actividad:', error);
+      res.status(500).json({
+        exito: false,
+        mensaje: 'No se pudo cargar la actividad.'
+      });
+    }
+  },
+
   // LISTAR TODOS LOS USUARIOS (Admin)
   listarUsuarios: async (req, res) => {
     try {

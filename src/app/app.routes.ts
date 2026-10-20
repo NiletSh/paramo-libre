@@ -3,6 +3,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { ReaderGuard } from './guards/reader.guard';
 import { BookFormComponent } from './pages/books/book-form/book-form';
 import { ExchangeProposalComponent } from './pages/exchange-proposal/exchange-proposal.component';
 import { MyProposalsComponent } from './pages/my-proposals/my-proposals.component';
@@ -32,12 +33,12 @@ export const routes: Routes = [
       {
         path: 'publicar-libro',
         component: BookFormComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'publicar',
         component: BookFormComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'libros/nuevo',
@@ -47,12 +48,12 @@ export const routes: Routes = [
       {
         path: 'libros/:id/editar',
         component: BookFormComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'libro/:id/editar',
         component: BookFormComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'mis-libros',
@@ -67,17 +68,17 @@ export const routes: Routes = [
       {
         path: 'intercambio/:bookId',
         component: ExchangeProposalComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'mis-propuestas',
         component: MyProposalsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'propuestas',
         component: MyProposalsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'perfil',
@@ -88,12 +89,12 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'mi-espacio',
         loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, ReaderGuard]
       },
       {
         path: 'admin',

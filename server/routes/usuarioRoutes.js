@@ -44,6 +44,9 @@ router.put('/notifications/read', authenticate, usuarioController.marcarNotifica
 // RUTAS PROTEGIDAS - ADMINISTRACIÓN
 // ==========================================
 
+// GET /api/users/activity (solo admin). Va antes de /:id.
+router.get('/activity', authenticate, authorize(['admin']), usuarioController.actividad);
+
 // GET /api/users/ (listar todos - solo admin)
 router.get('/', authenticate, authorize(['admin']), usuarioController.listarUsuarios);
 

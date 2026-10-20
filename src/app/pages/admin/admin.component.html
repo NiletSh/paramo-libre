@@ -1,0 +1,105 @@
+<section class="admin-page">
+  <header class="admin-hero">
+    <div>
+      <span class="eyebrow">Administración</span>
+      <h1>Actividad de los lectores</h1>
+      <p>Esta cuenta no publica ni propone trueques. Desde aquí ves quién entra, qué libros suben y cómo se mueve el estante.</p>
+    </div>
+  </header>
+
+  <div class="stats">
+    <article><span>Lectores</span><strong>{{ resumen.usuarios }}</strong></article>
+    <article><span>Libros publicados</span><strong>{{ resumen.libros }}</strong></article>
+    <article><span>Propuestas pendientes</span><strong>{{ resumen.propuestas }}</strong></article>
+    <article><span>Trueques completados</span><strong>{{ resumen.trueques }}</strong></article>
+  </div>
+
+  <section class="shelf-live" aria-live="polite">
+    <div class="shelf-live-head">
+      <strong>Estante en vivo</strong>
+      <span [class.on]="live.connected">{{ live.connected ? 'EN LÍNEA' : 'SIN ENLACE' }}</span>
+      <span [class.on]="live.deviceOnline">Estante {{ live.deviceOnline ? 'ACTIVO' : 'INACTIVO' }}</span>
+    </div>
+    <div class="shelf-meters">
+      <span>Peso <b>{{ live.peso === null ? '—' : live.peso + ' g' }}</b></span>
+      <span>Movimiento <b>{{ live.mov ? 'ACTIVO' : 'INACTIVO' }}</b></span>
+      <span>Luz <b>{{ live.oscuro ? 'OSCURO' : 'CON LUZ' }}</b></span>
+      <span>RFID <b>{{ live.rfid ? 'ACTIVO' : 'INACTIVO' }}</b></span>
+    </div>
+    <p class="shelf-msg" *ngIf="live.message">{{ live.message }}</p>
+  </section>
+
+  <p class="admin-error" *ngIf="error">{{ error }}</p>
+  <p class="admin-loading" *ngIf="loading">Cargando actividad...</p>
+
+  <div class="admin-grid" *ngIf="!loading">
+    <section class="panel">
+      <h2>Qué han hecho</h2>
+      <p class="empty" *ngIf="!actividades.length">Todavía no hay actividad de lectores.</p>
+      <ol class="feed">
+        <li *ngFor="let item of actividades">
+          <div>
+            <b>{{ item.texto }}</b>
+            <span>{{ item.detalle }}</span>
+          </div>
+          <time>{{ formatWhen(item.fecha) }}</time>
+        </li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2>Cuentas</h2>
+      <p class="empty" *ngIf="!usuarios.length">No hay cuentas registradas.</p>
+      <div class="table-wrap" *ngIf="usuarios.length">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Rol</th>
+              <th>Libros</th>
+              <th>Trueques</th>
+              <th>Última entrada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of usuarios">
+              <td>{{ user.nombre }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.rol === 'admin' ? 'Administra' : 'Lector' }}</td>
+              <td>{{ user.libros }}</td>
+              <td>{{ user.trueques }}</td>
+              <td>{{ formatWhen(user.ultima_conexion) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="admin-grid" *ngIf="!loading">
+    <section class="panel">
+      <h2>Libros publicados</h2>
+      <p class="empty" *ngIf="!libros.length">Nadie ha publicado un libro.</p>
+      <ul class="plain" *ngIf="libros.length">
+        <li *ngFor="let book of libros">
+          <a [routerLink]="['/libro', book.id]">{{ book.titulo }}</a>
+          <span>{{ book.dueno }} · {{ book.autor }} · {{ estadoLibro(book.estado) }}</span>
+          <time>{{ formatWhen(book.fecha) }}</time>
+        </li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Trueques</h2>
+      <p class="empty" *ngIf="!intercambios.length">No hay propuestas entre lectores.</p>
+      <ul class="plain" *ngIf="intercambios.length">
+        <li *ngFor="let trade of intercambios">
+          <b>{{ trade.solicitante }} y {{ trade.receptor }}</b>
+          <span>"{{ trade.libroOfrecido }}" por "{{ trade.libroSolicitado }}"</span>
+          <time>{{ estadoTrueque(trade.estado) }} · {{ formatWhen(trade.fecha) }}</time>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>

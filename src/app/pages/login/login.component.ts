@@ -66,7 +66,8 @@ export class LoginComponent implements OnInit {
             panelClass: ['snackbar-success']
           });
           const returnUrl = this.route.snapshot.queryParams['returnUrl'];
-          this.router.navigateByUrl(returnUrl ? `/${returnUrl}` : '/catalogo');
+          const home = this.authService.getCurrentUser()?.rol === 'admin' ? '/admin' : '/catalogo';
+          this.router.navigateByUrl(returnUrl ? `/${returnUrl}` : home);
         },
         error: (error) => {
           this.loading = false;

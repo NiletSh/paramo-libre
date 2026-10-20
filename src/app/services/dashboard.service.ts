@@ -32,6 +32,59 @@ export interface DashboardData {
   activities: DashboardActivity[];
 }
 
+export interface AdminOverview {
+  exito: boolean;
+  resumen: {
+    usuarios: number;
+    libros: number;
+    propuestas: number;
+    trueques: number;
+  };
+  actividades: AdminActivityItem[];
+  usuarios: AdminUserRow[];
+  libros: AdminBookRow[];
+  intercambios: AdminExchangeRow[];
+}
+
+export interface AdminActivityItem {
+  tipo: 'registro' | 'sesion' | 'libro' | 'trueque' | 'estante';
+  texto: string;
+  detalle: string;
+  fecha: string;
+  libroId?: number | null;
+}
+
+export interface AdminUserRow {
+  id: number;
+  nombre: string;
+  email: string;
+  rol: 'usuario' | 'admin';
+  activo: boolean;
+  libros: number;
+  trueques: number;
+  fecha_registro: string;
+  ultima_conexion: string | null;
+}
+
+export interface AdminBookRow {
+  id: number;
+  titulo: string;
+  autor: string;
+  estado: string;
+  fecha: string;
+  dueno: string;
+}
+
+export interface AdminExchangeRow {
+  id: number;
+  estado: string;
+  fecha: string;
+  solicitante: string;
+  receptor: string;
+  libroSolicitado: string;
+  libroOfrecido: string;
+}
+
 export interface AppNotification {
   id: number | string;
   tipo: string;
@@ -59,6 +112,10 @@ export class DashboardService {
     return this.http.get<{ exito: boolean; notificaciones: AppNotification[] }>(`${this.apiUrl}/notifications`).pipe(
       map((response) => response.notificaciones || [])
     );
+  }
+
+  getAdminActivity(): Observable<AdminOverview> {
+    return this.http.get<AdminOverview>(`${this.apiUrl}/activity`);
   }
 
   markNotificationsRead(): Observable<void> {

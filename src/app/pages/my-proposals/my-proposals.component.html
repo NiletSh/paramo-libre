@@ -5,21 +5,6 @@
       <p class="page-subtitle">Seguimiento de tus propuestas de trueque enviadas y recibidas</p>
     </div>
 
-    <section class="shelf-live" *ngIf="isAdmin" aria-live="polite">
-      <div class="shelf-live-head">
-        <strong>Estante en vivo</strong>
-        <span [class.on]="live.connected">{{ live.connected ? 'EN LÍNEA' : 'SIN ENLACE' }}</span>
-        <span [class.on]="live.deviceOnline">Estante {{ live.deviceOnline ? 'ACTIVO' : 'INACTIVO' }}</span>
-      </div>
-      <div class="shelf-meters">
-        <span>Peso <b>{{ live.peso === null ? '—' : live.peso + ' g' }}</b></span>
-        <span>Movimiento <b>{{ live.mov ? 'ACTIVO' : 'INACTIVO' }}</b></span>
-        <span>Luz <b>{{ live.oscuro ? 'OSCURO' : 'CON LUZ' }}</b></span>
-        <span>RFID <b>{{ live.rfid ? 'ACTIVO' : 'INACTIVO' }}</b></span>
-      </div>
-      <p class="shelf-msg" *ngIf="live.message">{{ live.message }}</p>
-    </section>
-
     <div class="tabs-row">
       <button
         class="tab-btn"

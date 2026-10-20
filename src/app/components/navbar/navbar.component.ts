@@ -18,18 +18,22 @@ import { ShelfLiveService } from '../../services/shelf-live.service';
         </a>
 
         <div class="nav-links" *ngIf="isLoggedIn || !isHomePage">
-          <ng-container *ngIf="isLoggedIn; else publicLinks">
+          <ng-container *ngIf="isLoggedIn && isAdmin">
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Actividad</a>
+            <a class="nav-link" routerLink="/perfil" routerLinkActive="active">Perfil</a>
+          </ng-container>
+          <ng-container *ngIf="isLoggedIn && !isAdmin">
             <a class="nav-link" routerLink="/catalogo" routerLinkActive="active">Cat&aacute;logo</a>
             <a class="nav-link" routerLink="/publicar-libro" routerLinkActive="active">Publicar libro</a>
             <a class="nav-link" routerLink="/mis-propuestas" routerLinkActive="active">Propuestas</a>
             <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Mi espacio</a>
             <a class="nav-link" routerLink="/perfil" routerLinkActive="active">Perfil</a>
           </ng-container>
+          <ng-container *ngIf="!isLoggedIn">
 
-          <ng-template #publicLinks>
             <a class="nav-link" routerLink="/auth/login" routerLinkActive="active">Iniciar sesi&oacute;n</a>
             <a class="nav-link nav-link-register" routerLink="/auth/registro" routerLinkActive="active">Registrarse</a>
-          </ng-template>
+          </ng-container>
         </div>
 
         <div class="nav-alerts" *ngIf="isLoggedIn" (click)="$event.stopPropagation()">
@@ -60,18 +64,21 @@ import { ShelfLiveService } from '../../services/shelf-live.service';
       </div>
 
       <div class="mobile-menu" [class.open]="menuOpen" *ngIf="isLoggedIn || !isHomePage">
-        <ng-container *ngIf="isLoggedIn; else publicMobileLinks">
+        <ng-container *ngIf="isLoggedIn && isAdmin">
+          <a class="mobile-link" routerLink="/admin" (click)="closeMenu()" routerLinkActive="active">Actividad</a>
+          <a class="mobile-link" routerLink="/perfil" (click)="closeMenu()" routerLinkActive="active">Perfil</a>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn && !isAdmin">
           <a class="mobile-link" routerLink="/catalogo" (click)="closeMenu()" routerLinkActive="active">Cat&aacute;logo</a>
           <a class="mobile-link" routerLink="/publicar-libro" (click)="closeMenu()" routerLinkActive="active">Publicar libro</a>
           <a class="mobile-link" routerLink="/mis-propuestas" (click)="closeMenu()" routerLinkActive="active">Propuestas</a>
           <a class="mobile-link" routerLink="/dashboard" (click)="closeMenu()" routerLinkActive="active">Mi espacio</a>
           <a class="mobile-link" routerLink="/perfil" (click)="closeMenu()" routerLinkActive="active">Perfil</a>
         </ng-container>
-
-        <ng-template #publicMobileLinks>
+        <ng-container *ngIf="!isLoggedIn">
           <a class="mobile-link" routerLink="/auth/login" (click)="closeMenu()" routerLinkActive="active">Iniciar sesi&oacute;n</a>
           <a class="mobile-link mobile-register" routerLink="/auth/registro" (click)="closeMenu()" routerLinkActive="active">Registrarse</a>
-        </ng-template>
+        </ng-container>
       </div>
     </nav>
   `,
@@ -369,6 +376,7 @@ import { ShelfLiveService } from '../../services/shelf-live.service';
 export class NavbarComponent implements OnDestroy {
   menuOpen = false;
   isLoggedIn = false;
+  isAdmin = false;
   isHomePage = true;
   userName = 'Perfil';
   photoUrl = '';
@@ -473,11 +481,14 @@ export class NavbarComponent implements OnDestroy {
   private applyUser(user: AuthUser | null): void {
     this.photoFailed = false;
     if (!user) {
+      this.isAdmin = false;
       this.userName = 'Perfil';
       this.photoUrl = '';
       this.initials = 'P';
       return;
     }
+
+    this.isAdmin = user.rol === 'admin';
 
     this.userName = user.nombre?.trim() || 'Perfil';
     this.photoUrl = user.foto_perfil || '';
