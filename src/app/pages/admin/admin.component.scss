@@ -98,6 +98,32 @@
   margin-top: 8px;
 }
 
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tarjetas li {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(123, 189, 47, 0.12);
+}
+
+.tarjetas li.off {
+  background: rgba(154, 74, 31, 0.1);
+}
+
+.tarjetas span {
+  color: #6a7d3b;
+  font-size: 12px;
+}
+
 .admin-error,
 .admin-loading {
   margin: 8px 0 16px;
@@ -190,7 +216,8 @@ th {
 
 @media (max-width: 800px) {
   .stats,
-  .admin-grid {
+  .admin-grid,
+  .tarjetas {
     grid-template-columns: 1fr;
   }
 

@@ -47,6 +47,8 @@ export class MyProposalsComponent implements OnInit, OnDestroy {
     mov: false,
     oscuro: false,
     rfid: false,
+    uid: '',
+    presentes: '1111',
     result: '',
     message: '',
     exchangeId: null

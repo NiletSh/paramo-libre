@@ -26,6 +26,14 @@
       <span>Luz <b>{{ live.oscuro ? 'OSCURO' : 'CON LUZ' }}</b></span>
       <span>RFID <b>{{ live.rfid ? 'ACTIVO' : 'INACTIVO' }}</b></span>
     </div>
+    <p class="shelf-msg">Última tarjeta leída: <b>{{ live.uid || 'ninguna' }}</b></p>
+    <ul class="tarjetas">
+      <li *ngFor="let card of tarjetas; let i = index" [class.off]="!enEstante(i)">
+        <b>{{ card.nombre }}</b>
+        <span>{{ card.uid }} · {{ card.peso }} g</span>
+        <span>{{ enEstante(i) ? 'En el estante' : 'Retirado' }}</span>
+      </li>
+    </ul>
     <p class="shelf-msg" *ngIf="live.message">{{ live.message }}</p>
   </section>
 

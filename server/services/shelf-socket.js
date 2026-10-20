@@ -15,6 +15,8 @@ const snapshot = {
   mov: false,
   oscuro: false,
   rfid: false,
+  uid: '',
+  presentes: '1111',
   message: 'El estante todavía no se ha conectado.'
 };
 
@@ -82,6 +84,8 @@ async function onDeviceMessage(ws, raw) {
       mov: Boolean(data.mov),
       oscuro: Boolean(data.oscuro),
       rfid: data.rfid !== false,
+      uid: typeof data.uid === 'string' ? data.uid.slice(0, 32) : snapshot.uid,
+      presentes: typeof data.presentes === 'string' ? data.presentes.slice(0, 8) : snapshot.presentes,
       message: snapshot.message
     });
     return;
@@ -99,7 +103,11 @@ async function onDeviceMessage(ws, raw) {
       event: data.event,
       weight: data.weight
     });
-    publish(result);
+    const peso = Number(data.weight);
+    publish({
+      ...result,
+      peso: Number.isFinite(peso) ? peso : snapshot.peso
+    });
     send(ws, { ok: true, ...result });
   } catch (error) {
     send(ws, { ok: false, message: error.message || 'No se pudo registrar el movimiento' });

@@ -11,6 +11,8 @@ export interface ShelfLiveState {
   mov: boolean;
   oscuro: boolean;
   rfid: boolean;
+  uid: string;
+  presentes: string;
   result: string;
   message: string;
   exchangeId: number | null;
@@ -23,6 +25,8 @@ const EMPTY: ShelfLiveState = {
   mov: false,
   oscuro: false,
   rfid: false,
+  uid: '',
+  presentes: '1111',
   result: '',
   message: '',
   exchangeId: null
@@ -105,9 +109,11 @@ export class ShelfLiveService implements OnDestroy {
       connected: true,
       deviceOnline: Boolean(data.deviceOnline),
       peso: data.peso === null || data.peso === undefined ? this.state$.value.peso : Number(data.peso),
-      mov: Boolean(data.mov),
-      oscuro: Boolean(data.oscuro),
-      rfid: Boolean(data.rfid),
+      mov: data.mov === undefined ? this.state$.value.mov : Boolean(data.mov),
+      oscuro: data.oscuro === undefined ? this.state$.value.oscuro : Boolean(data.oscuro),
+      rfid: data.rfid === undefined ? this.state$.value.rfid : Boolean(data.rfid),
+      uid: typeof data.uid === 'string' ? data.uid : this.state$.value.uid,
+      presentes: typeof data.presentes === 'string' ? data.presentes : this.state$.value.presentes,
       result: data.result || this.state$.value.result,
       message: data.message || this.state$.value.message,
       exchangeId: data.exchangeId ?? this.state$.value.exchangeId

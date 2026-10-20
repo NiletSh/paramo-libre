@@ -33,10 +33,18 @@ export class AdminComponent implements OnInit, OnDestroy {
     mov: false,
     oscuro: false,
     rfid: false,
+    uid: '',
+    presentes: '1111',
     result: '',
     message: '',
     exchangeId: null
   };
+  readonly tarjetas = [
+    { nombre: 'Libro 1', uid: '2A34651A', peso: 235 },
+    { nombre: 'Libro 2', uid: 'B7F6BB3B', peso: 500 },
+    { nombre: 'Libro 3', uid: '9AF57919', peso: 330 },
+    { nombre: 'Libro 4', uid: '40835B7C', peso: 235 }
+  ];
 
   private timer?: ReturnType<typeof setInterval>;
   private liveSub?: Subscription;
@@ -82,6 +90,10 @@ export class AdminComponent implements OnInit, OnDestroy {
       pausado: 'Pausado'
     };
     return labels[estado] || estado;
+  }
+
+  enEstante(index: number): boolean {
+    return (this.live.presentes || '1111').charAt(index) !== '0';
   }
 
   estadoTrueque(estado: string): string {
