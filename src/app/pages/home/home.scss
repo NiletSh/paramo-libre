@@ -18,9 +18,7 @@
   box-sizing: border-box;
   overflow: hidden;
   color: var(--pl-ink);
-  background:
-    radial-gradient(circle at 78% 38%, rgba(107, 138, 100, 0.16), transparent 42%),
-    linear-gradient(155deg, var(--pl-soft) 0%, var(--pl-page) 52%, var(--pl-page-2) 100%);
+  background: var(--pl-page);
 }
 
 .copy {
@@ -103,7 +101,7 @@ h1 {
 }
 
 .enter:hover {
-  background: linear-gradient(135deg, #5f7d56 0%, #455e40 100%);
+  background: linear-gradient(135deg, #5d8824 0%, #466818 100%);
 }
 
 .soft {
@@ -242,18 +240,6 @@ figure img {
 
   figure img {
     width: min(320px, 82vw);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .word.mid em {
-    color: #e2c4a2;
-  }
-
-  .soft {
-    color: var(--pl-ink);
-    background: #34302c;
-    border-color: rgba(255, 255, 255, 0.12);
   }
 }
 

@@ -8,22 +8,22 @@
 
 :root {
   color-scheme: light;
-  // Verde suave, baja saturación, para no cansar la vista
-  --pl-page: #e4ebe3;
-  --pl-page-2: #d4dfd3;
-  --pl-soft: #eef3ec;
-  --pl-card: #f7f8f6;
+  // El mismo verde, un paso más bajo para que no brille
+  --pl-page: #b6d088;
+  --pl-page-2: #a8c478;
+  --pl-soft: #e7f3d2;
+  --pl-card: #f7f8f4;
   --pl-ink: #2c3a2e;
-  --pl-muted: #5d6b5f;
-  --pl-accent: #6b8a64;
-  --pl-accent-2: #526b4c;
-  --pl-nav: rgba(236, 240, 234, 0.94);
+  --pl-muted: #5c6b45;
+  --pl-accent: #6a962c;
+  --pl-accent-2: #52761c;
+  --pl-nav: rgba(182, 208, 136, 0.94);
   --pl-on-accent: #ffffff;
 
   // Paleta de colores principal
-  --pl-primary: #6b8a64;
-  --pl-primary-light: #9bb396;
-  --pl-primary-dark: #526b4c;
+  --pl-primary: #6a962c;
+  --pl-primary-light: #8fb356;
+  --pl-primary-dark: #52761c;
   
   // Paleta secundaria
   --pl-secondary: #2c3a2e;
@@ -391,32 +391,4 @@ body {
 .snackbar-info {
   --mdc-snackbar-container-color: var(--pl-secondary);
   --mdc-snackbar-supporting-text-color: #ffffff;
-}
-
-// Modo oscuro del sistema (ahorro de batería en teléfono y computadora)
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --pl-page: #1a211c;
-    --pl-page-2: #141b16;
-    --pl-soft: #26312b;
-    --pl-card: #242c27;
-    --pl-ink: #e7efe8;
-    --pl-muted: #b7c4b8;
-    --pl-accent: #9bb892;
-    --pl-accent-2: #7a9a74;
-    --pl-nav: rgba(26, 33, 28, 0.94);
-    --pl-on-accent: #f7faf6;
-    --pl-primary: #8eae86;
-    --pl-primary-light: #b7cbb0;
-    --pl-primary-dark: #6d8b62;
-    --pl-secondary: #d7e4d8;
-    --pl-secondary-light: #b7c4b8;
-    --pl-secondary-dark: #e7efe8;
-  }
-
-  body {
-    background: var(--pl-page);
-    color: var(--pl-ink);
-  }
 }

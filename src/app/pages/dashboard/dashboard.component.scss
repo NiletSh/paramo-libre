@@ -23,9 +23,7 @@
   padding: 28px 32px;
   border: 1px solid rgba(107, 138, 100, 0.16);
   border-radius: 16px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 253, 234, 0.9)),
-    radial-gradient(circle at top right, rgba(107, 138, 100, 0.18), transparent 24rem);
+  background: linear-gradient(135deg, var(--pl-card), var(--pl-soft));
   box-shadow: 0 18px 44px rgba(44, 58, 46, 0.1);
 }
 
