@@ -125,8 +125,8 @@ export class DashboardComponent implements OnInit {
     }
 
     const covers = [
-      'linear-gradient(135deg, #3f5c28 0%, #6a962c 100%)',
-      'linear-gradient(135deg, #52761c 0%, #c4924a 100%)',
+      'linear-gradient(135deg, #2f4f2f 0%, #7bbd2f 100%)',
+      'linear-gradient(135deg, #5d8b1f 0%, #d58a14 100%)',
       'linear-gradient(135deg, #233b2d 0%, #6c8c4e 100%)'
     ];
     return covers[index % covers.length];

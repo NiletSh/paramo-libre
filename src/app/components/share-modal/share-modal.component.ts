@@ -52,7 +52,7 @@ import { environment } from '../../../environments/environment';
       align-items: center;
       justify-content: center;
       padding: 24px;
-      background: rgba(44, 58, 46, 0.45);
+      background: rgba(47, 79, 47, 0.45);
       backdrop-filter: blur(4px);
       animation: fadeIn 0.2s ease-out;
     }
@@ -61,10 +61,10 @@ import { environment } from '../../../environments/environment';
       position: relative;
       width: min(420px, 100%);
       padding: 32px 28px 28px;
-      border: 1px solid rgba(107, 138, 100, 0.2);
+      border: 1px solid rgba(123, 189, 47, 0.2);
       border-radius: 16px;
-      background: var(--pl-card);
-      box-shadow: 0 24px 60px rgba(44, 58, 46, 0.18);
+      background: #ffffff;
+      box-shadow: 0 24px 60px rgba(47, 79, 47, 0.18);
       text-align: center;
       animation: slideUp 0.25s ease-out;
     }
@@ -81,20 +81,20 @@ import { environment } from '../../../environments/environment';
       border: 0;
       border-radius: 50%;
       background: #f3f8e8;
-      color: var(--pl-accent-2);
+      color: #5d8b1f;
       cursor: pointer;
     }
 
     h2 {
       margin: 0 0 8px;
-      color: var(--pl-ink);
+      color: #2f4f2f;
       font-size: 22px;
       font-weight: 900;
     }
 
     .share-subtitle {
       margin: 0 0 24px;
-      color: var(--pl-muted);
+      color: #6a7d3b;
       font-size: 14px;
       line-height: 1.5;
     }
@@ -110,10 +110,10 @@ import { environment } from '../../../environments/environment';
     .qr-image {
       width: 200px;
       height: 200px;
-      border: 1px solid rgba(107, 138, 100, 0.2);
+      border: 1px solid rgba(123, 189, 47, 0.2);
       border-radius: 12px;
       padding: 8px;
-      background: var(--pl-card);
+      background: #ffffff;
       object-fit: contain;
     }
 
@@ -121,13 +121,13 @@ import { environment } from '../../../environments/environment';
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--pl-muted);
+      color: #6a7d3b;
       font-size: 13px;
       font-weight: 700;
     }
 
     .qr-hint {
-      color: var(--pl-muted);
+      color: #6a7d3b;
       font-size: 12px;
       font-weight: 700;
     }
@@ -136,8 +136,8 @@ import { environment } from '../../../environments/environment';
       margin-bottom: 20px;
       padding: 10px 14px;
       border-radius: 8px;
-      background: var(--pl-soft);
-      color: var(--pl-muted);
+      background: #f8fdea;
+      color: #4b5d32;
       font-size: 13px;
       font-weight: 650;
       word-break: break-all;
@@ -169,14 +169,14 @@ import { environment } from '../../../environments/environment';
 
     .share-btn-primary {
       color: #ffffff;
-      background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
-      box-shadow: 0 8px 20px rgba(107, 138, 100, 0.24);
+      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
+      box-shadow: 0 8px 20px rgba(123, 189, 47, 0.24);
     }
 
     .share-btn-secondary {
-      color: var(--pl-ink);
-      background: var(--pl-card);
-      border: 1px solid rgba(107, 138, 100, 0.22);
+      color: #2f4f2f;
+      background: #ffffff;
+      border: 1px solid rgba(123, 189, 47, 0.22);
     }
 
     @keyframes fadeIn {
@@ -207,7 +207,7 @@ export class ShareModalComponent implements OnInit {
       width: 220,
       margin: 1,
       errorCorrectionLevel: 'M',
-      color: { dark: 'var(--pl-ink)', light: '#ffffff' }
+      color: { dark: '#2f4f2f', light: '#ffffff' }
     }).then((url) => {
       this.qrUrl = url;
     }).catch(() => {

@@ -7,28 +7,15 @@
 // ============================================
 
 :root {
-  color-scheme: light;
-  // El mismo verde, un paso más bajo para que no brille
-  --pl-page: #b6d088;
-  --pl-page-2: #a8c478;
-  --pl-soft: #e7f3d2;
-  --pl-card: #f7f8f4;
-  --pl-ink: #2c3a2e;
-  --pl-muted: #5c6b45;
-  --pl-accent: #6a962c;
-  --pl-accent-2: #52761c;
-  --pl-nav: rgba(182, 208, 136, 0.94);
-  --pl-on-accent: #ffffff;
-
   // Paleta de colores principal
-  --pl-primary: #6a962c;
-  --pl-primary-light: #8fb356;
-  --pl-primary-dark: #52761c;
+  --pl-primary: #7bbd2f;
+  --pl-primary-light: #a8d96a;
+  --pl-primary-dark: #5d8b1f;
   
   // Paleta secundaria
-  --pl-secondary: #2c3a2e;
-  --pl-secondary-light: #6d7d6f;
-  --pl-secondary-dark: #243028;
+  --pl-secondary: #2f4f2f;
+  --pl-secondary-light: #6c8c4e;
+  --pl-secondary-dark: #233b2d;
   
   // Estados
   --pl-success: #4f7d2a;
@@ -102,8 +89,8 @@ body {
   font-family: var(--pl-font-family);
   font-size: var(--pl-font-size-base);
   line-height: 1.6;
-  color: var(--pl-ink);
-  background: var(--pl-page);
+  color: var(--pl-secondary);
+  background: #CCFFCE;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -364,7 +351,7 @@ body {
 
   .mdc-snackbar__surface {
     min-width: min(420px, calc(100vw - 32px));
-    box-shadow: 0 18px 42px rgba(44, 58, 46, 0.18) !important;
+    box-shadow: 0 18px 42px rgba(47, 79, 47, 0.18) !important;
   }
 
   .mdc-snackbar__label {
@@ -391,4 +378,32 @@ body {
 .snackbar-info {
   --mdc-snackbar-container-color: var(--pl-secondary);
   --mdc-snackbar-supporting-text-color: #ffffff;
+}
+
+// ============================================
+// DARK MODE PREPARADO
+// ============================================
+
+.dark-mode {
+  --pl-gray-50: #121212;
+  --pl-gray-100: #1e1e1e;
+  --pl-gray-200: #2d2d2d;
+  --pl-gray-300: #3d3d3d;
+  --pl-gray-400: #555555;
+  --pl-gray-500: #777777;
+  --pl-gray-600: #999999;
+  --pl-gray-700: #b0b0b0;
+  --pl-gray-800: #d0d0d0;
+  --pl-gray-900: #e0e0e0;
+  --pl-white: #1a1a1a;
+  
+  body {
+    background-color: var(--pl-gray-50);
+    color: var(--pl-gray-800);
+  }
+  
+  .card-modern {
+    background: var(--pl-gray-100);
+    border-color: var(--pl-gray-200);
+  }
 }

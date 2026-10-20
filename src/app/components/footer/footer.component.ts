@@ -16,8 +16,8 @@ import { filter } from 'rxjs';
   `,
   styles: [`
     .footer {
-      border-top: 1px solid rgba(107, 138, 100, 0.16);
-      background: var(--pl-card);
+      border-top: 1px solid rgba(123, 189, 47, 0.16);
+      background: rgba(255, 255, 255, 0.9);
       padding: 18px 48px;
     }
 
@@ -30,7 +30,7 @@ import { filter } from 'rxjs';
     }
 
     .footer-copy {
-      color: var(--pl-muted);
+      color: #6a7d3b;
       font-size: 13px;
       text-align: center;
     }

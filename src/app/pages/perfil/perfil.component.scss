@@ -1,18 +1,18 @@
-$color-primario: #6a962c;
-$color-secundario: #52761c;
+$color-primario: #7bbd2f;
+$color-secundario: #5d8b1f;
 $color-exito: #4f7d2a;
 $color-advertencia: #d58a14;
 $color-error: #c64b3d;
-$color-fondo: var(--pl-soft);
-$color-texto: var(--pl-ink);
-$color-texto-muted: var(--pl-muted);
-$color-borde: #d5ddd4;
-$color-card: var(--pl-card);
+$color-fondo: #f8fdea;
+$color-texto: #2f4f2f;
+$color-texto-muted: #6a7d3b;
+$color-borde: #dfeac7;
+$color-card: #ffffff;
 
 :host {
   display: block;
   min-height: calc(100vh - 72px);
-  background: var(--pl-page);
+  background: #CCFFCE;
 }
 
 .perfil-container {
@@ -55,7 +55,7 @@ $color-card: var(--pl-card);
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      box-shadow: 0 0 0 3px #ffffff, 0 0 0 5px rgba(82, 107, 76, 0.28);
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 5px rgba(93, 139, 31, 0.28);
       background: linear-gradient(135deg, $color-primario 0%, $color-secundario 100%);
       display: flex;
       align-items: center;
@@ -119,7 +119,7 @@ $color-card: var(--pl-card);
 
   .perfil-nombre {
     margin: 0 0 8px;
-    color: var(--pl-ink);
+    color: #24381f;
     font-size: 1.45rem;
     font-weight: 800;
     line-height: 1.15;
@@ -148,7 +148,7 @@ $color-card: var(--pl-card);
     border-radius: 18px;
     padding: 0 14px;
     color: #ffffff;
-    background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
+    background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
     border-color: transparent;
     font-size: 0.85rem;
     font-weight: 700;
@@ -182,17 +182,17 @@ $color-card: var(--pl-card);
       min-width: 0;
       padding: 6px 10px;
       border-radius: 999px;
-      background: var(--pl-soft);
+      background: #f4fbe6;
 
       .stat-value {
-        color: var(--pl-accent-2);
+        color: #5d8b1f;
         font-size: 0.95rem;
         font-weight: 800;
         line-height: 1;
       }
 
       .stat-label {
-        color: var(--pl-muted);
+        color: #4f6138;
         font-size: 0.72rem;
         font-weight: 700;
       }
@@ -205,14 +205,14 @@ $color-card: var(--pl-card);
   width: 100%;
   background: $color-card;
   border-radius: 16px;
-  border: 1px solid rgba(107, 138, 100, 0.16);
-  box-shadow: 0 16px 34px rgba(44, 58, 46, 0.08);
+  border: 1px solid rgba(123, 189, 47, 0.16);
+  box-shadow: 0 16px 34px rgba(47, 79, 47, 0.08);
   overflow: hidden;
   text-align: left;
 
   .card-header {
     padding: 0.8rem 1.1rem;
-    background: var(--pl-card);
+    background: #ffffff;
     border-bottom: 1px solid $color-borde;
     justify-content: space-between !important;
     text-align: left;
@@ -267,13 +267,13 @@ $color-card: var(--pl-card);
       font-weight: 600;
       font-size: 0.85rem;
       color: #ffffff;
-      background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
+      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
     }
 
     button[mat-flat-button],
     button[mat-stroked-button] {
       color: #ffffff;
-      background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
+      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
       border-color: transparent;
     }
   }
@@ -346,7 +346,7 @@ $color-card: var(--pl-card);
 
           &.bio-text {
             font-weight: 400;
-            color: var(--pl-muted);
+            color: #4f6138;
             line-height: 1.5;
             font-size: 0.95rem;
           }
@@ -424,12 +424,12 @@ $color-card: var(--pl-card);
   border: 0;
   border-radius: 10px;
   color: #ffffff;
-  background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
+  background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
   font-size: 0.85rem;
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
-  box-shadow: 0 10px 22px rgba(82, 107, 76, 0.18);
+  box-shadow: 0 10px 22px rgba(93, 139, 31, 0.18);
   transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
 
   mat-icon {
@@ -440,7 +440,7 @@ $color-card: var(--pl-card);
 
   &:hover {
     filter: brightness(1.03);
-    box-shadow: 0 12px 26px rgba(82, 107, 76, 0.24);
+    box-shadow: 0 12px 26px rgba(93, 139, 31, 0.24);
     transform: translateY(-1px);
   }
 
@@ -515,7 +515,7 @@ $color-card: var(--pl-card);
       white-space: nowrap;
       flex-shrink: 0;
       color: #ffffff;
-      background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
+      background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
     }
   }
 
@@ -531,7 +531,7 @@ $color-card: var(--pl-card);
         font-size: 0.8rem;
         font-weight: 600;
         color: #ffffff;
-        background: linear-gradient(135deg, var(--pl-accent) 0%, var(--pl-accent-2) 100%);
+        background: linear-gradient(135deg, #7bbd2f 0%, #5d8b1f 100%);
       }
     }
   }
