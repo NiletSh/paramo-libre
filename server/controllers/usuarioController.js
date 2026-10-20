@@ -120,14 +120,29 @@ const usuarioController = {
         [nombre, email, password_hash, ubicacion || null, telefono || null]
       );
 
-      // Obtener usuario creado
+      let nuevoId = Number(resultado.insertId);
+      if (!nuevoId) {
+        const [creado] = await pool.execute(
+          'SELECT id FROM usuarios WHERE email = ?',
+          [email]
+        );
+        nuevoId = Number(creado[0]?.id);
+      }
+
       const [usuarios] = await pool.execute(
         'SELECT * FROM usuarios WHERE id = ?',
-        [resultado.insertId]
+        [nuevoId]
       );
 
       const usuario = usuarios[0];
-      const token = generarToken({ id: usuario.id, email: usuario.email, rol: usuario.rol });
+      if (!usuario) {
+        throw new Error('El usuario se insertó pero no se pudo leer');
+      }
+      const token = generarToken({
+        id: Number(usuario.id),
+        email: usuario.email,
+        rol: usuario.rol
+      });
 
       res.status(201).json({
         exito: true,

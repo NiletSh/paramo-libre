@@ -14,7 +14,14 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   enableKeepAlive: true,
-  keepAliveInitialDelay: 0
+  keepAliveInitialDelay: 0,
+  typeCast(field, next) {
+    if (field.type === 'LONGLONG') {
+      const value = field.string();
+      return value === null ? null : Number(value);
+    }
+    return next();
+  }
 });
 
 // Verificar conexión al iniciar
