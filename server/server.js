@@ -78,6 +78,10 @@ Promise.all([
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
   });
 }).catch((error) => {
-  console.error('No se pudo preparar el guardado de fotos de perfil:', error.message);
+  const detalles = [error.code, error.message].filter(Boolean).join(' ');
+  console.error('No se pudo preparar la base de datos:', detalles || error);
+  if (Array.isArray(error.errors)) {
+    error.errors.forEach((item) => console.error('  -', item.code || '', item.message || item));
+  }
   process.exit(1);
 });

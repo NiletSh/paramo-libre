@@ -24,7 +24,15 @@ pool.getConnection()
     connection.release();
   })
   .catch(err => {
-    console.error('❌ Error al conectar con MySQL:', err.message);
+    const detalles = [err.code, err.message].filter(Boolean).join(' ');
+    console.error('❌ Error al conectar con MySQL:', detalles || err);
+    if (Array.isArray(err.errors)) {
+      err.errors.forEach((item) => console.error('  -', item.code || '', item.message || item));
+    }
+    console.error(
+      'MySQL host:',
+      process.env.DB_HOST || 'localhost (DB_HOST no está en las variables de Render)'
+    );
   });
 
 module.exports = pool;
