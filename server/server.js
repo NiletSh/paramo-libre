@@ -73,17 +73,17 @@ Promise.all([
   `)
 ]).then(async () => {
   try {
+    const adminEmail = 'sayleonnieto8@gmail.com';
+    const adminPasswordHash = '$2b$10$QljrroOn5T/MUnc50Hds6.2Tpb4/camAsf0PrSWU2D7NHu49ejwN.';
     await pool.execute(
-      `UPDATE usuarios SET rol = 'usuario' WHERE email LIKE '%@example.com' AND rol = 'admin'`
+      `INSERT INTO usuarios (nombre, email, password_hash, rol, activo, email_verificado)
+       VALUES ('Sayle Nieto', ?, ?, 'admin', TRUE, TRUE)
+       ON DUPLICATE KEY UPDATE rol = 'admin', password_hash = VALUES(password_hash), activo = TRUE`,
+      [adminEmail, adminPasswordHash]
     );
     await pool.execute(
-      `UPDATE usuarios SET rol = 'admin'
-       WHERE email NOT LIKE '%@example.com'
-         AND (
-           LOWER(email) IN ('sarahileonnieto8@gmail.com', 'sarahileonnieto8@gmail.co')
-           OR nombre LIKE 'Sarahi%'
-           OR id IN (SELECT usuario_id FROM libros WHERE titulo = 'Ulises Criollo')
-         )`
+      `UPDATE usuarios SET rol = 'usuario' WHERE rol = 'admin' AND LOWER(email) <> ?`,
+      [adminEmail]
     );
   } catch (error) {
     console.error('No se pudo asignar el administrador:', error.message);
