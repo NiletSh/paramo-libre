@@ -101,9 +101,11 @@ export class BookDetailComponent implements OnInit {
         this.book = this.toBookDetail(book);
         this.canEditBook = this.canEdit(this.book);
         this.isOwnBook = this.ownsBook(this.book);
-        if (book.rfidUid) {
-          this.linkedUid = book.rfidUid;
+        const savedUid = book.rfidUid || this.rememberedCard(book.id);
+        if (savedUid) {
+          this.linkedUid = savedUid;
           this.cardLinked = true;
+          this.rememberCard(book.id, savedUid);
         }
         this.notFound = false;
       },
@@ -164,6 +166,7 @@ export class BookDetailComponent implements OnInit {
         this.linkedUid = linked?.uid || uid;
         this.cardUid = '';
         this.cardLinked = true;
+        if (this.book) this.rememberCard(this.book.id, this.linkedUid);
         this.snackBar.open('Tarjeta vinculada. El estante ya puede reconocer este libro.', 'Cerrar', {
           duration: 5000,
           panelClass: ['snackbar-success']
@@ -178,6 +181,21 @@ export class BookDetailComponent implements OnInit {
         });
       }
     });
+  }
+
+  private cardKey(id: string | number | undefined): string {
+    return `pl_rfid_${id}`;
+  }
+
+  private rememberCard(id: string | number | undefined, uid: string): void {
+    const clean = (uid || '').replace(/[^0-9a-f]/gi, '').toUpperCase();
+    if (id == null || id === '' || !clean) return;
+    localStorage.setItem(this.cardKey(id), clean);
+  }
+
+  private rememberedCard(id: string | number | undefined): string {
+    if (id == null || id === '') return '';
+    return localStorage.getItem(this.cardKey(id)) || '';
   }
 
   formatUid(uid: string): string {

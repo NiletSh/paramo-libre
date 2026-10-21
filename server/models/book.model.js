@@ -210,7 +210,23 @@ class Book {
 
   static async findById(id) {
     const [rows] = await db.execute(`${Book.baseSelect()} AND l.id = ?`, [id]);
-    return Book.normalize(rows[0]);
+    const book = Book.normalize(rows[0]);
+    if (!book) return null;
+
+    try {
+      const [cards] = await db.execute(
+        'SELECT uid FROM tarjetas_rfid WHERE libro_id = ? LIMIT 1',
+        [id]
+      );
+      if (cards[0]?.uid) {
+        book.rfidUid = cards[0].uid;
+        book.rfid_uid = cards[0].uid;
+      }
+    } catch (error) {
+      console.error('No se pudo leer la tarjeta del libro:', error.message);
+    }
+
+    return book;
   }
 
   static async create(bookData) {
