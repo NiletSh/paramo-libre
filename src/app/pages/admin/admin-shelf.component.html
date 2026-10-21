@@ -1,0 +1,48 @@
+<section class="admin-page">
+  <header class="admin-hero">
+    <div>
+      <span class="eyebrow">Administración</span>
+      <h1>Registro del estante</h1>
+      <p>Cada cambio queda anotado en el momento: peso, movimiento, luz, tarjetas leídas y libros que entran o salen.</p>
+    </div>
+    <a routerLink="/admin">Volver a actividad</a>
+  </header>
+
+  <section class="shelf-live" aria-live="polite">
+    <div class="shelf-live-head">
+      <strong>En este momento</strong>
+      <span [class.on]="live.connected">{{ live.connected ? 'EN LÍNEA' : 'SIN ENLACE' }}</span>
+      <span [class.on]="live.deviceOnline">Estante {{ live.deviceOnline ? 'ACTIVO' : 'INACTIVO' }}</span>
+    </div>
+    <div class="shelf-meters">
+      <span>Peso <b>{{ live.peso === null ? '—' : live.peso + ' g' }}</b></span>
+      <span>Movimiento <b>{{ live.mov ? 'ACTIVO' : 'INACTIVO' }}</b></span>
+      <span>Luz <b>{{ live.oscuro ? 'OSCURO' : 'CON LUZ' }}</b></span>
+      <span>RFID <b>{{ live.rfid ? 'ACTIVO' : 'INACTIVO' }}</b></span>
+    </div>
+    <p class="shelf-msg">Última tarjeta leída: <b>{{ live.uid || 'ninguna' }}</b></p>
+    <ul class="tarjetas">
+      <li *ngFor="let card of tarjetas; let i = index" [class.off]="!enEstante(i)">
+        <b>{{ card.nombre }}</b>
+        <span>{{ card.uid }} · {{ card.peso }} g</span>
+        <span>{{ enEstante(i) ? 'En el estante' : 'Retirado' }}</span>
+      </li>
+    </ul>
+    <p class="shelf-msg" *ngIf="live.message">{{ live.message }}</p>
+  </section>
+
+  <section class="panel">
+    <h2>Línea de tiempo</h2>
+    <p class="empty" *ngIf="!registro.length">Cuando el estante cambie de peso, lea una tarjeta o mueva un libro, el registro aparecerá aquí.</p>
+    <ol class="feed">
+      <li *ngFor="let item of registro">
+        <div>
+          <em>{{ tipoTexto(item.tipo) }}</em>
+          <b>{{ item.texto }}</b>
+          <span *ngIf="item.detalle">{{ item.detalle }}</span>
+        </div>
+        <time>{{ formatWhen(item.at) }}</time>
+      </li>
+    </ol>
+  </section>
+</section>

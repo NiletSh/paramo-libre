@@ -9,6 +9,7 @@ import { ExchangeProposalComponent } from './pages/exchange-proposal/exchange-pr
 import { MyProposalsComponent } from './pages/my-proposals/my-proposals.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { AdminShelfComponent } from './pages/admin/admin-shelf.component';
 
 export const routes: Routes = [
   // ============================================
@@ -95,6 +96,12 @@ export const routes: Routes = [
         path: 'mi-espacio',
         loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
         canActivate: [AuthGuard, ReaderGuard]
+      },
+      {
+        path: 'admin/estante',
+        component: AdminShelfComponent,
+        canActivate: [AuthGuard, AdminGuard],
+        title: 'Estante en vivo - Páramo Libre'
       },
       {
         path: 'admin',

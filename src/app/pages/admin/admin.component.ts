@@ -9,7 +9,7 @@ import {
   AdminUserRow,
   DashboardService
 } from '../../services/dashboard.service';
-import { ShelfLiveService, ShelfLiveState } from '../../services/shelf-live.service';
+import { SHELF_CARDS, ShelfLiveService, ShelfLiveState } from '../../services/shelf-live.service';
 
 @Component({
   selector: 'app-admin',
@@ -40,12 +40,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     message: '',
     exchangeId: null
   };
-  readonly tarjetas = [
-    { nombre: 'Libro 1', uid: '2A34651A', peso: 235 },
-    { nombre: 'Libro 2', uid: 'B7F6BB3B', peso: 500 },
-    { nombre: 'Libro 3', uid: '9AF57919', peso: 330 },
-    { nombre: 'Libro 4', uid: '40835B7C', peso: 235 }
-  ];
+  readonly tarjetas = SHELF_CARDS;
 
   private timer?: ReturnType<typeof setInterval>;
   private liveSub?: Subscription;

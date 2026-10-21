@@ -18,6 +18,21 @@ export interface ShelfLiveState {
   exchangeId: number | null;
 }
 
+export interface ShelfLogEntry {
+  id: number;
+  at: string;
+  tipo: 'conexion' | 'peso' | 'movimiento' | 'luz' | 'rfid' | 'tarjeta' | 'presencia' | 'libro';
+  texto: string;
+  detalle: string;
+}
+
+export const SHELF_CARDS = [
+  { nombre: 'Libro 1', uid: '2A34651A', peso: 235 },
+  { nombre: 'Libro 2', uid: 'B7F6BB3B', peso: 500 },
+  { nombre: 'Libro 3', uid: '9AF57919', peso: 330 },
+  { nombre: 'Libro 4', uid: '40835B7C', peso: 235 }
+];
+
 const EMPTY: ShelfLiveState = {
   connected: false,
   deviceOnline: false,
@@ -36,6 +51,8 @@ const EMPTY: ShelfLiveState = {
 export class ShelfLiveService implements OnDestroy {
   readonly state$ = new BehaviorSubject<ShelfLiveState>(EMPTY);
   readonly events$ = new Subject<ShelfLiveState>();
+  readonly log$ = new BehaviorSubject<ShelfLogEntry[]>(this.readLog());
+  private logSerial = Date.now();
 
   private socket?: WebSocket;
   private retry?: ReturnType<typeof setTimeout>;
@@ -118,7 +135,9 @@ export class ShelfLiveService implements OnDestroy {
       message: data.message || this.state$.value.message,
       exchangeId: data.exchangeId ?? this.state$.value.exchangeId
     };
+    const previous = this.state$.value;
     this.state$.next(next);
+    this.recordChanges(previous, next, data);
 
     if (!data.result || data.result === 'status' || !data.message) return;
 
@@ -130,5 +149,125 @@ export class ShelfLiveService implements OnDestroy {
       duration: 8000,
       panelClass: [alert ? 'snackbar-error' : 'snackbar-success']
     });
+  }
+
+  private primed = false;
+
+  private recordChanges(
+    previous: ShelfLiveState,
+    next: ShelfLiveState,
+    data: Partial<ShelfLiveState> & { title?: string }
+  ): void {
+    const entries = this.describeChanges(previous, next, data);
+    const first = !this.primed;
+    this.primed = true;
+    if (first && (!data.result || data.result === 'status')) return;
+    this.pushLog(entries);
+  }
+
+  private describeChanges(
+    previous: ShelfLiveState,
+    next: ShelfLiveState,
+    data: Partial<ShelfLiveState> & { title?: string }
+  ): ShelfLogEntry[] {
+    const entries: ShelfLogEntry[] = [];
+    const add = (tipo: ShelfLogEntry['tipo'], texto: string, detalle = '') => {
+      this.logSerial += 1;
+      entries.push({
+        id: this.logSerial,
+        at: new Date().toISOString(),
+        tipo,
+        texto,
+        detalle
+      });
+    };
+
+    if (previous.deviceOnline !== next.deviceOnline) {
+      add(
+        'conexion',
+        next.deviceOnline ? 'El estante se conectó' : 'El estante se desconectó',
+        next.deviceOnline ? 'En línea' : 'Sin enlace'
+      );
+    }
+
+    if (data.peso !== undefined && data.peso !== null && Number.isFinite(Number(data.peso))) {
+      const peso = Number(data.peso);
+      const antes = previous.peso;
+      if (antes === null || Math.abs(peso - antes) >= 20) {
+        add(
+          'peso',
+          antes === null ? `Peso del estante: ${peso} g` : `El peso pasó de ${antes} g a ${peso} g`,
+          `${peso} g`
+        );
+      }
+    }
+
+    if (data.mov !== undefined && previous.mov !== next.mov) {
+      add('movimiento', next.mov ? 'Hay movimiento frente al estante' : 'El estante quedó quieto', next.mov ? 'Activo' : 'Inactivo');
+    }
+
+    if (data.oscuro !== undefined && previous.oscuro !== next.oscuro) {
+      add('luz', next.oscuro ? 'El estante quedó a oscuras' : 'El estante tiene luz', next.oscuro ? 'Oscuro' : 'Con luz');
+    }
+
+    if (data.rfid !== undefined && previous.rfid !== next.rfid) {
+      add('rfid', next.rfid ? 'El lector RFID está activo' : 'El lector RFID no responde', next.rfid ? 'Activo' : 'Inactivo');
+    }
+
+    const uid = this.cleanUid(data.uid);
+    if (uid && uid !== this.cleanUid(previous.uid)) {
+      add('tarjeta', `Se leyó la tarjeta ${this.formatUid(uid)}`, uid);
+    }
+
+    if (typeof data.presentes === 'string') {
+      const before = (previous.presentes || '1111').padEnd(4, '1');
+      const after = data.presentes.padEnd(4, '1');
+      SHELF_CARDS.forEach((card, index) => {
+        if (before.charAt(index) === after.charAt(index)) return;
+        const salio = after.charAt(index) === '0';
+        add(
+          'presencia',
+          salio ? `${card.nombre} salió del estante` : `${card.nombre} volvió al estante`,
+          `${this.formatUid(card.uid)} · ${card.peso} g`
+        );
+      });
+    }
+
+    if (data.result && data.result !== 'status' && data.message) {
+      add('libro', data.message, data.title || (uid ? this.formatUid(uid) : ''));
+    } else if ((!data.result || data.result === 'status') && data.message && data.message !== previous.message) {
+      add('conexion', data.message, 'Estado');
+    }
+
+    return entries;
+  }
+
+  private pushLog(entries: ShelfLogEntry[]): void {
+    if (!entries.length) return;
+    const next = [...entries].reverse().concat(this.log$.value).slice(0, 200);
+    this.log$.next(next);
+    try {
+      localStorage.setItem('pl_shelf_log', JSON.stringify(next));
+    } catch {
+      // El registro en memoria sigue, aunque el navegador no pueda guardarlo.
+    }
+  }
+
+  private readLog(): ShelfLogEntry[] {
+    try {
+      const raw = localStorage.getItem('pl_shelf_log');
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed.slice(0, 200) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  private cleanUid(value: unknown): string {
+    return String(value || '').replace(/[^0-9a-f]/gi, '').toUpperCase();
+  }
+
+  private formatUid(uid: string): string {
+    return uid.replace(/(.{2})/g, '$1 ').trim();
   }
 }

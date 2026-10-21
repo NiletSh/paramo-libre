@@ -19,6 +19,7 @@
       <strong>Estante en vivo</strong>
       <span [class.on]="live.connected">{{ live.connected ? 'EN LÍNEA' : 'SIN ENLACE' }}</span>
       <span [class.on]="live.deviceOnline">Estante {{ live.deviceOnline ? 'ACTIVO' : 'INACTIVO' }}</span>
+      <a class="shelf-more" routerLink="/admin/estante">Registro completo</a>
     </div>
     <div class="shelf-meters">
       <span>Peso <b>{{ live.peso === null ? '—' : live.peso + ' g' }}</b></span>

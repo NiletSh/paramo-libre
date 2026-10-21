@@ -19,7 +19,8 @@ import { ShelfLiveService } from '../../services/shelf-live.service';
 
         <div class="nav-links" *ngIf="isLoggedIn || !isHomePage">
           <ng-container *ngIf="isLoggedIn && isAdmin">
-            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Actividad</a>
+            <a class="nav-link" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Actividad</a>
+            <a class="nav-link" routerLink="/admin/estante" routerLinkActive="active">Estante</a>
             <a class="nav-link" routerLink="/perfil" routerLinkActive="active">Perfil</a>
           </ng-container>
           <ng-container *ngIf="isLoggedIn && !isAdmin">
@@ -65,7 +66,8 @@ import { ShelfLiveService } from '../../services/shelf-live.service';
 
       <div class="mobile-menu" [class.open]="menuOpen" *ngIf="isLoggedIn || !isHomePage">
         <ng-container *ngIf="isLoggedIn && isAdmin">
-          <a class="mobile-link" routerLink="/admin" (click)="closeMenu()" routerLinkActive="active">Actividad</a>
+          <a class="mobile-link" routerLink="/admin" (click)="closeMenu()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Actividad</a>
+          <a class="mobile-link" routerLink="/admin/estante" (click)="closeMenu()" routerLinkActive="active">Estante</a>
           <a class="mobile-link" routerLink="/perfil" (click)="closeMenu()" routerLinkActive="active">Perfil</a>
         </ng-container>
         <ng-container *ngIf="isLoggedIn && !isAdmin">
