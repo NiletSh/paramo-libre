@@ -644,8 +644,19 @@ const usuarioController = {
 
   // ACTIVIDAD DE LOS LECTORES (Admin)
   actividad: async (req, res) => {
+    const leer = async (etiqueta, sql) => {
+      try {
+        const [filas] = await pool.query(sql);
+        return filas;
+      } catch (error) {
+        console.error(`actividad ${etiqueta}:`, error.message);
+        return null;
+      }
+    };
+
     try {
-      const [conteos] = await pool.execute(
+      const conteos = await leer(
+        'conteos',
         `SELECT
            (SELECT COUNT(*) FROM usuarios WHERE rol = 'usuario' AND activo = TRUE) AS usuarios,
            (SELECT COUNT(*) FROM libros WHERE activo = TRUE) AS libros,
@@ -653,16 +664,24 @@ const usuarioController = {
            (SELECT COUNT(*) FROM intercambios WHERE activo = TRUE AND estado = 'completado') AS trueques`
       );
 
-      const [usuarios] = await pool.execute(
+      const usuarios = await leer(
+        'usuarios',
         `SELECT u.id, u.nombre, u.email, u.rol, u.activo, u.fecha_registro, u.ultima_conexion,
                 (SELECT COUNT(*) FROM libros l WHERE l.usuario_id = u.id AND l.activo = TRUE) AS libros,
                 (SELECT COUNT(*) FROM intercambios i
                   WHERE i.activo = TRUE AND (i.solicitante_id = u.id OR i.receptor_id = u.id)) AS trueques
          FROM usuarios u
          ORDER BY u.fecha_registro DESC`
-      );
+      ) || await leer(
+        'usuarios-simple',
+        `SELECT id, nombre, email, rol, activo, fecha_registro, ultima_conexion,
+                0 AS libros, 0 AS trueques
+         FROM usuarios
+         ORDER BY fecha_registro DESC`
+      ) || [];
 
-      const [libros] = await pool.execute(
+      const libros = await leer(
+        'libros',
         `SELECT l.id, l.titulo, l.autor, l.estado_publicacion, l.fecha_publicacion,
                 u.nombre AS dueno
          FROM libros l
@@ -670,9 +689,10 @@ const usuarioController = {
          WHERE l.activo = TRUE
          ORDER BY l.fecha_publicacion DESC
          LIMIT 40`
-      );
+      ) || [];
 
-      const [intercambios] = await pool.execute(
+      const intercambios = await leer(
+        'intercambios',
         `SELECT i.id, i.estado, i.fecha_propuesta, i.fecha_respuesta, i.fecha_completado,
                 s.nombre AS solicitante, r.nombre AS receptor,
                 ls.titulo AS libro_solicitado, lo.titulo AS libro_ofrecido
@@ -684,7 +704,7 @@ const usuarioController = {
          WHERE i.activo = TRUE
          ORDER BY i.fecha_propuesta DESC
          LIMIT 40`
-      );
+      ) || [];
 
       let avisosEstante = [];
       try {
@@ -762,7 +782,8 @@ const usuarioController = {
 
       const vistos = new Set();
       for (const aviso of avisosEstante) {
-        const marca = new Date(aviso.fecha).toISOString().slice(0, 19);
+        const momento = new Date(aviso.fecha);
+        const marca = Number.isNaN(momento.getTime()) ? String(aviso.fecha || '') : momento.toISOString().slice(0, 19);
         const clave = `${aviso.mensaje}|${marca}`;
         if (vistos.has(clave)) continue;
         vistos.add(clave);
@@ -777,14 +798,15 @@ const usuarioController = {
 
       actividades.sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());
 
-      const conteo = conteos[0] || {};
+      const conteo = conteos?.[0] || {};
+      const lectores = usuarios.filter((usuario) => usuario.rol === 'usuario' && usuario.activo !== 0 && usuario.activo !== false);
       res.json({
         exito: true,
         resumen: {
-          usuarios: Number(conteo.usuarios) || 0,
-          libros: Number(conteo.libros) || 0,
-          propuestas: Number(conteo.propuestas) || 0,
-          trueques: Number(conteo.trueques) || 0
+          usuarios: Number(conteo.usuarios) || lectores.length,
+          libros: Number(conteo.libros) || libros.length,
+          propuestas: Number(conteo.propuestas) || intercambios.filter((item) => item.estado === 'pendiente').length,
+          trueques: Number(conteo.trueques) || intercambios.filter((item) => item.estado === 'completado').length
         },
         actividades: actividades.slice(0, 40),
         usuarios: usuarios.map((usuario) => ({

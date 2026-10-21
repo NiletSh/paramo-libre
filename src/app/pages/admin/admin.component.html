@@ -100,7 +100,8 @@
 
     <section class="panel">
       <h2>Trueques</h2>
-      <p class="empty" *ngIf="!intercambios.length">No hay propuestas entre lectores.</p>
+      <p class="empty" *ngIf="truequesListos && !intercambios.length">No hay propuestas entre lectores.</p>
+      <p class="empty" *ngIf="!truequesListos">Los trueques no se pudieron leer todavía.</p>
       <ul class="plain" *ngIf="intercambios.length">
         <li *ngFor="let trade of intercambios">
           <b>{{ trade.solicitante }} y {{ trade.receptor }}</b>

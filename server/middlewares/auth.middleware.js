@@ -30,12 +30,28 @@ const authenticate = (req, res, next) => {
 };
 
 const authorize = (roles = []) => {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     if (!req.usuario) {
       return res.status(401).json({
         exito: false,
         mensaje: 'Acceso no autorizado.'
       });
+    }
+
+    if (roles.length && !roles.includes(req.usuario.rol)) {
+      try {
+        const pool = require('../config/db');
+        const [rows] = await pool.query(
+          'SELECT rol FROM usuarios WHERE id = ? AND activo = TRUE LIMIT 1',
+          [req.usuario.id]
+        );
+        if (rows[0]?.rol) {
+          req.usuario.rol = rows[0].rol;
+          if (req.user) req.user.rol = rows[0].rol;
+        }
+      } catch (error) {
+        console.error('No se pudo confirmar el rol:', error.message);
+      }
     }
 
     if (roles.length && !roles.includes(req.usuario.rol)) {

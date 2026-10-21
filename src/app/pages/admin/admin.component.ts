@@ -21,6 +21,7 @@ import { ShelfLiveService, ShelfLiveState } from '../../services/shelf-live.serv
 export class AdminComponent implements OnInit, OnDestroy {
   loading = true;
   error = '';
+  truequesListos = true;
   resumen = { usuarios: 0, libros: 0, propuestas: 0, trueques: 0 };
   actividades: AdminActivityItem[] = [];
   usuarios: AdminUserRow[] = [];
@@ -111,12 +112,16 @@ export class AdminComponent implements OnInit, OnDestroy {
     if (showSpinner) this.loading = true;
     this.dashboardService.getAdminActivity().subscribe({
       next: (data) => {
-        this.resumen = data.resumen;
+        this.resumen = data.resumen || this.resumen;
         this.actividades = data.actividades || [];
         this.usuarios = data.usuarios || [];
         this.libros = data.libros || [];
         this.intercambios = data.intercambios || [];
-        this.error = '';
+        this.truequesListos = data.truequesDisponibles !== false;
+        const vacio = !this.usuarios.length && !this.libros.length && !this.truequesListos;
+        this.error = vacio
+          ? 'No se pudo cargar la actividad. Entra de nuevo con la cuenta administradora.'
+          : '';
         this.loading = false;
       },
       error: () => {
