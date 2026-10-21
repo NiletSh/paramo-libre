@@ -596,7 +596,8 @@ const usuarioController = {
         mensaje: row.receptor_id === usuarioId
           ? `${row.solicitante_nombre} envió una propuesta por "${row.libro_solicitado}"`
           : `Tu propuesta por "${row.libro_solicitado}" está ${row.estado}`,
-        fecha: row.fecha_completado || row.fecha_respuesta || row.fecha_propuesta
+        fecha: row.fecha_completado || row.fecha_respuesta || row.fecha_propuesta,
+        leida: true
       }));
 
       let fromShelf = [];

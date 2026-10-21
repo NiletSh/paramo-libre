@@ -388,6 +388,8 @@ export class NavbarComponent implements OnDestroy {
   private profileLoaded = false;
   private alertTimer?: ReturnType<typeof setInterval>;
   private alertSub?: Subscription;
+  private loadStamp = 0;
+  private readStamp = 0;
 
   constructor(
     private authService: AuthService,
@@ -444,18 +446,18 @@ export class NavbarComponent implements OnDestroy {
   toggleAlerts(): void {
     this.alertsOpen = !this.alertsOpen;
     if (!this.alertsOpen || !this.unreadCount) return;
+    this.readStamp = Date.now();
+    this.unreadCount = 0;
+    this.notifications = this.notifications.map((item) => ({ ...item, leida: true }));
     this.dashboardService.markNotificationsRead().subscribe({
-      next: () => {
-        this.unreadCount = 0;
-        this.notifications = this.notifications.map((item) => ({ ...item, leida: true }));
-      }
+      error: () => this.loadAlerts()
     });
   }
 
   private startAlerts(): void {
     this.loadAlerts();
     if (this.alertTimer) return;
-    this.alertTimer = setInterval(() => this.loadAlerts(), 20000);
+    this.alertTimer = setInterval(() => this.loadAlerts(), 8000);
     this.alertSub = this.shelfLive.events$.subscribe(() => this.loadAlerts());
   }
 
@@ -470,8 +472,11 @@ export class NavbarComponent implements OnDestroy {
   }
 
   private loadAlerts(): void {
+    const stamp = ++this.loadStamp;
+    const readStamp = this.readStamp;
     this.dashboardService.getNotifications().subscribe({
       next: (items) => {
+        if (stamp !== this.loadStamp || readStamp !== this.readStamp) return;
         this.notifications = items;
         this.unreadCount = items.filter((item) => item.leida === false).length;
       }

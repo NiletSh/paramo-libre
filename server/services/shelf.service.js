@@ -33,7 +33,7 @@ async function findAcceptedExchange(bookId) {
 
 async function findRecentCompletedExchange(bookId) {
   const [rows] = await db.execute(
-    `SELECT id
+    `SELECT id, solicitante_id, receptor_id, libro_solicitado_id, libro_ofrecido_id
      FROM intercambios
      WHERE activo = TRUE
        AND estado = 'completado'
@@ -44,6 +44,36 @@ async function findRecentCompletedExchange(bookId) {
     [bookId, bookId]
   );
   return rows[0] || null;
+}
+
+async function notifyRemoval(book, exchange) {
+  const title = book.title || 'Libro';
+  const ownerId = Number(book.user_id || book.ownerId);
+  const people = new Set();
+  if (ownerId) people.add(ownerId);
+  if (exchange) {
+    if (exchange.solicitante_id) people.add(Number(exchange.solicitante_id));
+    if (exchange.receptor_id) people.add(Number(exchange.receptor_id));
+  }
+
+  for (const userId of people) {
+    if (!userId) continue;
+    const esDueno = userId === ownerId;
+    try {
+      await Notification.createNotification({
+        userId,
+        tipo: 'libro_retirado',
+        titulo: 'Libro retirado',
+        mensaje: esDueno
+          ? `Tu libro "${title}" fue retirado del estante con éxito.`
+          : `Retiraste "${title}" del estante con éxito.`,
+        exchangeId: exchange?.id || null,
+        bookId: Number(book.id)
+      });
+    } catch (error) {
+      console.warn('Aviso de retiro sin notificación:', error.message);
+    }
+  }
 }
 
 async function bindCard(uidRaw, bookIdRaw) {
@@ -182,13 +212,7 @@ async function handleShelfReading({ bookId, uid, event, weight }) {
     await Exchange.updateStatus(exchange.id, 'completed');
     await Book.updateStatus(exchange.libro_solicitado_id, 'exchanged');
     await Book.updateStatus(exchange.libro_ofrecido_id, 'exchanged');
-    await notifyEveryone({
-      tipo: 'libro_retirado',
-      titulo: 'Libro retirado',
-      mensaje: `Se retiró "${title}" del estante. El trueque quedó completado.`,
-      exchangeId: exchange.id,
-      bookId: resolvedBookId
-    });
+    await notifyRemoval(book, exchange);
     return {
       type: 'shelf',
       result: 'completed',
@@ -204,13 +228,7 @@ async function handleShelfReading({ bookId, uid, event, weight }) {
 
   const recent = await findRecentCompletedExchange(resolvedBookId);
   if (recent) {
-    await notifyEveryone({
-      tipo: 'libro_retirado',
-      titulo: 'Libro retirado',
-      mensaje: `Se retiró "${title}" del estante.`,
-      exchangeId: recent.id,
-      bookId: resolvedBookId
-    });
+    await notifyRemoval(book, recent);
     return {
       type: 'shelf',
       result: 'completed',
@@ -224,12 +242,7 @@ async function handleShelfReading({ bookId, uid, event, weight }) {
     };
   }
 
-  await notifyEveryone({
-    tipo: 'libro_retirado',
-    titulo: 'Libro retirado',
-    mensaje: `Se retiró "${title}" del estante.`,
-    bookId: resolvedBookId
-  });
+  await notifyRemoval(book, null);
   return {
     type: 'shelf',
     result: 'wrong',
