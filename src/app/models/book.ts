@@ -12,6 +12,7 @@ export interface Book {
   ownerName?: string;
   status?: 'available' | 'exchanged' | 'reserved';
   createdAt?: string;
+  rfidUid?: string | null;
 }
 
 /** Punto único de entrega física (estante con sensores). */

@@ -39,6 +39,8 @@ interface ApiBook {
   status?: 'available' | 'exchanged' | 'reserved';
   createdAt?: string;
   created_at?: string;
+  rfidUid?: string | null;
+  rfid_uid?: string | null;
 }
 
 @Injectable({
@@ -138,7 +140,8 @@ export class BookService {
       ownerId: book.ownerId ? String(book.ownerId) : undefined,
       ownerName: book.ownerName || book.owner_name,
       status: book.status || 'available',
-      createdAt: book.createdAt || book.created_at
+      createdAt: book.createdAt || book.created_at,
+      rfidUid: book.rfidUid || book.rfid_uid || null
     };
   }
 

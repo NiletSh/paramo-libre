@@ -55,7 +55,9 @@ class Book {
       owner_email: row.owner_email,
       ownerEmail: row.owner_email,
       owner_image: row.owner_image,
-      ownerImage: row.owner_image
+      ownerImage: row.owner_image,
+      rfid_uid: row.rfid_uid || null,
+      rfidUid: row.rfid_uid || null
     };
   }
 
@@ -100,7 +102,8 @@ class Book {
         c.nombre AS category_name,
         u.nombre AS owner_name,
         u.email AS owner_email,
-        u.foto_perfil AS owner_image
+        u.foto_perfil AS owner_image,
+        (SELECT t.uid FROM tarjetas_rfid t WHERE t.libro_id = l.id LIMIT 1) AS rfid_uid
       FROM libros l
       LEFT JOIN categorias c ON l.categoria_id = c.id
       LEFT JOIN usuarios u ON l.usuario_id = u.id

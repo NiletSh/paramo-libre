@@ -112,9 +112,15 @@
 
       <!-- Acciones -->
       <div class="rfid-row" *ngIf="canEditBook">
-        <label for="card-uid">Tarjeta del estante</label>
-        <input id="card-uid" [(ngModel)]="cardUid" placeholder="UID, ej. 2A34651A" autocomplete="off" />
-        <button type="button" (click)="saveCard()" [disabled]="savingCard">Vincular</button>
+        <label>Tarjeta del estante</label>
+        <ng-container *ngIf="cardLinked; else cardForm">
+          <span class="rfid-locked">{{ formatUid(linkedUid) }}</span>
+          <span class="rfid-note">Vinculada. Ya no se puede cambiar.</span>
+        </ng-container>
+        <ng-template #cardForm>
+          <input id="card-uid" [(ngModel)]="cardUid" placeholder="UID, ej. 2A34651A" autocomplete="off" />
+          <button type="button" (click)="saveCard()" [disabled]="savingCard">Vincular</button>
+        </ng-template>
       </div>
 
       <div class="detail-actions">

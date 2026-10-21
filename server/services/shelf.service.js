@@ -61,9 +61,28 @@ async function bindCard(uidRaw, bookIdRaw) {
     throw error;
   }
 
+  const [delLibro] = await db.execute(
+    'SELECT uid FROM tarjetas_rfid WHERE libro_id = ? LIMIT 1',
+    [bookId]
+  );
+  if (delLibro.length) {
+    const error = new Error('Este libro ya tiene una tarjeta vinculada y no se puede cambiar.');
+    error.status = 409;
+    throw error;
+  }
+
+  const [deLaTarjeta] = await db.execute(
+    'SELECT libro_id FROM tarjetas_rfid WHERE uid = ? LIMIT 1',
+    [uid]
+  );
+  if (deLaTarjeta.length) {
+    const error = new Error('Esa tarjeta ya está vinculada a otro libro.');
+    error.status = 409;
+    throw error;
+  }
+
   await db.execute(
-    `INSERT INTO tarjetas_rfid (uid, libro_id) VALUES (?, ?)
-     ON DUPLICATE KEY UPDATE libro_id = VALUES(libro_id)`,
+    'INSERT INTO tarjetas_rfid (uid, libro_id) VALUES (?, ?)',
     [uid, bookId]
   );
 

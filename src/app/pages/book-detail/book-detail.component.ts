@@ -42,6 +42,8 @@ export class BookDetailComponent implements OnInit {
   canEditBook = false;
   isOwnBook = false;
   cardUid = '';
+  linkedUid = '';
+  cardLinked = false;
   savingCard = false;
 
   conditionLabels: Record<string, string> = {
@@ -99,6 +101,10 @@ export class BookDetailComponent implements OnInit {
         this.book = this.toBookDetail(book);
         this.canEditBook = this.canEdit(this.book);
         this.isOwnBook = this.ownsBook(this.book);
+        if (book.rfidUid) {
+          this.linkedUid = book.rfidUid;
+          this.cardLinked = true;
+        }
         this.notFound = false;
       },
       error: () => {
@@ -153,21 +159,30 @@ export class BookDetailComponent implements OnInit {
     }
     this.savingCard = true;
     this.bookService.linkShelfCard(this.book.id, uid).subscribe({
-      next: () => {
+      next: (linked) => {
         this.savingCard = false;
+        this.linkedUid = linked?.uid || uid;
+        this.cardUid = '';
+        this.cardLinked = true;
         this.snackBar.open('Tarjeta vinculada. El estante ya puede reconocer este libro.', 'Cerrar', {
           duration: 5000,
           panelClass: ['snackbar-success']
         });
       },
-      error: () => {
+      error: (error) => {
         this.savingCard = false;
-        this.snackBar.open('No se pudo vincular la tarjeta.', 'Cerrar', {
+        const message = error?.error?.message || 'No se pudo vincular la tarjeta.';
+        this.snackBar.open(message, 'Cerrar', {
           duration: 5000,
           panelClass: ['snackbar-error']
         });
       }
     });
+  }
+
+  formatUid(uid: string): string {
+    const clean = (uid || '').replace(/[^0-9a-f]/gi, '').toUpperCase();
+    return clean.replace(/(.{2})/g, '$1 ').trim();
   }
 
   private formatDate(value?: string): string {

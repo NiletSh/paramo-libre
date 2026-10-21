@@ -519,9 +519,21 @@
   border-radius: 18px;
   padding: 0 14px;
   color: #ffffff;
-  background: #5d8b1f;
+  background: linear-gradient(135deg, #7bbd2f, #5d8b1f);
   font-weight: 700;
   cursor: pointer;
+}
+
+.rfid-locked {
+  color: #2f4f2f;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.rfid-note {
+  color: #5d8b1f;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .detail-actions {
