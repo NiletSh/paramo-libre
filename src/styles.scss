@@ -477,23 +477,27 @@ body {
 
 .cdk-overlay-container .mat-mdc-snack-bar-container.snackbar-warning {
   --mat-snack-bar-container-color: #fff8ee !important;
-  --mat-snack-bar-button-color: #8a5a0c !important;
+  --mat-snack-bar-button-color: #d58a14 !important;
 
   .mat-mdc-snackbar-surface,
   .mdc-snackbar__surface {
     background-color: #fff8ee !important;
-    border-color: rgba(213, 138, 20, 0.22) !important;
-    border-left-color: #d58a14 !important;
+    border-color: rgba(213, 138, 20, 0.28) !important;
+    border-left: 6px solid #d58a14 !important;
   }
 
   .mat-mdc-simple-snack-bar .mdc-snackbar__label::before {
     content: "warning";
-    color: #b86e0a;
+    color: #d58a14;
   }
 
   .mat-mdc-snack-bar-action {
-    background: rgba(213, 138, 20, 0.16) !important;
-    color: #8a5a0c !important;
+    background: rgba(213, 138, 20, 0.18) !important;
+    color: #d58a14 !important;
+  }
+
+  .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+    color: #d58a14 !important;
   }
 }
 
