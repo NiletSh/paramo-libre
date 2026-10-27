@@ -343,41 +343,180 @@ body {
   box-shadow: var(--pl-shadow) !important;
 }
 
-.mat-mdc-snack-bar-container {
-  --mdc-snackbar-container-shape: 12px;
-  --mdc-snackbar-supporting-text-font: var(--pl-font-family);
-  --mat-snack-bar-button-color: #ffffff;
-  margin: 16px !important;
+@keyframes pl-snackbar-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
 
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// Material M3 usa inverse-surface (gris oscuro) por defecto — forzar avisos claros Páramo Libre
+.cdk-overlay-container .mat-mdc-snack-bar-container {
+  --mat-snack-bar-container-color: #fffdf8 !important;
+  --mat-snack-bar-supporting-text-color: #243528 !important;
+  --mat-snack-bar-button-color: #4f7a1b !important;
+  --mat-snack-bar-container-shape: 16px !important;
+  --mdc-snackbar-container-color: #fffdf8 !important;
+  --mdc-snackbar-supporting-text-color: #243528 !important;
+  --mdc-snackbar-container-shape: 16px !important;
+  margin: 0 16px 28px !important;
+  animation: pl-snackbar-in 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+
+  .mat-mdc-snackbar-surface,
   .mdc-snackbar__surface {
-    min-width: min(420px, calc(100vw - 32px));
-    box-shadow: 0 18px 42px rgba(47, 79, 47, 0.18) !important;
+    min-width: min(480px, calc(100vw - 32px)) !important;
+    background-color: #fffdf8 !important;
+    color: #243528 !important;
+    border: 1px solid rgba(47, 79, 47, 0.12) !important;
+    border-left: 6px solid #7bbd2f !important;
+    border-radius: 16px !important;
+    box-shadow: 0 18px 42px rgba(47, 79, 47, 0.16) !important;
   }
 
-  .mdc-snackbar__label {
-    font-weight: 700;
+  .mat-mdc-simple-snack-bar {
+    align-items: center;
+    width: 100%;
+  }
+
+  .mat-mdc-simple-snack-bar .mdc-snackbar__label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--pl-font-family);
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.45;
     letter-spacing: 0;
+    color: #243528 !important;
+    padding: 14px 6px 14px 14px;
+  }
+
+  .mat-mdc-simple-snack-bar .mdc-snackbar__label::before {
+    content: "info";
+    font-family: "Material Icons";
+    font-size: 22px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    flex: 0 0 auto;
+    color: #5d8b1f;
+  }
+
+  .mat-mdc-snack-bar-actions {
+    padding-right: 10px;
+  }
+
+  .mat-mdc-snack-bar-action {
+    min-height: 34px !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+    border-radius: 999px !important;
+    background: rgba(123, 189, 47, 0.16) !important;
+    color: #3f681f !important;
+    font-family: var(--pl-font-family) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+    color: #3f681f !important;
   }
 }
 
-.snackbar-success {
-  --mdc-snackbar-container-color: var(--pl-success);
-  --mdc-snackbar-supporting-text-color: #ffffff;
+.cdk-overlay-container .mat-mdc-snack-bar-container.snackbar-success {
+  --mat-snack-bar-container-color: #f3f8ea !important;
+  --mat-snack-bar-button-color: #3f681f !important;
+
+  .mat-mdc-snackbar-surface,
+  .mdc-snackbar__surface {
+    background-color: #f3f8ea !important;
+    border-color: rgba(79, 125, 42, 0.16) !important;
+    border-left-color: #4f7d2a !important;
+  }
+
+  .mat-mdc-simple-snack-bar .mdc-snackbar__label::before {
+    content: "check_circle";
+    color: #4f7d2a;
+  }
+
+  .mat-mdc-snack-bar-action {
+    background: rgba(79, 125, 42, 0.14) !important;
+    color: #3f681f !important;
+  }
 }
 
-.snackbar-error {
-  --mdc-snackbar-container-color: var(--pl-error);
-  --mdc-snackbar-supporting-text-color: #ffffff;
+.cdk-overlay-container .mat-mdc-snack-bar-container.snackbar-error {
+  --mat-snack-bar-container-color: #fff5f3 !important;
+  --mat-snack-bar-button-color: #a33b30 !important;
+
+  .mat-mdc-snackbar-surface,
+  .mdc-snackbar__surface {
+    background-color: #fff5f3 !important;
+    border-color: rgba(198, 75, 61, 0.16) !important;
+    border-left-color: #c64b3d !important;
+  }
+
+  .mat-mdc-simple-snack-bar .mdc-snackbar__label::before {
+    content: "error";
+    color: #c64b3d;
+  }
+
+  .mat-mdc-snack-bar-action {
+    background: rgba(198, 75, 61, 0.12) !important;
+    color: #a33b30 !important;
+  }
 }
 
-.snackbar-warning {
-  --mdc-snackbar-container-color: var(--pl-warning);
-  --mdc-snackbar-supporting-text-color: #ffffff;
+.cdk-overlay-container .mat-mdc-snack-bar-container.snackbar-warning {
+  --mat-snack-bar-container-color: #fff8ee !important;
+  --mat-snack-bar-button-color: #8a5a0c !important;
+
+  .mat-mdc-snackbar-surface,
+  .mdc-snackbar__surface {
+    background-color: #fff8ee !important;
+    border-color: rgba(213, 138, 20, 0.22) !important;
+    border-left-color: #d58a14 !important;
+  }
+
+  .mat-mdc-simple-snack-bar .mdc-snackbar__label::before {
+    content: "warning";
+    color: #b86e0a;
+  }
+
+  .mat-mdc-snack-bar-action {
+    background: rgba(213, 138, 20, 0.16) !important;
+    color: #8a5a0c !important;
+  }
 }
 
-.snackbar-info {
-  --mdc-snackbar-container-color: var(--pl-secondary);
-  --mdc-snackbar-supporting-text-color: #ffffff;
+.cdk-overlay-container .mat-mdc-snack-bar-container.snackbar-info {
+  --mat-snack-bar-container-color: #f7f6f1 !important;
+  --mat-snack-bar-button-color: #2f4f2f !important;
+
+  .mat-mdc-snackbar-surface,
+  .mdc-snackbar__surface {
+    background-color: #f7f6f1 !important;
+    border-color: rgba(47, 79, 47, 0.12) !important;
+    border-left-color: #2f4f2f !important;
+  }
+
+  .mat-mdc-simple-snack-bar .mdc-snackbar__label::before {
+    content: "info";
+    color: #2f4f2f;
+  }
+
+  .mat-mdc-snack-bar-action {
+    background: rgba(47, 79, 47, 0.1) !important;
+    color: #2f4f2f !important;
+  }
 }
 
 // ============================================
