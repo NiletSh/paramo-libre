@@ -19,7 +19,9 @@ import { ShelfLiveService } from '../../services/shelf-live.service';
   `,
   styles: [`
     .main-layout {
-      min-height: 100vh;
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       background: #f7f6f1;
@@ -27,7 +29,10 @@ import { ShelfLiveService } from '../../services/shelf-live.service';
 
     .main-content {
       flex: 1;
+      min-height: 0;
       padding-top: 72px;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
   `]
 })
